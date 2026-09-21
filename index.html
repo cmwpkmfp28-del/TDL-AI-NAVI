@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDL Spot Navi</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    sans-serif;
+  background: #f5f6f8;
+  color: #222;
+}
+
+header {
+  background: linear-gradient(135deg, #151a2d, #30385c);
+  color: white;
+  padding: 28px 20px 30px;
+  border-radius: 0 0 28px 28px;
+}
+
+.header-small {
+  font-size: 13px;
+  opacity: .75;
+  margin-bottom: 6px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 27px;
+}
+
+header p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  opacity: .85;
+}
+
+.container {
+  max-width: 680px;
+  margin: auto;
+  padding: 18px;
+}
+
+.location-card {
+  background: white;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.06);
+  margin-bottom: 18px;
+}
+
+.location-title {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.location-name {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary {
+  width: 100%;
+  background: #222a48;
+  color: white;
+  margin-top: 14px;
+}
+
+.secondary {
+  background: #eef0f5;
+  color: #333;
+  width: 100%;
+  margin-top: 9px;
+}
+
+.status {
+  font-size: 13px;
+  color: #777;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 25px 2px 12px;
+}
+
+.nearby-main {
+  background: white;
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.06);
+  border: 2px solid #e4e7f0;
+}
+
+.attraction-label {
+  font-size: 12px;
+  color: #72778a;
+}
+
+.attraction-name {
+  font-size: 23px;
+  font-weight: 800;
+  margin-top: 3px;
+}
+
+.distance {
+  color: #596179;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.spot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.spot-card {
+  background: #fafafa;
+  border-radius: 17px;
+  padding: 15px;
+  border: 1px solid #eee;
+}
+
+.spot-icon {
+  font-size: 24px;
+}
+
+.spot-type {
+  font-size: 12px;
+  color: #777;
+  margin-top: 7px;
+}
+
+.spot-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 3px;
+  line-height: 1.35;
+}
+
+.spot-distance {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.empty {
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+  padding: 30px 18px;
+  color: #777;
+}
+
+.footer {
+  text-align: center;
+  color: #999;
+  font-size: 11px;
+  padding: 30px 10px;
+}
+
+@media (max-width: 420px) {
+  .spot-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-small">TOKYO DISNEYLAND</div>
+  <h1>📍 Spot Navi</h1>
+  <p>今いる場所の近くでできることを探そう</p>
+</header>
+
+<div class="container">
+
+  <div class="location-card">
+    <div class="location-title">現在地</div>
+    <div class="location-name" id="locationName">
+      まだ取得していません
+    </div>
+
+    <button class="primary" onclick="getLocation()">
+      📍 現在地を取得する
+    </button>
+
+    <button class="secondary" onclick="demoLocation()">
+      🏰 デモで試す
+    </button>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <div id="result"></div>
+
+</div>
+
+<div class="footer">
+  TDL Spot Navi / Prototype
+</div>
+
+
+<script>
+
+/* =========================
+   ディズニーランドの簡易データ
+========================= */
+
+const attractions = [
+
+  {
+    name: "ホーンテッドマンション",
+    lat: 35.6317,
+    lng: 139.8805,
+    area: "ファンタジーランド",
+    spots: [
+      ["📸", "写真", "ホーンテッドマンション周辺", "すぐ近く"],
+      ["🍴", "フード", "トルバドールタバン", "徒歩約3分"],
+      ["🛍️", "ショップ", "キングダム・トレジャー", "徒歩約4分"],
+      ["🎢", "アトラクション", "イッツ・ア・スモールワールド", "徒歩約5分"],
+      ["🎢", "アトラクション", "ピーターパン空の旅", "徒歩約5分"],
+      ["📸", "写真", "シンデレラ城方面", "徒歩約6分"]
+    ]
+  },
+
+  {
+    name: "イッツ・ア・スモールワールド",
+    lat: 35.6318,
+    lng: 139.8795,
+    area: "ファンタジーランド",
+    spots: [
+      ["📸", "写真", "ファンタジーランドの街並み", "すぐ近く"],
+      ["🎢", "アトラクション", "ピーターパン空の旅", "徒歩約2分"],
+      ["🎢", "アトラクション", "ホーンテッドマンション", "徒歩約5分"],
+      ["🍴", "フード", "クイーン・オブ・ハートのバンケットホール", "徒歩約4分"],
+      ["🛍️", "ショップ", "プーさんコーナー", "徒歩約6分"],
+      ["📸", "写真", "シンデレラ城周辺", "徒歩約6分"]
+    ]
+  },
+
+  {
+    name: "ピーターパン空の旅",
+    lat: 35.6321,
+    lng: 139.8798,
+    area: "ファンタジーランド",
+    spots: [
+      ["📸", "写真", "ピーターパン周辺の街並み", "すぐ近く"],
+      ["🎢", "アトラクション", "イッツ・ア・スモールワールド", "徒歩約2分"],
+      ["🎢", "アトラクション", "ホーンテッドマンション", "徒歩約5分"],
+      ["🍴", "フード", "クイーン・オブ・ハートのバンケットホール", "徒歩約3分"],
+      ["🛍️", "ショップ", "プーさんコーナー", "徒歩約6分"]
+    ]
+  },
+
+  {
+    name: "プーさんのハニーハント",
+    lat: 35.6325,
+    lng: 139.8782,
+    area: "ファンタジーランド",
+    spots: [
+      ["🛍️", "ショップ", "プーさんコーナー", "すぐ近く"],
+      ["📸", "写真", "ファンタジーランド周辺", "徒歩約2分"],
+      ["🍴", "フード", "キャプテンフックス・ギャレー", "徒歩約5分"],
+      ["🎢", "アトラクション", "イッツ・ア・スモールワールド", "徒歩約6分"],
+      ["📸", "写真", "シンデレラ城方面", "徒歩約7分"]
+    ]
+  },
+
+  {
+    name: "カリブの海賊",
+    lat: 35.6300,
+    lng: 139.8820,
+    area: "アドベンチャーランド",
+    spots: [
+      ["🛍️", "ショップ", "ゴールデンガリオン", "すぐ近く"],
+      ["🛍️", "ショップ", "パイレーツ・トレジャー", "徒歩約2分"],
+      ["📸", "写真", "カリブの海賊周辺", "すぐ近く"],
+      ["🍴", "フード", "ブルーバイユー・レストラン", "すぐ近く"],
+      ["🎢", "アトラクション", "ジャングルクルーズ", "徒歩約5分"],
+      ["📸", "写真", "アドベンチャーランドの街並み", "徒歩約4分"]
+    ]
+  },
+
+  {
+    name: "ジャングルクルーズ",
+    lat: 35.6294,
+    lng: 139.8830,
+    area: "アドベンチャーランド",
+    spots: [
+      ["🎢", "アトラクション", "カリブの海賊", "徒歩約5分"],
+      ["📸", "写真", "アドベンチャーランド", "すぐ近く"],
+      ["🍴", "フード", "チャイナボイジャー", "徒歩約4分"],
+      ["🛍️", "ショップ", "ゴールデンガリオン", "徒歩約6分"],
+      ["📸", "写真", "シンデレラ城方面", "徒歩約8分"]
+    ]
+  },
+
+  {
+    name: "ビッグサンダー・マウンテン",
+    lat: 35.6310,
+    lng: 139.8850,
+    area: "ウエスタンランド",
+    spots: [
+      ["📸", "写真", "ビッグサンダー・マウンテン周辺", "すぐ近く"],
+      ["🍴", "フード", "キャンプ・ウッドチャック・キッチン", "徒歩約5分"],
+      ["🎢", "アトラクション", "カントリーベア・シアター", "徒歩約4分"],
+      ["🛍️", "ショップ", "カントリーベア・バンドワゴン", "徒歩約4分"],
+      ["📸", "写真", "ウエスタンランドの街並み", "徒歩約3分"]
+    ]
+  },
+
+  {
+    name: "スプラッシュ・マウンテン",
+    lat: 35.6287,
+    lng: 139.8835,
+    area: "クリッターカントリー",
+    spots: [
+      ["📸", "写真", "クリッターカントリー", "すぐ近く"],
+      ["🍴", "フード", "グランマ・サラのキッチン", "徒歩約3分"],
+      ["🎢", "アトラクション", "ビッグサンダー・マウンテン", "徒歩約7分"],
+      ["📸", "写真", "アメリカ河周辺", "徒歩約5分"],
+      ["😴", "休憩", "アメリカ河沿い", "徒歩約5分"]
+    ]
+  },
+
+  {
+    name: "美女と野獣“魔法のものがたり”",
+    lat: 35.6328,
+    lng: 139.8767,
+    area: "ファンタジーランド",
+    spots: [
+      ["📸", "写真", "美女と野獣の城周辺", "すぐ近く"],
+      ["🛍️", "ショップ", "ビレッジショップス", "徒歩約2分"],
+      ["🍴", "フード", "ラ・タベルヌ・ド・ガストン", "徒歩約3分"],
+      ["🎢", "アトラクション", "プーさんのハニーハント", "徒歩約6分"],
+      ["📸", "写真", "ファンタジーランドの街並み", "徒歩約3分"]
+    ]
+  },
+
+  {
+    name: "トゥーンタウン",
+    lat: 35.6320,
+    lng: 139.8740,
+    area: "トゥーンタウン",
+    spots: [
+      ["📸", "写真", "トゥーンタウンの街並み", "すぐ近く"],
+      ["🍴", "フード", "ヒューイ・デューイ・ルーイのグッドタイム・カフェ", "すぐ近く"],
+      ["🛍️", "ショップ", "ギャグファクトリー", "すぐ近く"],
+      ["📸", "写真", "ミッキーの家周辺", "徒歩約3分"],
+      ["😴", "休憩", "トゥーンタウン周辺", "徒歩約2分"]
+    ]
+  },
+
+  {
+    name: "スペース・マウンテン",
+    lat: 35.6325,
+    lng: 139.8780,
+    area: "トゥモローランド",
+    spots: [
+      ["📸", "写真", "トゥモローランドの街並み", "すぐ近く"],
+      ["🍴", "フード", "トゥモローランド・テラス", "徒歩約3分"],
+      ["🛍️", "ショップ", "プラネットM", "徒歩約4分"],
+      ["🎢", "アトラクション", "バズ・ライトイヤーのアストロブラスター", "徒歩約5分"]
+    ]
+  }
+
+];
+
+
+/* =========================
+   現在地取得
+========================= */
+
+function getLocation() {
+
+  const status = document.getElementById("status");
+
+  if (!navigator.geolocation) {
+    status.textContent = "このブラウザでは位置情報を利用できません。";
+    return;
+  }
+
+  status.textContent = "現在地を取得しています…";
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position) {
+
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      document.getElementById("locationName").textContent =
+        "現在地を取得しました";
+
+      status.textContent =
+        "近くのアトラクションを探しています…";
+
+      showNearby(lat, lng);
+
+    },
+
+    function(error) {
+
+      status.textContent =
+        "位置情報を取得できませんでした。位置情報の許可を確認してください。";
+
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 30000
+    }
+
+  );
+}
+
+
+/* =========================
+   近くのアトラクション検索
+========================= */
+
+function showNearby(lat, lng) {
+
+  let nearest = null;
+  let nearestDistance = Infinity;
+
+  attractions.forEach(function(attraction) {
+
+    const distance =
+      getDistance(lat, lng, attraction.lat, attraction.lng);
+
+    if (distance < nearestDistance) {
+      nearestDistance = distance;
+      nearest = attraction;
+    }
+
+  });
+
+  if (!nearest) {
+    document.getElementById("result").innerHTML =
+      '<div class="empty">近くのスポットが見つかりませんでした。</div>';
+    return;
+  }
+
+  showResult(nearest, nearestDistance);
+}
+
+
+/* =========================
+   結果表示
+========================= */
+
+function showResult(attraction, distance) {
+
+  const distanceText =
+    distance < 1000
+      ? Math.round(distance) + "m"
+      : (distance / 1000).toFixed(1) + "km";
+
+  let html = `
+
+    <div class="section-title">
+      🎢 近くのアトラクション
+    </div>
+
+    <div class="nearby-main">
+
+      <div class="attraction-label">
+        ${attraction.area}
+      </div>
+
+      <div class="attraction-name">
+        ${attraction.name}
+      </div>
+
+      <div class="distance">
+        📍 現在地から約 ${distanceText}
+      </div>
+
+      <div class="section-title" style="font-size:17px;margin-top:20px;">
+        この周辺でできること
+      </div>
+
+      <div class="spot-grid">
+  `;
+
+  attraction.spots.forEach(function(spot) {
+
+    html += `
+
+      <div class="spot-card">
+
+        <div class="spot-icon">
+          ${spot[0]}
+        </div>
+
+        <div class="spot-type">
+          ${spot[1]}
+        </div>
+
+        <div class="spot-name">
+          ${spot[2]}
+        </div>
+
+        <div class="spot-distance">
+          ${spot[3]}
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  html += `
+      </div>
+    </div>
+  `;
+
+  document.getElementById("result").innerHTML = html;
+}
+
+
+/* =========================
+   デモ
+========================= */
+
+function demoLocation() {
+
+  document.getElementById("locationName").textContent =
+    "カリブの海賊付近（デモ）";
+
+  document.getElementById("status").textContent =
+    "デモモード";
+
+  const attraction = attractions.find(
+    a => a.name === "カリブの海賊"
+  );
+
+  showResult(attraction, 120);
+
+}
+
+
+/* =========================
+   距離計算
+========================= */
+
+function getDistance(lat1, lon1, lat2, lon2) {
+
+  const R = 6371000;
+
+  const rad = Math.PI / 180;
+
+  const dLat = (lat2 - lat1) * rad;
+  const dLon = (lon2 - lon1) * rad;
+
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * rad) *
+    Math.cos(lat2 * rad) *
+    Math.sin(dLon / 2) ** 2;
+
+  const c =
+    2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c;
+
+}
+
+</script>
+
+</body>
+</html>
