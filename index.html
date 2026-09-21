@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDL AI NAVI</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+  background: #f5f3f0;
+  color: #222;
+}
+
+header {
+  background: linear-gradient(135deg, #161616, #343434);
+  color: white;
+  padding: 28px 20px 24px;
+  border-radius: 0 0 28px 28px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  margin: 7px 0 0;
+  opacity: .75;
+  font-size: 13px;
+}
+
+.container {
+  padding: 18px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 22px 0 10px;
+}
+
+.location-box {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.location-status {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 13px 15px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.location-button {
+  width: 100%;
+  background: #111;
+  color: white;
+}
+
+select {
+  width: 100%;
+  padding: 13px;
+  border-radius: 13px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 14px;
+}
+
+.preferences {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.pref {
+  background: white;
+  border: 2px solid transparent;
+  color: #333;
+}
+
+.pref.active {
+  border-color: #111;
+  background: #eee;
+}
+
+.main-card {
+  margin-top: 18px;
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.ai-label {
+  display: inline-block;
+  background: #111;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.recommendation {
+  margin-top: 13px;
+}
+
+.recommendation h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.reason {
+  margin-top: 8px;
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.action {
+  margin-top: 17px;
+  background: #f3f3f3;
+  padding: 13px;
+  border-radius: 14px;
+  font-size: 13px;
+}
+
+.candidates {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.candidate {
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,.05);
+}
+
+.candidate-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.candidate-type {
+  color: #888;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.distance {
+  font-size: 12px;
+  color: #777;
+  white-space: nowrap;
+}
+
+.refresh {
+  width: 100%;
+  margin-top: 14px;
+  background: #e5e5e5;
+  color: #222;
+}
+
+.note {
+  font-size: 11px;
+  color: #888;
+  line-height: 1.5;
+  margin-top: 18px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🏰 TDL AI NAVI</h1>
+  <p>今いる場所から、次に何する？</p>
+</header>
+
+<div class="container">
+
+  <div class="section-title">📍 現在地</div>
+
+  <div class="location-box">
+
+    <div id="locationStatus" class="location-status">
+      現在地を取得していません
+    </div>
+
+    <button class="location-button" onclick="getLocation()">
+      📍 現在地を取得する
+    </button>
+
+    <div style="height:12px;"></div>
+
+    <select id="manualLocation" onchange="manualLocationChanged()">
+      <option value="">現在地を手動で選択</option>
+      <option value="worldbazaar">ワールドバザール</option>
+      <option value="castle">シンデレラ城</option>
+      <option value="adventure">アドベンチャーランド</option>
+      <option value="western">ウエスタンランド</option>
+      <option value="critters">クリッターカントリー</option>
+      <option value="fantasy">ファンタジーランド</option>
+      <option value="toon">トゥーンタウン</option>
+      <option value="tomorrow">トゥモローランド</option>
+    </select>
+
+  </div>
+
+
+  <div class="section-title">👥 一緒にいる人の好み</div>
+
+  <div class="preferences">
+
+    <button class="pref" onclick="togglePreference(this,'chip')">
+      🐿️ チップ＆デール
+    </button>
+
+    <button class="pref" onclick="togglePreference(this,'tinker')">
+      🧚 ティンカー・ベル
+    </button>
+
+    <button class="pref" onclick="togglePreference(this,'pooh')">
+      🍯 プーさん
+    </button>
+
+    <button class="pref" onclick="togglePreference(this,'rapunzel')">
+      🌸 ラプンツェル
+    </button>
+
+    <button class="pref" onclick="togglePreference(this,'hades')">
+      🔥 ハデス
+    </button>
+
+    <button class="pref" onclick="togglePreference(this,'photo')">
+      📸 写真重視
+    </button>
+
+  </div>
+
+
+  <div class="main-card">
+
+    <span class="ai-label">AI NAVI</span>
+
+    <div class="recommendation">
+
+      <h2 id="recommendationTitle">
+        次の行動を考えています…
+      </h2>
+
+      <div id="reason" class="reason">
+        現在地を設定すると、次におすすめの行動を提案します。
+      </div>
+
+      <div id="action" class="action">
+        📍 現在地を取得するか、上のリストから場所を選んでください。
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-title">✨ その他の候補</div>
+
+  <div id="candidates" class="candidates"></div>
+
+  <button class="refresh" onclick="recommend()">
+    🔄 もう一度おすすめを見る
+  </button>
+
+  <div class="note">
+    ※現在は試作版です。待ち時間はリアルタイム取得ではありません。
+    今後、より本格的なナビ機能に拡張できます。
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   データ
+========================= */
+
+const places = [
+
+  {
+    id:"worldbazaar",
+    name:"ワールドバザール",
+    lat:35.6328,
+    lng:139.8807,
+    attractions:["ペニーアーケード"],
+    photos:["ワールドバザールのハロウィン装飾"],
+    food:["センターストリート・コーヒーハウス"],
+    type:"エリア"
+  },
+
+  {
+    id:"castle",
+    name:"シンデレラ城",
+    lat:35.6314,
+    lng:139.8806,
+    attractions:["シンデレラのフェアリーテイル・ホール"],
+    photos:["シンデレラ城前"],
+    food:["スウィートハート・カフェ"],
+    type:"フォト"
+  },
+
+  {
+    id:"adventure",
+    name:"アドベンチャーランド",
+    lat:35.6320,
+    lng:139.8782,
+    attractions:[
+      "カリブの海賊",
+      "ジャングルクルーズ"
+    ],
+    photos:[
+      "ゴールデンガリオン周辺",
+      "アドベンチャーランドの街並み"
+    ],
+    food:[
+      "チャイナボイジャー",
+      "クリスタルパレス"
+    ],
+    type:"アトラクション"
+  },
+
+  {
+    id:"western",
+    name:"ウエスタンランド",
+    lat:35.6328,
+    lng:139.8764,
+    attractions:[
+      "ビッグサンダー・マウンテン",
+      "蒸気船マークトウェイン号"
+    ],
+    photos:[
+      "ビッグサンダー周辺",
+      "ウエスタンランドの街並み"
+    ],
+    food:[
+      "キャンプ・ウッドチャック・キッチン"
+    ],
+    type:"アトラクション"
+  },
+
+  {
+    id:"critters",
+    name:"クリッターカントリー",
+    lat:35.6315,
+    lng:139.8750,
+    attractions:[
+      "スプラッシュ・マウンテン"
+    ],
+    photos:[
+      "クリッターカントリーの小道"
+    ],
+    food:[
+      "グランマ・サラのキッチン"
+    ],
+    type:"アトラクション"
+  },
+
+  {
+    id:"fantasy",
+    name:"ファンタジーランド",
+    lat:35.6305,
+    lng:139.8785,
+    attractions:[
+      "ホーンテッドマンション",
+      "美女と野獣“魔法のものがたり”",
+      "ピーターパン空の旅"
+    ],
+    photos:[
+      "ホーンテッドマンション周辺",
+      "ラプンツェルを感じるファンタジーランド"
+    ],
+    food:[
+      "クイーン・オブ・ハートのバンケットホール"
+    ],
+    type:"アトラクション"
+  },
+
+  {
+    id:"toon",
+    name:"トゥーンタウン",
+    lat:35.6310,
+    lng:139.8820,
+    attractions:[
+      "ミッキーの家とミート・ミッキー",
+      "ガジェットのゴーコースター"
+    ],
+    photos:[
+      "トゥーンタウンの街並み"
+    ],
+    food:[
+      "ヒューイ・デューイ・ルーイのグッドタイム・カフェ"
+    ],
+    type:"キャラクター"
+  },
+
+  {
+    id:"tomorrow",
+    name:"トゥモローランド",
+    lat:35.6300,
+    lng:139.8815,
+    attractions:[
+      "ベイマックスのハッピーライド",
+      "モンスターズ・インク“ライド＆ゴーシーク！”"
+    ],
+    photos:[
+      "トゥモローランドの夜景"
+    ],
+    food:[
+      "トゥモローランド・テラス"
+    ],
+    type:"アトラクション"
+  }
+
+];
+
+
+/* =========================
+   好み
+========================= */
+
+let preferences = [];
+
+function togglePreference(button, value){
+
+  button.classList.toggle("active");
+
+  if(preferences.includes(value)){
+    preferences = preferences.filter(x => x !== value);
+  }else{
+    preferences.push(value);
+  }
+
+  recommend();
+}
+
+
+/* =========================
+   現在地
+========================= */
+
+let currentPlace = null;
+
+function manualLocationChanged(){
+
+  const value =
+    document.getElementById("manualLocation").value;
+
+  if(!value) return;
+
+  currentPlace =
+    places.find(p => p.id === value);
+
+  document.getElementById("locationStatus").innerText =
+    "📍 " + currentPlace.name;
+
+  recommend();
+}
+
+
+/* =========================
+   GPS
+========================= */
+
+function getLocation(){
+
+  const status =
+    document.getElementById("locationStatus");
+
+  status.innerText =
+    "📡 現在地を取得中…";
+
+  if(!navigator.geolocation){
+
+    status.innerText =
+      "このブラウザでは位置情報を利用できません";
+
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    position => {
+
+      const lat =
+        position.coords.latitude;
+
+      const lng =
+        position.coords.longitude;
+
+      currentPlace =
+        findNearestPlace(lat,lng);
+
+      status.innerText =
+        "📍 " + currentPlace.name +
+        " 付近";
+
+      document.getElementById("manualLocation").value =
+        currentPlace.id;
+
+      recommend();
+
+    },
+
+    error => {
+
+      status.innerText =
+        "位置情報を取得できませんでした。手動選択を使ってください。";
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:10000
+    }
+
+  );
+}
+
+
+/* =========================
+   一番近いエリア
+========================= */
+
+function findNearestPlace(lat,lng){
+
+  let nearest = places[0];
+  let minDistance = Infinity;
+
+  places.forEach(place => {
+
+    const distance =
+      calculateDistance(
+        lat,
+        lng,
+        place.lat,
+        place.lng
+      );
+
+    if(distance < minDistance){
+
+      minDistance = distance;
+      nearest = place;
+
+    }
+
+  });
+
+  return nearest;
+}
+
+
+/* =========================
+   距離計算
+========================= */
+
+function calculateDistance(
+  lat1,
+  lon1,
+  lat2,
+  lon2
+){
+
+  const R = 6371;
+
+  const dLat =
+    (lat2-lat1) *
+    Math.PI / 180;
+
+  const dLon =
+    (lon2-lon1) *
+    Math.PI / 180;
+
+  const a =
+    Math.sin(dLat/2) *
+    Math.sin(dLat/2) +
+
+    Math.cos(lat1*Math.PI/180) *
+    Math.cos(lat2*Math.PI/180) *
+
+    Math.sin(dLon/2) *
+    Math.sin(dLon/2);
+
+  const c =
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1-a)
+    );
+
+  return R*c;
+
+}
+
+
+/* =========================
+   おすすめAI
+========================= */
+
+function recommend(){
+
+  if(!currentPlace){
+
+    document.getElementById(
+      "recommendationTitle"
+    ).innerText =
+      "まず現在地を教えて！";
+
+    document.getElementById(
+      "reason"
+    ).innerText =
+      "現在地が分かれば、そこから次の行動を考えます。";
+
+    return;
+
+  }
+
+
+  const now =
+    new Date();
+
+  const hour =
+    now.getHours();
+
+
+  let score = {};
+
+
+  places.forEach(place => {
+
+    if(place.id === currentPlace.id){
+      score[place.id] = -999;
+      return;
+    }
+
+    let s = 0;
+
+
+    /* 距離 */
+
+    const distance =
+      calculateDistance(
+        currentPlace.lat,
+        currentPlace.lng,
+        place.lat,
+        place.lng
+      );
+
+    s += Math.max(
+      0,
+      10 - distance*100
+    );
+
+
+    /* 好み */
+
+    if(
+      preferences.includes("chip") &&
+      place.id === "toon"
+    ){
+      s += 8;
+    }
+
+    if(
+      preferences.includes("tinker") &&
+      place.id === "fantasy"
+    ){
+      s += 5;
+    }
+
+    if(
+      preferences.includes("pooh") &&
+      place.id === "fantasy"
+    ){
+      s += 5;
+    }
+
+    if(
+      preferences.includes("rapunzel") &&
+      place.id === "fantasy"
+    ){
+      s += 8;
+    }
+
+    if(
+      preferences.includes("hades") &&
+      place.id === "adventure"
+    ){
+      s += 7;
+    }
+
+    if(
+      preferences.includes("photo")
+    ){
+      s += 5;
+    }
+
+
+    /* 時間帯 */
+
+    if(
+      hour >= 18 &&
+      place.id === "tomorrow"
+    ){
+      s += 3;
+    }
+
+
+    score[place.id] = s;
+
+  });
+
+
+  const sorted =
+    places
+      .filter(p => p.id !== currentPlace.id)
+      .sort(
+        (a,b) =>
+          score[b.id]-score[a.id]
+      );
+
+
+  const best =
+    sorted[0];
+
+
+  const second =
+    sorted[1];
+
+  const third =
+    sorted[2];
+
+
+  /* メイン表示 */
+
+  document.getElementById(
+    "recommendationTitle"
+  ).innerText =
+    getActionTitle(best);
+
+
+  document.getElementById(
+    "reason"
+  ).innerText =
+    createReason(best);
+
+
+  document.getElementById(
+    "action"
+  ).innerHTML =
+    createAction(best);
+
+
+  /* その他候補 */
+
+  const container =
+    document.getElementById(
+      "candidates"
+    );
+
+  container.innerHTML = "";
+
+  [second,third].forEach(
+    place => {
+
+      const distance =
+        calculateDistance(
+          currentPlace.lat,
+          currentPlace.lng,
+          place.lat,
+          place.lng
+        );
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "candidate";
+
+      div.innerHTML = `
+
+        <div>
+          <div class="candidate-title">
+            ${getEmoji(place)} ${place.name}
+          </div>
+
+          <div class="candidate-type">
+            ${place.type}
+          </div>
+        </div>
+
+        <div class="distance">
+          約${Math.max(
+            1,
+            Math.round(distance*1000)
+          )}m
+        </div>
+
+      `;
+
+      container.appendChild(div);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   タイトル
+========================= */
+
+function getActionTitle(place){
+
+  if(place.id === "adventure"){
+
+    return "🏴‍☠️ カリブ方面へ行こう！";
+
+  }
+
+  if(place.id === "fantasy"){
+
+    return "✨ ファンタジーランドへ！";
+
+  }
+
+  if(place.id === "toon"){
+
+    return "🐿️ トゥーンタウン方面へ！";
+
+  }
+
+  if(place.id === "tomorrow"){
+
+    return "🚀 トゥモローランドへ！";
+
+  }
+
+  return "👉 " + place.name + "へ行こう！";
+
+}
+
+
+/* =========================
+   理由
+========================= */
+
+function createReason(place){
+
+  let reasons = [];
+
+  reasons.push(
+    "現在地「" +
+    currentPlace.name +
+    "」から移動しやすいエリアです。"
+  );
+
+  if(
+    preferences.includes("photo")
+  ){
+
+    reasons.push(
+      "写真重視なので、周辺の撮影スポットも候補に入れています。"
+    );
+
+  }
+
+  if(
+    preferences.includes("hades") &&
+    place.id === "adventure"
+  ){
+
+    reasons.push(
+      "ハデス系コーデなら海賊エリアとの相性も良さそう。"
+    );
+
+  }
+
+  if(
+    preferences.includes("chip") &&
+    place.id === "toon"
+  ){
+
+    reasons.push(
+      "チップ＆デール好きの同行者に合わせています。"
+    );
+
+  }
+
+  return reasons.join(" ");
+
+}
+
+
+/* =========================
+   行動
+========================= */
+
+function createAction(place){
+
+  const attraction =
+    place.attractions[0];
+
+  const photo =
+    place.photos[0];
+
+  const food =
+    place.food[0];
+
+
+  return `
+
+    🎢 次の候補：
+    <b>${attraction}</b><br><br>
+
+    📸 近くで：
+    <b>${photo}</b><br><br>
+
+    🍴 お腹が空いたら：
+    <b>${food}</b>
+
+  `;
+
+}
+
+
+/* =========================
+   絵文字
+========================= */
+
+function getEmoji(place){
+
+  const map = {
+
+    worldbazaar:"🏰",
+    castle:"🏰",
+    adventure:"🏴‍☠️",
+    western:"🤠",
+    critters:"🐿️",
+    fantasy:"✨",
+    toon:"🐭",
+    tomorrow:"🚀"
+
+  };
+
+  return map[place.id] || "📍";
+
+}
+
+
+/* =========================
+   初期表示
+========================= */
+
+recommend();
+
+</script>
+
+</body>
+</html>
