@@ -141,6 +141,32 @@ header p{
   margin-bottom:18px;
 }
 
+.selected-main{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.selected-image{
+  width:100px;
+  height:80px;
+  flex:none;
+  object-fit:cover;
+  border-radius:10px;
+  background:#333;
+}
+
+.selected-image.placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.selected-info{
+  min-width:0;
+}
+
 .selected-title{
   font-size:18px;
   font-weight:bold;
@@ -194,6 +220,7 @@ header p{
 
 .mini-info{
   padding:10px;
+  min-width:0;
 }
 
 .mini-name{
@@ -205,6 +232,13 @@ header p{
   color:#888;
   font-size:11px;
   margin-top:3px;
+}
+
+.distance{
+  color:#2878d8;
+  font-size:12px;
+  font-weight:bold;
+  margin-top:5px;
 }
 
 .photo-card{
@@ -238,6 +272,13 @@ header p{
 
 .photo-source a{
   color:#2878d8;
+}
+
+.photo-distance{
+  color:#2878d8;
+  font-size:12px;
+  font-weight:bold;
+  margin-top:7px;
 }
 
 .hidden{
@@ -299,7 +340,7 @@ header p{
 
 <header>
   <h1>🏰 TDL AI NAVI</h1>
-  <p>アトラクションを選ぶと、周辺のスポットを表示します</p>
+  <p>アトラクションを選ぶと、徒歩5分圏内のスポットを表示します</p>
 </header>
 
 <div class="container">
@@ -308,18 +349,42 @@ header p{
     <div class="section-title">📍 エリアを選択</div>
 
     <div class="area-buttons">
-      <button class="area-btn active" onclick="selectArea('ワールドバザール',this)">🏰 ワールドバザール</button>
-      <button class="area-btn" onclick="selectArea('アドベンチャーランド',this)">🌴 アドベンチャーランド</button>
-      <button class="area-btn" onclick="selectArea('ウエスタンランド',this)">🤠 ウエスタンランド</button>
-      <button class="area-btn" onclick="selectArea('クリッターカントリー',this)">🦫 クリッターカントリー</button>
-      <button class="area-btn" onclick="selectArea('ファンタジーランド',this)">🏰 ファンタジーランド</button>
-      <button class="area-btn" onclick="selectArea('トゥーンタウン',this)">🎨 トゥーンタウン</button>
-      <button class="area-btn" onclick="selectArea('トゥモローランド',this)">🚀 トゥモローランド</button>
+      <button class="area-btn active" onclick="selectArea('ワールドバザール',this)">
+        🏰 ワールドバザール
+      </button>
+
+      <button class="area-btn" onclick="selectArea('アドベンチャーランド',this)">
+        🌴 アドベンチャーランド
+      </button>
+
+      <button class="area-btn" onclick="selectArea('ウエスタンランド',this)">
+        🤠 ウエスタンランド
+      </button>
+
+      <button class="area-btn" onclick="selectArea('クリッターカントリー',this)">
+        🦫 クリッターカントリー
+      </button>
+
+      <button class="area-btn" onclick="selectArea('ファンタジーランド',this)">
+        🏰 ファンタジーランド
+      </button>
+
+      <button class="area-btn" onclick="selectArea('トゥーンタウン',this)">
+        🎨 トゥーンタウン
+      </button>
+
+      <button class="area-btn" onclick="selectArea('トゥモローランド',this)">
+        🚀 トゥモローランド
+      </button>
     </div>
   </div>
 
+
   <div class="section">
-    <div class="section-title">🎢 アトラクションを選択</div>
+
+    <div class="section-title">
+      🎢 アトラクションを選択
+    </div>
 
     <input
       id="search"
@@ -329,14 +394,35 @@ header p{
     >
 
     <div id="attractionCount" class="count"></div>
+
     <div id="attractions" class="cards"></div>
+
   </div>
+
 
   <div id="result" class="hidden">
 
     <div class="selected">
-      <div class="selected-title" id="selectedName"></div>
-      <div class="selected-area" id="selectedArea"></div>
+
+      <div class="selected-main">
+
+        <div id="selectedImage"></div>
+
+        <div class="selected-info">
+
+          <div
+            class="selected-title"
+            id="selectedName">
+          </div>
+
+          <div
+            class="selected-area"
+            id="selectedArea">
+          </div>
+
+        </div>
+
+      </div>
 
       <a
         id="selectedOfficial"
@@ -346,31 +432,57 @@ header p{
       >
         公式ページを見る →
       </a>
+
     </div>
 
+
     <div class="category">
-      <div class="category-title">🎢 周辺のアトラクション</div>
+
+      <div class="category-title">
+        🎢 徒歩5分圏内のアトラクション
+      </div>
+
       <div id="nearAttractions"></div>
+
     </div>
 
+
     <div class="category">
-      <div class="category-title">🍴 周辺のレストラン</div>
+
+      <div class="category-title">
+        🍴 徒歩5分圏内のレストラン
+      </div>
+
       <div id="nearRestaurants"></div>
+
     </div>
 
+
     <div class="category">
-      <div class="category-title">🛍️ 周辺のショップ</div>
+
+      <div class="category-title">
+        🛍️ 徒歩5分圏内のショップ
+      </div>
+
       <div id="nearShops"></div>
+
     </div>
 
+
     <div class="category">
-      <div class="category-title">📸 フォトスポット</div>
+
+      <div class="category-title">
+        📸 徒歩5分圏内のフォトスポット
+      </div>
+
       <div id="photoSpots"></div>
+
     </div>
 
   </div>
 
 </div>
+
 
 <script>
 
@@ -381,18 +493,41 @@ header p{
 const OFFICIAL =
   "https://www.tokyodisneyresort.jp";
 
-let currentArea = "ワールドバザール";
-let selectedAttraction = null;
+let currentArea =
+  "ワールドバザール";
+
+let selectedAttraction =
+  null;
+
+
+/* =========================================================
+   徒歩判定設定
+
+   70m/分で歩くと5分 = 350m
+
+   園内マップ上の直線距離に
+   道の曲がりなどを考慮した係数を掛ける
+========================================================= */
+
+const WALKING_SPEED =
+  70;
+
+const WALKING_FACTOR =
+  1.30;
+
+const MAX_WALKING_MINUTES =
+  5;
+
+const MAX_WALKING_DISTANCE =
+  WALKING_SPEED *
+  MAX_WALKING_MINUTES;
 
 
 /* =========================================================
    直接確認済みの公式画像
-   ※ここは絶対に勝手なURLを作らない
 ========================================================= */
 
 const DIRECT_IMAGES = {
-
-  /* アトラクション */
 
   "オムニバス":
     "https://media1.tokyodisneyresort.jp/images/adventure/attraction/41_main_visual_name_1.jpg?mod=20260122101251",
@@ -409,8 +544,6 @@ const DIRECT_IMAGES = {
   "美女と野獣":
     "https://media1.tokyodisneyresort.jp/images/adventure/attraction/1054_main_visual_name_1.jpg?mod=20260910162741",
 
-  /* ショップ */
-
   "グランドエンポーリアム":
     "https://media1.tokyodisneyresort.jp/images/adventure/shop/11_main_visual_name_1.jpg?mod=20251226140046",
 
@@ -426,49 +559,49 @@ const DIRECT_IMAGES = {
 
 const attractions = [
 
-["オムニバス","ワールドバザール",151],
-["ペニーアーケード","ワールドバザール",150],
+  ["オムニバス","ワールドバザール",151],
+  ["ペニーアーケード","ワールドバザール",150],
 
-["カリブの海賊","アドベンチャーランド",152],
-["ジャングルクルーズ","アドベンチャーランド",153],
-["ウエスタンリバー鉄道","アドベンチャーランド",154],
-["スイスファミリー・ツリーハウス","アドベンチャーランド",155],
-["魅惑のチキルーム","アドベンチャーランド",156],
+  ["カリブの海賊","アドベンチャーランド",152],
+  ["ジャングルクルーズ","アドベンチャーランド",153],
+  ["ウエスタンリバー鉄道","アドベンチャーランド",154],
+  ["スイスファミリー・ツリーハウス","アドベンチャーランド",155],
+  ["魅惑のチキルーム","アドベンチャーランド",156],
 
-["ウエスタンランド・シューティングギャラリー","ウエスタンランド",157],
-["カントリーベア・シアター","ウエスタンランド",158],
-["蒸気船マークトウェイン号","ウエスタンランド",159],
-["ビッグサンダー・マウンテン","ウエスタンランド",160],
-["トムソーヤ島いかだ","ウエスタンランド",161],
+  ["ウエスタンランド・シューティングギャラリー","ウエスタンランド",157],
+  ["カントリーベア・シアター","ウエスタンランド",158],
+  ["蒸気船マークトウェイン号","ウエスタンランド",159],
+  ["ビッグサンダー・マウンテン","ウエスタンランド",160],
+  ["トムソーヤ島いかだ","ウエスタンランド",161],
 
-["スプラッシュ・マウンテン","クリッターカントリー",162],
-["ビーバーブラザーズのカヌー探険","クリッターカントリー",163],
+  ["スプラッシュ・マウンテン","クリッターカントリー",162],
+  ["ビーバーブラザーズのカヌー探険","クリッターカントリー",163],
 
-["ピーターパン","ファンタジーランド",164],
-["白雪姫","ファンタジーランド",165],
-["シンデレラ","ファンタジーランド",166],
-["フィルハーマジック","ファンタジーランド",167],
-["ピノキオ","ファンタジーランド",168],
-["ダンボ","ファンタジーランド",169],
-["キャッスルカルーセル","ファンタジーランド",170],
-["ホーンテッドマンション","ファンタジーランド",171],
-["スモールワールド","ファンタジーランド",172],
-["アリスのティーパーティー","ファンタジーランド",173],
-["プーさん","ファンタジーランド",174],
-["美女と野獣","ファンタジーランド",197],
+  ["ピーターパン","ファンタジーランド",164],
+  ["白雪姫","ファンタジーランド",165],
+  ["シンデレラ","ファンタジーランド",166],
+  ["フィルハーマジック","ファンタジーランド",167],
+  ["ピノキオ","ファンタジーランド",168],
+  ["ダンボ","ファンタジーランド",169],
+  ["キャッスルカルーセル","ファンタジーランド",170],
+  ["ホーンテッドマンション","ファンタジーランド",171],
+  ["スモールワールド","ファンタジーランド",172],
+  ["アリスのティーパーティー","ファンタジーランド",173],
+  ["プーさん","ファンタジーランド",174],
+  ["美女と野獣","ファンタジーランド",197],
 
-["ロジャーラビットのカートゥーンスピン","トゥーンタウン",175],
-["ミニーの家","トゥーンタウン",177],
-["チップとデールのツリーハウス","トゥーンタウン",178],
-["ガジェットのゴーコースター","トゥーンタウン",179],
-["ドナルドのボート","トゥーンタウン",180],
-["グーフィーのペイント＆プレイハウス","トゥーンタウン",181],
-["トゥーンパーク","トゥーンタウン",194],
+  ["ロジャーラビットのカートゥーンスピン","トゥーンタウン",175],
+  ["ミニーの家","トゥーンタウン",177],
+  ["チップとデールのツリーハウス","トゥーンタウン",178],
+  ["ガジェットのゴーコースター","トゥーンタウン",179],
+  ["ドナルドのボート","トゥーンタウン",180],
+  ["グーフィーのペイント＆プレイハウス","トゥーンタウン",181],
+  ["トゥーンパーク","トゥーンタウン",194],
 
-["スター・ツアーズ","トゥモローランド",183],
-["スティッチ・エンカウンター","トゥモローランド",195],
-["モンスターズ・インク“ライド＆ゴーシーク！”","トゥモローランド",189],
-["ベイマックスのハッピーライド","トゥモローランド",196]
+  ["スター・ツアーズ","トゥモローランド",183],
+  ["スティッチ・エンカウンター","トゥモローランド",195],
+  ["モンスターズ・インク“ライド＆ゴーシーク！”","トゥモローランド",189],
+  ["ベイマックスのハッピーライド","トゥモローランド",196]
 
 ];
 
@@ -479,31 +612,31 @@ const attractions = [
 
 const restaurants = [
 
-["アイスクリームコーン","ワールドバザール",304],
-["リフレッシュメントコーナー","ワールドバザール",303],
-["イーストサイド・カフェ","ワールドバザール",300],
-["センターストリート・コーヒーハウス","ワールドバザール",301],
+  ["アイスクリームコーン","ワールドバザール",304],
+  ["リフレッシュメントコーナー","ワールドバザール",303],
+  ["イーストサイド・カフェ","ワールドバザール",300],
+  ["センターストリート・コーヒーハウス","ワールドバザール",301],
 
-["ポリネシアンテラス・レストラン","アドベンチャーランド",326],
-["クリスタルパレス・レストラン","アドベンチャーランド",323],
-["ブルーバイユー・レストラン","アドベンチャーランド",318],
-["チャイナボイジャー","アドベンチャーランド",320],
-["カフェ・オーリンズ","アドベンチャーランド",321],
-["カスバ・フードコート","アドベンチャーランド",322],
+  ["ポリネシアンテラス・レストラン","アドベンチャーランド",326],
+  ["クリスタルパレス・レストラン","アドベンチャーランド",323],
+  ["ブルーバイユー・レストラン","アドベンチャーランド",318],
+  ["チャイナボイジャー","アドベンチャーランド",320],
+  ["カフェ・オーリンズ","アドベンチャーランド",321],
+  ["カスバ・フードコート","アドベンチャーランド",322],
 
-["ハングリーベア・レストラン","ウエスタンランド",338],
-["プラザパビリオン・レストラン","ウエスタンランド",335],
+  ["ハングリーベア・レストラン","ウエスタンランド",338],
+  ["プラザパビリオン・レストラン","ウエスタンランド",335],
 
-["グランマ・サラのキッチン","クリッターカントリー",344],
+  ["グランマ・サラのキッチン","クリッターカントリー",344],
 
-["クイーン・オブ・ハートのバンケットホール","ファンタジーランド",346],
-["トルバドールタバン","ファンタジーランド",349],
-["キャプテンフックス・ギャレー","ファンタジーランド",347],
+  ["クイーン・オブ・ハートのバンケットホール","ファンタジーランド",346],
+  ["トルバドールタバン","ファンタジーランド",349],
+  ["キャプテンフックス・ギャレー","ファンタジーランド",347],
 
-["トゥーンタウン・グルメ","トゥーンタウン",350],
+  ["トゥーンタウン・グルメ","トゥーンタウン",350],
 
-["トゥモローランド・テラス","トゥモローランド",357],
-["プラズマ・レイズ・ダイナー","トゥモローランド",352]
+  ["トゥモローランド・テラス","トゥモローランド",357],
+  ["プラズマ・レイズ・ダイナー","トゥモローランド",352]
 
 ];
 
@@ -514,75 +647,61 @@ const restaurants = [
 
 const shops = [
 
-/* ワールドバザール */
+  ["カメラセンター","ワールドバザール",515],
+  ["グランドエンポーリアム","ワールドバザール",513],
+  ["シルエットスタジオ","ワールドバザール",510],
+  ["タウンセンターファッション","ワールドバザール",525],
+  ["ディズニー＆カンパニー","ワールドバザール",502],
+  ["トイ・ステーション","ワールドバザール",524],
+  ["ハウス・オブ・グリーティング","ワールドバザール",508],
+  ["ハリントンズ・ジュエリー＆ウォッチ","ワールドバザール",523],
+  ["ビビディ・バビディ・ブティック","ワールドバザール",566],
+  ["ペイストリーパレス","ワールドバザール",522],
+  ["ホームストア","ワールドバザール",512],
+  ["マジックショップ","ワールドバザール",509],
+  ["ワールドバザール・コンフェクショナリー","ワールドバザール",500],
 
-["カメラセンター","ワールドバザール",515],
-["グランドエンポーリアム","ワールドバザール",513],
-["シルエットスタジオ","ワールドバザール",510],
-["タウンセンターファッション","ワールドバザール",525],
-["ディズニー＆カンパニー","ワールドバザール",502],
-["トイ・ステーション","ワールドバザール",524],
-["ハウス・オブ・グリーティング","ワールドバザール",508],
-["ハリントンズ・ジュエリー＆ウォッチ","ワールドバザール",523],
-["ビビディ・バビディ・ブティック","ワールドバザール",566],
-["ペイストリーパレス","ワールドバザール",522],
-["ホームストア","ワールドバザール",512],
-["マジックショップ","ワールドバザール",509],
-["ワールドバザール・コンフェクショナリー","ワールドバザール",500],
+  ["アドベンチャーランド・バザール","アドベンチャーランド",533],
+  ["アドベンチャーランド・バザール（カプセルトイ）","アドベンチャーランド",594],
+  ["クリスタルアーツ","アドベンチャーランド",531],
+  ["クリスタルアーツ（制作物）","アドベンチャーランド",532],
+  ["ゴールデンガリオン","アドベンチャーランド",526],
+  ["ジャングルカーニバル（丸太投げ）","アドベンチャーランド",570],
+  ["ジャングルカーニバル（ボール転がし）","アドベンチャーランド",571],
+  ["パイレーツ・トレジャー","アドベンチャーランド",527],
+  ["パーティグラ・ギフト","アドベンチャーランド",529],
+  ["ラ・プティート・パフュームリー","アドベンチャーランド",528],
+  ["ル・マルシェ・ブルー","アドベンチャーランド",530],
 
-/* アドベンチャーランド */
+  ["ウエスタンウエア","ウエスタンランド",539],
+  ["ウエスタンランド写真館","ウエスタンランド",538],
+  ["カントリーベア・バンドワゴン","ウエスタンランド",542],
+  ["ゼネラルストア","ウエスタンランド",540],
+  ["トレーディングポスト","ウエスタンランド",537],
+  ["ハッピーキャンパーサプライ","ウエスタンランド",534],
+  ["フロンティア・ウッドクラフト","ウエスタンランド",541],
 
-["アドベンチャーランド・バザール","アドベンチャーランド",533],
-["アドベンチャーランド・バザール（カプセルトイ）","アドベンチャーランド",594],
-["クリスタルアーツ","アドベンチャーランド",531],
-["クリスタルアーツ（制作物）","アドベンチャーランド",532],
-["ゴールデンガリオン","アドベンチャーランド",526],
-["ジャングルカーニバル（丸太投げ）","アドベンチャーランド",570],
-["ジャングルカーニバル（ボール転がし）","アドベンチャーランド",571],
-["パイレーツ・トレジャー","アドベンチャーランド",527],
-["パーティグラ・ギフト","アドベンチャーランド",529],
-["ラ・プティート・パフュームリー","アドベンチャーランド",528],
-["ル・マルシェ・ブルー","アドベンチャーランド",530],
+  ["スプラッシュダウン・フォト","クリッターカントリー",543],
 
-/* ウエスタンランド */
+  ["ガラスの靴","ファンタジーランド",546],
+  ["ガラスの靴（制作物）","ファンタジーランド",547],
+  ["キングダム・トレジャー","ファンタジーランド",549],
+  ["ストロンボリズ・ワゴン","ファンタジーランド",552],
+  ["ハーモニーフェア","ファンタジーランド",548],
+  ["ビレッジショップス","ファンタジーランド",572],
+  ["プーさんコーナー","ファンタジーランド",555],
+  ["ブレイブリトルテイラー・ショップ","ファンタジーランド",563],
+  ["プレジャーアイランド・キャンディーズ","ファンタジーランド",551],
 
-["ウエスタンウエア","ウエスタンランド",539],
-["ウエスタンランド写真館","ウエスタンランド",538],
-["カントリーベア・バンドワゴン","ウエスタンランド",542],
-["ゼネラルストア","ウエスタンランド",540],
-["トレーディングポスト","ウエスタンランド",537],
-["ハッピーキャンパーサプライ","ウエスタンランド",534],
-["フロンティア・ウッドクラフト","ウエスタンランド",541],
+  ["ギャグファクトリー／ファイブ・アンド・ダイム","トゥーンタウン",556],
+  ["ギャグファクトリー/ファイブ・アンド・ダイム（カプセルトイ）","トゥーンタウン",590],
+  ["トゥーンタウン・デリバリー・カンパニー","トゥーンタウン",557],
 
-/* クリッターカントリー */
-
-["スプラッシュダウン・フォト","クリッターカントリー",543],
-
-/* ファンタジーランド */
-
-["ガラスの靴","ファンタジーランド",546],
-["ガラスの靴（制作物）","ファンタジーランド",547],
-["キングダム・トレジャー","ファンタジーランド",549],
-["ストロンボリズ・ワゴン","ファンタジーランド",552],
-["ハーモニーフェア","ファンタジーランド",548],
-["ビレッジショップス","ファンタジーランド",572],
-["プーさんコーナー","ファンタジーランド",555],
-["ブレイブリトルテイラー・ショップ","ファンタジーランド",563],
-["プレジャーアイランド・キャンディーズ","ファンタジーランド",551],
-
-/* トゥーンタウン */
-
-["ギャグファクトリー／ファイブ・アンド・ダイム","トゥーンタウン",556],
-["ギャグファクトリー/ファイブ・アンド・ダイム（カプセルトイ）","トゥーンタウン",590],
-["トゥーンタウン・デリバリー・カンパニー","トゥーンタウン",557],
-
-/* トゥモローランド */
-
-["コズミック・エンカウンター","トゥモローランド",560],
-["スターゲイザーサプライ","トゥモローランド",576],
-["トレジャーコメット","トゥモローランド",564],
-["トレジャーコメット（カプセルトイ）","トゥモローランド",592],
-["モンスターズ・インク・カンパニーストア","トゥモローランド",558]
+  ["コズミック・エンカウンター","トゥモローランド",560],
+  ["スターゲイザーサプライ","トゥモローランド",576],
+  ["トレジャーコメット","トゥモローランド",564],
+  ["トレジャーコメット（カプセルトイ）","トゥモローランド",592],
+  ["モンスターズ・インク・カンパニーストア","トゥモローランド",558]
 
 ];
 
@@ -593,70 +712,257 @@ const shops = [
 
 const photoSpots = [
 
-{
-  name:"シンデレラ城 プラザ側",
-  area:"ワールドバザール",
-  icon:"🏰",
-  description:"パークの定番。正面から全体を入れた写真が撮りやすいスポット。",
-  source:"Castel",
-  url:"https://castel.jp/p/6245"
-},
+  {
+    name:"シンデレラ城 プラザ側",
+    area:"ワールドバザール",
+    icon:"🏰",
+    description:"パークの定番。正面から全体を入れた写真が撮りやすいスポット。",
+    source:"Castel",
+    url:"https://castel.jp/p/6245"
+  },
 
-{
-  name:"シンデレラ城 トゥモローランド側",
-  area:"ファンタジーランド",
-  icon:"📸",
-  description:"少し角度を変えて撮影できる定番スポット。",
-  source:"Castel",
-  url:"https://castel.jp/p/6245"
-},
+  {
+    name:"シンデレラ城 トゥモローランド側",
+    area:"ファンタジーランド",
+    icon:"📸",
+    description:"少し角度を変えて撮影できる定番スポット。",
+    source:"Castel",
+    url:"https://castel.jp/p/6245"
+  },
 
-{
-  name:"美女と野獣の城 左側",
-  area:"ファンタジーランド",
-  icon:"🌹",
-  description:"美女と野獣エリアらしい雰囲気を入れた写真におすすめ。",
-  source:"Castel",
-  url:"https://castel.jp/p/6245"
-},
+  {
+    name:"美女と野獣の城 左側",
+    area:"ファンタジーランド",
+    icon:"🌹",
+    description:"美女と野獣エリアらしい雰囲気を入れた写真におすすめ。",
+    source:"Castel",
+    url:"https://castel.jp/p/6245"
+  },
 
-{
-  name:"美女と野獣の城 右側",
-  area:"ファンタジーランド",
-  icon:"🌹",
-  description:"城を背景に人物を入れやすいフォトスポット。",
-  source:"Castel",
-  url:"https://castel.jp/p/6245"
-},
+  {
+    name:"美女と野獣の城 右側",
+    area:"ファンタジーランド",
+    icon:"🌹",
+    description:"城を背景に人物を入れやすいフォトスポット。",
+    source:"Castel",
+    url:"https://castel.jp/p/6245"
+  },
 
-{
-  name:"ワールドバザール ハロウィーン",
-  area:"ワールドバザール",
-  icon:"🎃",
-  description:"2026年ハロウィーン時期のワールドバザール周辺。",
-  source:"Castel",
-  url:"https://castel.jp/p/10576"
-},
+  {
+    name:"ワールドバザール ハロウィーン",
+    area:"ワールドバザール",
+    icon:"🎃",
+    description:"2026年ハロウィーン時期のワールドバザール周辺。",
+    source:"Castel",
+    url:"https://castel.jp/p/10576"
+  },
 
-{
-  name:"シンデレラ城 ハロウィーン",
-  area:"ワールドバザール",
-  icon:"🎃",
-  description:"ハロウィーン時期ならではのパーク写真に。",
-  source:"Castel",
-  url:"https://castel.jp/p/10576"
-},
+  {
+    name:"シンデレラ城 ハロウィーン",
+    area:"ワールドバザール",
+    icon:"🎃",
+    description:"ハロウィーン時期ならではのパーク写真に。",
+    source:"Castel",
+    url:"https://castel.jp/p/10576"
+  },
 
-{
-  name:"アドベンチャーランドの街並み",
-  area:"アドベンチャーランド",
-  icon:"🌴",
-  description:"建物や街灯など、雰囲気重視の写真が撮りやすいエリア。",
-  source:"Castel",
-  url:"https://castel.jp/p/2418"
-}
+  {
+    name:"アドベンチャーランドの街並み",
+    area:"アドベンチャーランド",
+    icon:"🌴",
+    description:"建物や街灯など、雰囲気重視の写真が撮りやすいエリア。",
+    source:"Castel",
+    url:"https://castel.jp/p/2418"
+  }
 
 ];
+
+
+/* =========================================================
+   園内座標
+
+   公式パークマップを基準にした
+   「園内位置の近似座標」
+
+   x = 東西
+   y = 南北
+
+   ※Google Mapsの実測座標ではない
+========================================================= */
+
+const LOCATIONS = {
+
+  /* -------------------------
+     ワールドバザール
+  ------------------------- */
+
+  "オムニバス":[0,-10],
+  "ペニーアーケード":[30,-5],
+
+  "アイスクリームコーン":[-25,-35],
+  "リフレッシュメントコーナー":[5,-35],
+  "イーストサイド・カフェ":[40,-30],
+  "センターストリート・コーヒーハウス":[70,-25],
+
+  "カメラセンター":[-35,-45],
+  "グランドエンポーリアム":[0,-50],
+  "シルエットスタジオ":[25,-45],
+  "タウンセンターファッション":[55,-45],
+  "ディズニー＆カンパニー":[80,-45],
+  "トイ・ステーション":[105,-40],
+  "ハウス・オブ・グリーティング":[-10,-65],
+  "ハリントンズ・ジュエリー＆ウォッチ":[35,-65],
+  "ビビディ・バビディ・ブティック":[65,-65],
+  "ペイストリーパレス":[95,-65],
+  "ホームストア":[115,-60],
+  "マジックショップ":[-25,-70],
+  "ワールドバザール・コンフェクショナリー":[20,-75],
+
+  "シンデレラ城 プラザ側":[70,80],
+  "ワールドバザール ハロウィーン":[25,35],
+  "シンデレラ城 ハロウィーン":[70,75],
+
+
+  /* -------------------------
+     アドベンチャーランド
+  ------------------------- */
+
+  "カリブの海賊":[-115,40],
+  "ジャングルクルーズ":[-165,105],
+  "ウエスタンリバー鉄道":[-210,150],
+  "スイスファミリー・ツリーハウス":[-100,20],
+  "魅惑のチキルーム":[-210,45],
+
+  "ポリネシアンテラス・レストラン":[-75,20],
+  "クリスタルパレス・レストラン":[-55,60],
+  "ブルーバイユー・レストラン":[-100,65],
+  "チャイナボイジャー":[-135,35],
+  "カフェ・オーリンズ":[-95,5],
+  "カスバ・フードコート":[-245,30],
+
+  "アドベンチャーランド・バザール":[-90,15],
+  "アドベンチャーランド・バザール（カプセルトイ）":[-80,0],
+  "クリスタルアーツ":[-80,55],
+  "クリスタルアーツ（制作物）":[-65,50],
+  "ゴールデンガリオン":[-135,10],
+  "ジャングルカーニバル（丸太投げ）":[-155,85],
+  "ジャングルカーニバル（ボール転がし）":[-145,90],
+  "パイレーツ・トレジャー":[-125,25],
+  "パーティグラ・ギフト":[-100,-5],
+  "ラ・プティート・パフュームリー":[-115,-5],
+  "ル・マルシェ・ブルー":[-70,-5],
+
+  "アドベンチャーランドの街並み":[-125,5],
+
+
+  /* -------------------------
+     ウエスタンランド
+  ------------------------- */
+
+  "ウエスタンランド・シューティングギャラリー":[-300,235],
+  "カントリーベア・シアター":[-255,185],
+  "蒸気船マークトウェイン号":[-245,315],
+  "ビッグサンダー・マウンテン":[-330,285],
+  "トムソーヤ島いかだ":[-205,320],
+
+  "ハングリーベア・レストラン":[-285,175],
+  "プラザパビリオン・レストラン":[-215,135],
+
+  "ウエスタンウエア":[-300,215],
+  "ウエスタンランド写真館":[-285,210],
+  "カントリーベア・バンドワゴン":[-260,200],
+  "ゼネラルストア":[-250,155],
+  "トレーディングポスト":[-280,145],
+  "ハッピーキャンパーサプライ":[-310,265],
+  "フロンティア・ウッドクラフト":[-325,250],
+
+
+  /* -------------------------
+     クリッターカントリー
+  ------------------------- */
+
+  "スプラッシュ・マウンテン":[-100,295],
+  "ビーバーブラザーズのカヌー探険":[-55,350],
+
+  "グランマ・サラのキッチン":[-85,320],
+
+  "スプラッシュダウン・フォト":[-75,285],
+
+
+  /* -------------------------
+     ファンタジーランド
+  ------------------------- */
+
+  "ピーターパン":[60,255],
+  "白雪姫":[95,205],
+  "シンデレラ":[125,160],
+  "フィルハーマジック":[145,225],
+  "ピノキオ":[105,220],
+  "ダンボ":[185,250],
+  "キャッスルカルーセル":[140,185],
+  "ホーンテッドマンション":[35,305],
+  "スモールワールド":[15,285],
+  "アリスのティーパーティー":[165,295],
+  "プーさん":[230,325],
+  "美女と野獣":[300,325],
+
+  "クイーン・オブ・ハートのバンケットホール":[210,305],
+  "トルバドールタバン":[160,265],
+  "キャプテンフックス・ギャレー":[65,275],
+
+  "ガラスの靴":[115,145],
+  "ガラスの靴（制作物）":[125,145],
+  "キングダム・トレジャー":[185,305],
+  "ストロンボリズ・ワゴン":[175,315],
+  "ハーモニーフェア":[250,300],
+  "ビレッジショップス":[270,330],
+  "プーさんコーナー":[235,340],
+  "ブレイブリトルテイラー・ショップ":[290,300],
+  "プレジャーアイランド・キャンディーズ":[215,275],
+
+  "シンデレラ城 トゥモローランド側":[170,115],
+  "美女と野獣の城 左側":[285,305],
+  "美女と野獣の城 右側":[315,305],
+
+
+  /* -------------------------
+     トゥーンタウン
+  ------------------------- */
+
+  "ロジャーラビットのカートゥーンスピン":[395,270],
+  "ミニーの家":[445,255],
+  "チップとデールのツリーハウス":[475,295],
+  "ガジェットのゴーコースター":[415,350],
+  "ドナルドのボート":[460,330],
+  "グーフィーのペイント＆プレイハウス":[375,345],
+  "トゥーンパーク":[430,225],
+
+  "トゥーンタウン・グルメ":[405,310],
+
+  "ギャグファクトリー／ファイブ・アンド・ダイム":[390,300],
+  "ギャグファクトリー/ファイブ・アンド・ダイム（カプセルトイ）":[395,305],
+  "トゥーンタウン・デリバリー・カンパニー":[430,305],
+
+
+  /* -------------------------
+     トゥモローランド
+  ------------------------- */
+
+  "スター・ツアーズ":[270,80],
+  "スティッチ・エンカウンター":[310,95],
+  "モンスターズ・インク“ライド＆ゴーシーク！”":[350,65],
+  "ベイマックスのハッピーライド":[375,105],
+
+  "トゥモローランド・テラス":[330,25],
+  "プラズマ・レイズ・ダイナー":[360,35],
+
+  "コズミック・エンカウンター":[300,60],
+  "スターゲイザーサプライ":[335,120],
+  "トレジャーコメット":[400,50],
+  "トレジャーコメット（カプセルトイ）":[405,55],
+  "モンスターズ・インク・カンパニーストア":[345,45]
+
+};
 
 
 /* =========================================================
@@ -669,34 +975,34 @@ const IMAGE_CACHE_KEY =
 let imageCache = {};
 
 try{
+
   imageCache =
     JSON.parse(
-      localStorage.getItem(IMAGE_CACHE_KEY) || "{}"
+      localStorage.getItem(
+        IMAGE_CACHE_KEY
+      ) || "{}"
     );
+
 }catch(e){
+
   imageCache = {};
+
 }
 
-
-/* =========================================================
-   画像キャッシュ保存
-========================================================= */
 
 function saveImageCache(){
 
   try{
+
     localStorage.setItem(
       IMAGE_CACHE_KEY,
       JSON.stringify(imageCache)
     );
+
   }catch(e){}
 
 }
 
-
-/* =========================================================
-   キャッシュキー
-========================================================= */
 
 function imageKey(name){
 
@@ -705,13 +1011,10 @@ function imageKey(name){
 }
 
 
-/* =========================================================
-   直接画像 or キャッシュ画像
-========================================================= */
-
 function getKnownImage(name){
 
-  const key = imageKey(name);
+  const key =
+    imageKey(name);
 
   if(imageCache[key]){
     return imageCache[key];
@@ -750,13 +1053,17 @@ function getDetailURL(type,id){
 
 
 /* =========================================================
-   Jinaから公式「イメージ1」を探す
-   ※直接画像がない施設だけ使用
+   公式画像取得
 ========================================================= */
 
-async function fetchOfficialImage(name,type,id){
+async function fetchOfficialImage(
+  name,
+  type,
+  id
+){
 
-  const key = imageKey(name);
+  const key =
+    imageKey(name);
 
   const known =
     getKnownImage(name);
@@ -776,7 +1083,8 @@ async function fetchOfficialImage(name,type,id){
 
     const response =
       await fetch(
-        "https://r.jina.ai/" + pageURL,
+        "https://r.jina.ai/" +
+        pageURL,
         {
           cache:"force-cache"
         }
@@ -788,11 +1096,6 @@ async function fetchOfficialImage(name,type,id){
 
     const text =
       await response.text();
-
-
-    /* -----------------------------------------
-       Jina Markdown形式
-    ----------------------------------------- */
 
     let match =
       text.match(
@@ -808,11 +1111,6 @@ async function fetchOfficialImage(name,type,id){
 
     }
 
-
-    /* -----------------------------------------
-       Image: ... (URL)
-    ----------------------------------------- */
-
     if(!match){
 
       match =
@@ -821,11 +1119,6 @@ async function fetchOfficialImage(name,type,id){
         );
 
     }
-
-
-    /* -----------------------------------------
-       HTMLっぽい形式
-    ----------------------------------------- */
 
     if(!match){
 
@@ -836,7 +1129,6 @@ async function fetchOfficialImage(name,type,id){
 
     }
 
-
     if(!match){
 
       match =
@@ -846,17 +1138,14 @@ async function fetchOfficialImage(name,type,id){
 
     }
 
-
     if(!match){
       return null;
     }
-
 
     const imageURL =
       match[1]
         .replace(/&amp;/g,"&")
         .replace(/\\u0026/g,"&");
-
 
     if(
       !imageURL.includes(
@@ -866,8 +1155,8 @@ async function fetchOfficialImage(name,type,id){
       return null;
     }
 
-
-    imageCache[key] = imageURL;
+    imageCache[key] =
+      imageURL;
 
     saveImageCache();
 
@@ -889,7 +1178,7 @@ async function fetchOfficialImage(name,type,id){
 
 
 /* =========================================================
-   画像を実際に読み込む
+   画像Observer
 ========================================================= */
 
 const imageObserver =
@@ -905,9 +1194,13 @@ const imageObserver =
         const element =
           entry.target;
 
-        imageObserver.unobserve(element);
+        imageObserver.unobserve(
+          element
+        );
 
-        loadLazyImage(element);
+        loadLazyImage(
+          element
+        );
 
       });
 
@@ -922,7 +1215,9 @@ const imageObserver =
    lazy画像
 ========================================================= */
 
-async function loadLazyImage(element){
+async function loadLazyImage(
+  element
+){
 
   if(
     element.dataset.loaded === "true" ||
@@ -931,7 +1226,8 @@ async function loadLazyImage(element){
     return;
   }
 
-  element.dataset.loading = "true";
+  element.dataset.loading =
+    "true";
 
   const name =
     element.dataset.name;
@@ -942,14 +1238,8 @@ async function loadLazyImage(element){
   const id =
     element.dataset.id;
 
-
-  /* まずキャッシュ・直接URL */
-
   let url =
     getKnownImage(name);
-
-
-  /* なければJina */
 
   if(!url){
 
@@ -962,49 +1252,56 @@ async function loadLazyImage(element){
 
   }
 
-
-  /* 画像取得成功 */
-
   if(url){
 
     const img =
       document.createElement("img");
 
-    img.className =
-      element.dataset.small === "true"
-        ? "mini-image"
-        : "card-image";
+    const isSelected =
+      element.dataset.selected === "true";
 
-    img.alt = name;
+    if(isSelected){
 
-    img.loading = "lazy";
+      img.className =
+        "selected-image";
 
-    img.decoding = "async";
+    }else{
+
+      img.className =
+        element.dataset.small === "true"
+          ? "mini-image"
+          : "card-image";
+
+    }
+
+    img.alt =
+      name;
+
+    img.loading =
+      "lazy";
+
+    img.decoding =
+      "async";
 
     img.referrerPolicy =
       "no-referrer";
 
-    img.src = url;
-
-    img.dataset.fallbackTried =
-      element.dataset.fallbackTried || "false";
-
+    img.src =
+      url;
 
     img.onload = () => {
 
-      element.replaceWith(img);
+      element.replaceWith(
+        img
+      );
 
     };
 
-
     img.onerror = async () => {
 
-      /* 直接URLが壊れていた場合だけ
-         キャッシュを削除してJinaを再試行 */
-
       if(
-        img.dataset.fallbackTried === "false" &&
-        !DIRECT_IMAGES[name]
+        !DIRECT_IMAGES[name] &&
+        !element.dataset.fallbackTried
       ){
 
         delete imageCache[
@@ -1019,7 +1316,9 @@ async function loadLazyImage(element){
         element.dataset.fallbackTried =
           "true";
 
-        await loadLazyImage(element);
+        await loadLazyImage(
+          element
+        );
 
       }else{
 
@@ -1031,13 +1330,9 @@ async function loadLazyImage(element){
 
     };
 
-
     return;
 
   }
-
-
-  /* 見つからなかった場合 */
 
   element.dataset.loading =
     "false";
@@ -1063,12 +1358,6 @@ function imageHTML(
   const url =
     getKnownImage(name);
 
-
-  /* -----------------------------------------
-     すでにURLが分かっている画像
-     → 直接読み込む
-  ----------------------------------------- */
-
   if(url){
 
     return `
@@ -1084,12 +1373,6 @@ function imageHTML(
     `;
 
   }
-
-
-  /* -----------------------------------------
-     URL不明
-     → 画面に近づいた時だけJina取得
-  ----------------------------------------- */
 
   return `
     <div
@@ -1108,7 +1391,51 @@ function imageHTML(
 
 
 /* =========================================================
-   lazy画像を監視対象へ追加
+   選択中アトラクション画像
+========================================================= */
+
+function selectedImageHTML(
+  name,
+  type,
+  id
+){
+
+  const url =
+    getKnownImage(name);
+
+  if(url){
+
+    return `
+      <img
+        class="selected-image"
+        src="${url}"
+        alt="${escapeHTML(name)}"
+        fetchpriority="high"
+        decoding="async"
+        referrerpolicy="no-referrer"
+      >
+    `;
+
+  }
+
+  return `
+    <div
+      class="selected-image placeholder image-loading lazy-image"
+      data-name="${escapeHTML(name)}"
+      data-type="${escapeHTML(type)}"
+      data-id="${escapeHTML(id)}"
+      data-selected="true"
+      data-fallback-tried="false"
+    >
+      🎢
+    </div>
+  `;
+
+}
+
+
+/* =========================================================
+   lazy画像監視
 ========================================================= */
 
 function observeLazyImages(){
@@ -1132,7 +1459,7 @@ function observeLazyImages(){
 
 
 /* =========================================================
-   エスケープ
+   HTMLエスケープ
 ========================================================= */
 
 function escapeHTML(str){
@@ -1148,20 +1475,149 @@ function escapeHTML(str){
 
 
 /* =========================================================
+   座標から距離を計算
+========================================================= */
+
+function getLocation(name){
+
+  return LOCATIONS[name] || null;
+
+}
+
+
+function calculateDistance(
+  name1,
+  name2
+){
+
+  const a =
+    getLocation(name1);
+
+  const b =
+    getLocation(name2);
+
+  if(!a || !b){
+    return Infinity;
+  }
+
+  const dx =
+    a[0] - b[0];
+
+  const dy =
+    a[1] - b[1];
+
+  const straight =
+    Math.sqrt(
+      dx * dx +
+      dy * dy
+    );
+
+  return straight *
+    WALKING_FACTOR;
+
+}
+
+
+/* =========================================================
+   徒歩時間
+========================================================= */
+
+function walkingMinutes(
+  distance
+){
+
+  return Math.max(
+    1,
+    Math.ceil(
+      distance /
+      WALKING_SPEED
+    )
+  );
+
+}
+
+
+/* =========================================================
+   徒歩5分以内だけ取得
+========================================================= */
+
+function getNearby(
+  list,
+  selectedName
+){
+
+  return list
+    .filter(item => {
+
+      const name =
+        item[0];
+
+      if(name === selectedName){
+        return false;
+      }
+
+      const distance =
+        calculateDistance(
+          selectedName,
+          name
+        );
+
+      return (
+        distance <=
+        MAX_WALKING_DISTANCE
+      );
+
+    })
+    .map(item => {
+
+      const distance =
+        calculateDistance(
+          selectedName,
+          item[0]
+        );
+
+      return {
+        item:item,
+        distance:distance,
+        minutes:
+          walkingMinutes(distance)
+      };
+
+    })
+    .sort(
+      (a,b) =>
+        a.distance -
+        b.distance
+    );
+
+}
+
+
+/* =========================================================
    エリア変更
 ========================================================= */
 
-function selectArea(area,button){
+function selectArea(
+  area,
+  button
+){
 
-  currentArea = area;
+  currentArea =
+    area;
 
   document
-    .querySelectorAll(".area-btn")
+    .querySelectorAll(
+      ".area-btn"
+    )
     .forEach(btn =>
-      btn.classList.remove("active")
+      btn.classList.remove(
+        "active"
+      )
     );
 
-  button.classList.add("active");
+  button.classList.add(
+    "active"
+  );
 
   document.getElementById(
     "search"
@@ -1185,12 +1641,14 @@ function renderAttractions(){
       .trim()
       .toLowerCase();
 
-
   const list =
     attractions.filter(item => {
 
-      const name = item[0];
-      const area = item[1];
+      const name =
+        item[0];
+
+      const area =
+        item[1];
 
       const areaOK =
         area === currentArea;
@@ -1201,7 +1659,10 @@ function renderAttractions(){
           .toLowerCase()
           .includes(search);
 
-      return areaOK && searchOK;
+      return (
+        areaOK &&
+        searchOK
+      );
 
     });
 
@@ -1217,19 +1678,28 @@ function renderAttractions(){
       "attractions"
     );
 
-  container.innerHTML = "";
+  container.innerHTML =
+    "";
 
 
   list.forEach(item => {
 
-    const name = item[0];
-    const area = item[1];
-    const id = item[2];
+    const name =
+      item[0];
+
+    const area =
+      item[1];
+
+    const id =
+      item[2];
 
     const div =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
-    div.className = "card";
+    div.className =
+      "card";
 
     div.innerHTML = `
 
@@ -1258,12 +1728,15 @@ function renderAttractions(){
 
     `;
 
-
     div.onclick =
-      () => selectAttraction(item);
+      () =>
+        selectAttraction(
+          item
+        );
 
-
-    container.appendChild(div);
+    container.appendChild(
+      div
+    );
 
   });
 
@@ -1277,18 +1750,30 @@ function renderAttractions(){
    アトラクション選択
 ========================================================= */
 
-function selectAttraction(item){
+function selectAttraction(
+  item
+){
 
-  selectedAttraction = item;
+  selectedAttraction =
+    item;
 
-  const name = item[0];
-  const area = item[1];
-  const id = item[2];
+  const name =
+    item[0];
+
+  const area =
+    item[1];
+
+  const id =
+    item[2];
 
 
   document
-    .getElementById("result")
-    .classList.remove("hidden");
+    .getElementById(
+      "result"
+    )
+    .classList.remove(
+      "hidden"
+    );
 
 
   document.getElementById(
@@ -1309,11 +1794,29 @@ function selectAttraction(item){
     `${OFFICIAL}/tdl/attraction/detail/${id}/`;
 
 
+  const selectedImage =
+    document.getElementById(
+      "selectedImage"
+    );
+
+  selectedImage.innerHTML =
+    selectedImageHTML(
+      name,
+      "attraction",
+      id
+    );
+
+
   renderNearby();
 
 
+  observeLazyImages();
+
+
   document
-    .getElementById("result")
+    .getElementById(
+      "result"
+    )
     .scrollIntoView({
       behavior:"smooth",
       block:"start"
@@ -1328,23 +1831,19 @@ function selectAttraction(item){
 
 function renderNearby(){
 
-  const area =
-    selectedAttraction[1];
-
-  const name =
+  const selectedName =
     selectedAttraction[0];
 
 
-  /* -----------------------------------------
+  /* -------------------------
      アトラクション
-  ----------------------------------------- */
+  ------------------------- */
 
   const nearA =
-    attractions.filter(x =>
-      x[1] === area &&
-      x[0] !== name
+    getNearby(
+      attractions,
+      selectedName
     );
-
 
   renderMini(
     "nearAttractions",
@@ -1353,15 +1852,15 @@ function renderNearby(){
   );
 
 
-  /* -----------------------------------------
+  /* -------------------------
      レストラン
-  ----------------------------------------- */
+  ------------------------- */
 
   const nearR =
-    restaurants.filter(x =>
-      x[1] === area
+    getNearby(
+      restaurants,
+      selectedName
     );
-
 
   renderMini(
     "nearRestaurants",
@@ -1370,15 +1869,15 @@ function renderNearby(){
   );
 
 
-  /* -----------------------------------------
+  /* -------------------------
      ショップ
-  ----------------------------------------- */
+  ------------------------- */
 
   const nearS =
-    shops.filter(x =>
-      x[1] === area
+    getNearby(
+      shops,
+      selectedName
     );
-
 
   renderMini(
     "nearShops",
@@ -1387,14 +1886,39 @@ function renderNearby(){
   );
 
 
-  /* -----------------------------------------
+  /* -------------------------
      フォトスポット
-  ----------------------------------------- */
+  ------------------------- */
 
   const nearP =
-    photoSpots.filter(x =>
-      x.area === area
-    );
+    photoSpots
+      .map(photo => {
+
+        const distance =
+          calculateDistance(
+            selectedName,
+            photo.name
+          );
+
+        return {
+          photo:photo,
+          distance:distance,
+          minutes:
+            walkingMinutes(
+              distance
+            )
+        };
+
+      })
+      .filter(x =>
+        x.distance <=
+        MAX_WALKING_DISTANCE
+      )
+      .sort(
+        (a,b) =>
+          a.distance -
+          b.distance
+      );
 
 
   const photoContainer =
@@ -1402,69 +1926,81 @@ function renderNearby(){
       "photoSpots"
     );
 
-
-  photoContainer.innerHTML = "";
+  photoContainer.innerHTML =
+    "";
 
 
   if(!nearP.length){
 
-    photoContainer.innerHTML =
-      `
+    photoContainer.innerHTML = `
       <div class="loading">
-        このエリアの登録フォトスポットはありません。
+        徒歩5分圏内に登録フォトスポットはありません。
       </div>
-      `;
+    `;
 
   }else{
 
-    nearP.forEach(photo => {
+    nearP.forEach(
+      result => {
 
-      const div =
-        document.createElement("div");
+        const photo =
+          result.photo;
 
-      div.className =
-        "photo-card";
+        const div =
+          document.createElement(
+            "div"
+          );
 
+        div.className =
+          "photo-card";
 
-      div.innerHTML = `
+        div.innerHTML = `
 
-        <div class="photo-icon">
-          ${photo.icon}
-        </div>
+          <div class="photo-icon">
+            ${photo.icon}
+          </div>
 
-        <div class="photo-title">
-          ${escapeHTML(photo.name)}
-        </div>
+          <div class="photo-title">
+            ${escapeHTML(
+              photo.name
+            )}
+          </div>
 
-        <div class="photo-description">
-          ${escapeHTML(photo.description)}
-        </div>
+          <div class="photo-description">
+            ${escapeHTML(
+              photo.description
+            )}
+          </div>
 
-        <div class="photo-source">
+          <div class="photo-distance">
+            🚶 約${result.minutes}分
+          </div>
 
-          出典：
+          <div class="photo-source">
 
-          <a
-            href="${photo.url}"
-            target="_blank"
-            rel="noopener"
-          >
-            ${escapeHTML(photo.source)}
-          </a>
+            出典：
+            <a
+              href="${photo.url}"
+              target="_blank"
+              rel="noopener"
+            >
+              ${escapeHTML(
+                photo.source
+              )}
+            </a>
 
-        </div>
+          </div>
 
-      `;
+        `;
 
+        photoContainer.appendChild(
+          div
+        );
 
-      photoContainer.appendChild(div);
-
-    });
+      }
+    );
 
   }
-
-
-  observeLazyImages();
 
 }
 
@@ -1475,115 +2011,131 @@ function renderNearby(){
 
 function renderMini(
   id,
-  list,
+  results,
   type
 ){
 
   const container =
-    document.getElementById(id);
+    document.getElementById(
+      id
+    );
 
-  container.innerHTML = "";
+  container.innerHTML =
+    "";
 
 
-  if(!list.length){
+  if(!results.length){
 
-    container.innerHTML =
-      `
+    container.innerHTML = `
       <div class="loading">
-        このエリアにはありません。
+        徒歩5分圏内にはありません。
       </div>
-      `;
+    `;
 
     return;
 
   }
 
 
-  list.forEach(item => {
+  results.forEach(
+    result => {
 
-    const name =
-      item[0];
+      const item =
+        result.item;
 
-    const area =
-      item[1];
+      const name =
+        item[0];
 
-    const detailId =
-      item[2];
+      const area =
+        item[1];
 
-
-    const div =
-      document.createElement("div");
-
-    div.className =
-      "mini-card";
+      const detailId =
+        item[2];
 
 
-    let link = "#";
-
-
-    if(type === "attraction"){
-
-      link =
-        `${OFFICIAL}/tdl/attraction/detail/${detailId}/`;
-
-    }
-
-    else if(type === "restaurant"){
-
-      link =
-        `${OFFICIAL}/tdl/restaurant/detail/${detailId}/`;
-
-    }
-
-    else if(type === "shop"){
-
-      link =
-        `${OFFICIAL}/tdl/shop/detail/${detailId}/`;
-
-    }
-
-
-    div.innerHTML = `
-
-      ${imageHTML(
-        name,
-        true,
-        type,
-        detailId
-      )}
-
-      <div class="mini-info">
-
-        <div class="mini-name">
-          ${escapeHTML(name)}
-        </div>
-
-        <div class="mini-area">
-          📍 ${escapeHTML(area)}
-        </div>
-
-      </div>
-
-    `;
-
-
-    div.onclick = () => {
-
-      if(link !== "#"){
-
-        window.open(
-          link,
-          "_blank"
+      const div =
+        document.createElement(
+          "div"
         );
+
+      div.className =
+        "mini-card";
+
+
+      let link =
+        "#";
+
+
+      if(type === "attraction"){
+
+        link =
+          `${OFFICIAL}/tdl/attraction/detail/${detailId}/`;
 
       }
 
-    };
+      else if(type === "restaurant"){
+
+        link =
+          `${OFFICIAL}/tdl/restaurant/detail/${detailId}/`;
+
+      }
+
+      else if(type === "shop"){
+
+        link =
+          `${OFFICIAL}/tdl/shop/detail/${detailId}/`;
+
+      }
 
 
-    container.appendChild(div);
+      div.innerHTML = `
 
-  });
+        ${imageHTML(
+          name,
+          true,
+          type,
+          detailId
+        )}
+
+        <div class="mini-info">
+
+          <div class="mini-name">
+            ${escapeHTML(name)}
+          </div>
+
+          <div class="mini-area">
+            📍 ${escapeHTML(area)}
+          </div>
+
+          <div class="distance">
+            🚶 約${result.minutes}分
+          </div>
+
+        </div>
+
+      `;
+
+
+      div.onclick = () => {
+
+        if(link !== "#"){
+
+          window.open(
+            link,
+            "_blank"
+          );
+
+        }
+
+      };
+
+
+      container.appendChild(
+        div
+      );
+
+    }
+  );
 
 
   observeLazyImages();
@@ -1592,8 +2144,7 @@ function renderMini(
 
 
 /* =========================================================
-   主要画像だけ最初に先読み
-   → 初期画面の体感速度を優先
+   主要画像先読み
 ========================================================= */
 
 function preloadImportantImages(){
@@ -1611,26 +2162,27 @@ function preloadImportantImages(){
   ];
 
 
-  preloadNames.forEach(name => {
+  preloadNames.forEach(
+    name => {
 
-    const url =
-      getKnownImage(name);
+      const url =
+        getKnownImage(name);
 
-    if(!url){
-      return;
+      if(!url){
+        return;
+      }
+
+      const img =
+        new Image();
+
+      img.decoding =
+        "async";
+
+      img.src =
+        url;
+
     }
-
-
-    const img =
-      new Image();
-
-    img.decoding =
-      "async";
-
-    img.src =
-      url;
-
-  });
+  );
 
 }
 
@@ -1642,11 +2194,10 @@ function preloadImportantImages(){
 renderAttractions();
 
 
-/* =========================================================
-   重要画像だけ先読み
-========================================================= */
-
-if("requestIdleCallback" in window){
+if(
+  "requestIdleCallback"
+  in window
+){
 
   requestIdleCallback(
     preloadImportantImages
