@@ -2,23 +2,16 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TDL AI NAVI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🏰 TDL AI NAVI</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Hiragino Kaku Gothic ProN",
-    "Yu Gothic",
-    sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",
+  "Yu Gothic",sans-serif;
   background:#f5f6f8;
   color:#222;
 }
@@ -28,17 +21,14 @@ header{
   top:0;
   z-index:100;
   background:#111827;
-  color:white;
-  padding:14px 16px;
-  box-shadow:0 2px 10px rgba(0,0,0,.15);
+  color:#fff;
+  padding:13px 15px;
+  box-shadow:0 2px 10px #0002;
 }
 
 .header-inner{
   max-width:1100px;
   margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
 }
 
 .logo{
@@ -46,37 +36,33 @@ header{
   font-weight:800;
 }
 
-.sub-logo{
+.sub{
   font-size:11px;
-  opacity:.7;
+  opacity:.65;
+  margin-top:2px;
 }
 
 main{
   max-width:1100px;
   margin:auto;
-  padding:20px 14px 60px;
+  padding:18px 13px 60px;
 }
 
 h2{
-  margin:26px 0 12px;
-  font-size:19px;
+  font-size:18px;
+  margin:25px 0 11px;
 }
 
-h3{
-  margin:0 0 8px;
-}
-
-.search{
-  width:100%;
-  padding:13px 15px;
-  border:1px solid #ddd;
+.notice{
+  background:#fff8df;
+  border:1px solid #f0dda0;
   border-radius:12px;
-  font-size:16px;
-  background:white;
-  margin-bottom:14px;
+  padding:12px;
+  font-size:12px;
+  line-height:1.6;
 }
 
-.area-buttons{
+.area-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:8px;
@@ -84,94 +70,98 @@ h3{
 
 .area-btn{
   border:0;
-  border-radius:12px;
-  padding:12px 8px;
-  background:white;
-  box-shadow:0 1px 5px rgba(0,0,0,.08);
-  font-size:14px;
+  background:#fff;
+  padding:12px 6px;
+  border-radius:11px;
   font-weight:700;
-  cursor:pointer;
+  box-shadow:0 1px 5px #0001;
 }
 
 .area-btn.active{
   background:#111827;
-  color:white;
+  color:#fff;
 }
 
-.attraction-grid,
-.card-grid{
+.search{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:11px;
+  font-size:16px;
+  margin-bottom:12px;
+}
+
+.grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
 
 .card{
-  background:white;
+  background:#fff;
   border-radius:14px;
   overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  box-shadow:0 2px 8px #0001;
 }
 
-.card-image{
-  width:100%;
+.image-box{
   aspect-ratio:16/10;
   background:#e9edf2;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   overflow:hidden;
-  position:relative;
 }
 
-.card-image img{
+.image-box img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
 }
 
-.image-placeholder{
-  color:#7b8491;
-  font-size:13px;
+.placeholder{
+  color:#78818d;
+  font-size:12px;
   text-align:center;
-  padding:10px;
+  padding:12px;
 }
 
-.card-body{
+.body{
   padding:11px;
 }
 
-.card-title{
-  font-size:15px;
+.title{
+  font-size:14px;
   font-weight:800;
-  line-height:1.4;
+  line-height:1.45;
 }
 
-.card-area{
-  font-size:12px;
+.area{
   color:#777;
-  margin-top:4px;
+  font-size:11px;
+  margin-top:3px;
 }
 
-.card-desc{
-  font-size:12px;
-  line-height:1.5;
+.desc{
   color:#555;
-  margin-top:7px;
+  font-size:11px;
+  line-height:1.5;
+  margin-top:6px;
 }
 
-.card-buttons{
+.buttons{
   display:flex;
   gap:6px;
-  margin-top:10px;
+  margin-top:9px;
 }
 
-.card-buttons a,
-.card-buttons button{
+.buttons a,
+.buttons button{
   flex:1;
   border:0;
   border-radius:8px;
-  padding:8px 5px;
+  padding:8px 3px;
   text-align:center;
   text-decoration:none;
   font-size:11px;
@@ -181,32 +171,31 @@ h3{
 
 .official{
   background:#111827;
-  color:white;
+  color:#fff;
 }
 
-.select-btn{
-  background:#e9eef7;
+.select{
+  background:#e8eef7;
   color:#1e3a5f;
 }
 
-.selected-box{
-  background:#111827;
-  color:white;
-  border-radius:16px;
-  padding:16px;
+.selected{
   margin-top:18px;
-  box-shadow:0 3px 12px rgba(0,0,0,.15);
+  background:#111827;
+  color:#fff;
+  padding:15px;
+  border-radius:15px;
+}
+
+.selected-small{
+  font-size:11px;
+  opacity:.65;
 }
 
 .selected-name{
-  font-size:18px;
+  font-size:17px;
   font-weight:800;
-}
-
-.selected-area{
-  opacity:.7;
-  font-size:12px;
-  margin-top:3px;
+  margin-top:4px;
 }
 
 .section{
@@ -214,78 +203,59 @@ h3{
 }
 
 .section-title{
-  display:flex;
-  align-items:center;
-  gap:6px;
   font-size:17px;
   font-weight:800;
   margin-bottom:10px;
 }
 
-.photo-card{
-  background:white;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+.empty{
+  background:#fff;
+  padding:16px;
+  border-radius:12px;
+  text-align:center;
+  color:#777;
+  font-size:12px;
 }
 
-.photo-card img{
-  width:100%;
-  aspect-ratio:16/10;
-  object-fit:cover;
-  display:block;
+.photo{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 2px 8px #0001;
 }
 
 .photo-body{
-  padding:12px;
+  padding:11px;
 }
 
 .source{
-  font-size:11px;
-  color:#777;
-  margin-top:7px;
+  font-size:10px;
+  color:#888;
+  margin-top:6px;
 }
 
-.empty{
-  background:white;
-  border-radius:12px;
-  padding:18px;
-  text-align:center;
-  color:#777;
-  font-size:13px;
-}
-
-.loading{
-  padding:14px;
-  text-align:center;
-  color:#777;
-  font-size:12px;
-}
-
-.notice{
-  background:#fff8df;
-  border:1px solid #f2df9a;
-  border-radius:12px;
-  padding:12px;
-  font-size:12px;
-  line-height:1.6;
-  margin-bottom:16px;
+.status{
+  display:inline-block;
+  margin-top:5px;
+  padding:3px 6px;
+  border-radius:5px;
+  background:#eee;
+  font-size:10px;
+  color:#666;
 }
 
 @media(min-width:700px){
-  .area-buttons{
+  .area-grid{
     grid-template-columns:repeat(4,1fr);
   }
 
-  .attraction-grid,
-  .card-grid{
+  .grid{
     grid-template-columns:repeat(3,1fr);
   }
 }
 
 @media(max-width:390px){
-  .attraction-grid,
-  .card-grid{
+  .grid{
     grid-template-columns:1fr;
   }
 }
@@ -296,59 +266,47 @@ h3{
 
 <header>
   <div class="header-inner">
-    <div>
-      <div class="logo">🏰 TDL AI NAVI</div>
-      <div class="sub-logo">東京ディズニーランドをもっと効率よく</div>
-    </div>
+    <div class="logo">🏰 TDL AI NAVI</div>
+    <div class="sub">東京ディズニーランドをもっと効率よく</div>
   </div>
 </header>
 
 <main>
 
-  <div class="notice">
-    💡 アトラクションを選ぶと、そのエリア周辺の
-    <b>アトラクション・レストラン・ショップ・フォトスポット</b>
-    を表示します。
-    <br>
-    ※施設画像は東京ディズニーリゾート公式詳細ページの「イメージ1」を参照します。
-  </div>
+<div class="notice">
+  🧭 <b>アトラクションを選択</b>すると、そのエリア周辺の
+  アトラクション・レストラン・ショップ・フォトスポットを表示します。
+  <br>
+  📷 施設画像は東京ディズニーリゾート公式詳細ページの「イメージ1」を使用します。
+</div>
 
-  <h2>① エリアを選ぶ</h2>
+<h2>① エリアを選択</h2>
+<div id="areas" class="area-grid"></div>
 
-  <div class="area-buttons" id="areaButtons"></div>
+<h2>② アトラクションを選択</h2>
 
-  <h2>② アトラクションを選ぶ</h2>
+<input
+  id="search"
+  class="search"
+  placeholder="🔎 アトラクションを検索"
+>
 
-  <input
-    id="searchInput"
-    class="search"
-    type="text"
-    placeholder="🔎 アトラクションを検索"
-  >
+<div id="attractions" class="grid"></div>
 
-  <div id="attractionList" class="attraction-grid"></div>
-
-  <div id="selectedArea"></div>
-
-  <div id="nearbyArea"></div>
+<div id="selected"></div>
+<div id="nearby"></div>
 
 </main>
 
 <script>
 
-/* =====================================================
-   基本設定
-===================================================== */
+/* =========================================================
+   基本
+========================================================= */
 
-const OFFICIAL_BASE =
-  "https://www.tokyodisneyresort.jp";
+const BASE="https://www.tokyodisneyresort.jp";
 
-
-/* =====================================================
-   エリア
-===================================================== */
-
-const areas = [
+const areas=[
   "ワールドバザール",
   "アドベンチャーランド",
   "ウエスタンランド",
@@ -358,887 +316,500 @@ const areas = [
   "トゥモローランド"
 ];
 
+let selectedArea="ワールドバザール";
 
-/* =====================================================
+
+/* =========================================================
    アトラクション
-   ※公式詳細ページURLを使用
-===================================================== */
+========================================================= */
 
-const attractions = [
+const attractions=[
 
-  {
-    name:"オムニバス",
-    area:"ワールドバザール",
-    id:"151",
-    desc:"パークの景色を眺めながら楽しめる2階建てバス。",
-    emoji:"🚌"
-  },
+["オムニバス","ワールドバザール","151","🚌"],
+["ペニーアーケード","ワールドバザール","150","🎮"],
 
-  {
-    name:"ペニーアーケード",
-    area:"ワールドバザール",
-    id:"150",
-    desc:"昔懐かしいアーケードゲームが楽しめる施設。",
-    emoji:"🎮"
-  },
+["カリブの海賊","アドベンチャーランド","152","🏴‍☠️"],
+["ジャングルクルーズ：ワイルドライフ・エクスペディション","アドベンチャーランド","153","🌴"],
+["ウエスタンリバー鉄道","アドベンチャーランド","154","🚂"],
+["スイスファミリー・ツリーハウス","アドベンチャーランド","155","🌳"],
+["魅惑のチキルーム：スティッチ・プレゼンツ“アロハ・エ・コモ・マイ！”","アドベンチャーランド","156","🌺"],
 
-  {
-    name:"カリブの海賊",
-    area:"アドベンチャーランド",
-    id:"152",
-    desc:"海賊たちの世界をボートで巡る人気アトラクション。",
-    emoji:"🏴‍☠️"
-  },
+["ウエスタンランド・シューティングギャラリー","ウエスタンランド","157","🎯"],
+["カントリーベア・シアター","ウエスタンランド","158","🐻"],
+["蒸気船マークトウェイン号","ウエスタンランド","159","🚢"],
+["ビッグサンダー・マウンテン","ウエスタンランド","160","⛰️"],
+["トムソーヤ島いかだ","ウエスタンランド","161","🛶"],
 
-  {
-    name:"ジャングルクルーズ：ワイルドライフ・エクスペディション",
-    area:"アドベンチャーランド",
-    id:"153",
-    desc:"船長と一緒にジャングルを探検。",
-    emoji:"🌴"
-  },
+["スプラッシュ・マウンテン","クリッターカントリー","162","💦"],
+["ビーバーブラザーズのカヌー探険","クリッターカントリー","163","🛶"],
 
-  {
-    name:"ウエスタンリバー鉄道",
-    area:"アドベンチャーランド",
-    id:"154",
-    desc:"蒸気機関車でパークを一周する鉄道の旅。",
-    emoji:"🚂"
-  },
+["ピーターパンの空の旅","ファンタジーランド","164","🧚"],
+["白雪姫と七人のこびと","ファンタジーランド","165","🍎"],
+["シンデレラのフェアリーテイル・ホール","ファンタジーランド","166","👠"],
+["ミッキーのフィルハーマジック","ファンタジーランド","167","🎵"],
+["ピノキオの冒険旅行","ファンタジーランド","168","🪵"],
+["空飛ぶダンボ","ファンタジーランド","169","🐘"],
+["キャッスルカルーセル","ファンタジーランド","170","🎠"],
+["ホーンテッドマンション","ファンタジーランド","171","👻"],
+["イッツ・ア・スモールワールド","ファンタジーランド","172","🌎"],
+["アリスのティーパーティー","ファンタジーランド","173","☕"],
+["プーさんのハニーハント","ファンタジーランド","174","🍯"],
+["美女と野獣“魔法のものがたり”","ファンタジーランド","197","🌹"],
 
-  {
-    name:"スイスファミリー・ツリーハウス",
-    area:"アドベンチャーランド",
-    id:"155",
-    desc:"大きな木の上からパークを眺められるウォークスルー施設。",
-    emoji:"🌳"
-  },
+["ロジャーラビットのカートゥーンスピン","トゥーンタウン","175","🐰"],
+["ミニーの家","トゥーンタウン","177","🎀"],
+["チップとデールのツリーハウス","トゥーンタウン","178","🐿️"],
+["ガジェットのゴーコースター","トゥーンタウン","179","🎢"],
+["ドナルドのボート","トゥーンタウン","180","🦆"],
+["グーフィーのペイント＆プレイハウス","トゥーンタウン","181","🎨"],
+["トゥーンパーク","トゥーンタウン","194","🌟"],
 
-  {
-    name:"魅惑のチキルーム：スティッチ・プレゼンツ“アロハ・エ・コモ・マイ！”",
-    area:"アドベンチャーランド",
-    id:"156",
-    desc:"鳥たちとスティッチが登場するシアタータイプの施設。",
-    emoji:"🌺"
-  },
+["スター・ツアーズ：ザ・アドベンチャーズ・コンティニュー","トゥモローランド","183","🚀"],
+["スティッチ・エンカウンター","トゥモローランド","195","👽"],
+["モンスターズ・インク“ライド＆ゴーシーク！”","トゥモローランド","189","👁️"],
+["ベイマックスのハッピーライド","トゥモローランド","196","🤖"]
 
-  {
-    name:"ウエスタンランド・シューティングギャラリー",
-    area:"ウエスタンランド",
-    id:"157",
-    desc:"西部開拓時代をイメージした射的体験。",
-    emoji:"🎯"
-  },
-
-  {
-    name:"カントリーベア・シアター",
-    area:"ウエスタンランド",
-    id:"158",
-    desc:"クマたちによる楽しいカントリーミュージックショー。",
-    emoji:"🐻"
-  },
-
-  {
-    name:"蒸気船マークトウェイン号",
-    area:"ウエスタンランド",
-    id:"159",
-    desc:"大きな蒸気船でアメリカ河を一周。",
-    emoji:"🚢"
-  },
-
-  {
-    name:"ビッグサンダー・マウンテン",
-    area:"ウエスタンランド",
-    id:"160",
-    desc:"鉱山を駆け抜けるローラーコースター。",
-    emoji:"⛰️"
-  },
-
-  {
-    name:"トムソーヤ島いかだ",
-    area:"ウエスタンランド",
-    id:"161",
-    desc:"いかだに乗ってトムソーヤ島へ。",
-    emoji:"🛶"
-  },
-
-  {
-    name:"スプラッシュ・マウンテン",
-    area:"クリッターカントリー",
-    id:"162",
-    desc:"丸太のボートで冒険する人気アトラクション。",
-    emoji:"💦"
-  },
-
-  {
-    name:"ビーバーブラザーズのカヌー探険",
-    area:"クリッターカントリー",
-    id:"163",
-    desc:"ゲスト自身でカヌーを漕いでアメリカ河を進む体験。",
-    emoji:"🛶"
-  },
-
-  {
-    name:"ピーターパンの空の旅",
-    area:"ファンタジーランド",
-    id:"164",
-    desc:"空飛ぶ海賊船でネバーランドへ。",
-    emoji:"🧚"
-  },
-
-  {
-    name:"白雪姫と七人のこびと",
-    area:"ファンタジーランド",
-    id:"165",
-    desc:"白雪姫の物語を巡るダークライド。",
-    emoji:"🍎"
-  },
-
-  {
-    name:"シンデレラのフェアリーテイル・ホール",
-    area:"ファンタジーランド",
-    id:"166",
-    desc:"シンデレラの物語を体験できるウォークスルー施設。",
-    emoji:"👠"
-  },
-
-  {
-    name:"ミッキーのフィルハーマジック",
-    area:"ファンタジーランド",
-    id:"167",
-    desc:"ディズニーキャラクターと音楽を楽しむ3Dシアター。",
-    emoji:"🎵"
-  },
-
-  {
-    name:"ピノキオの冒険旅行",
-    area:"ファンタジーランド",
-    id:"168",
-    desc:"ピノキオの物語を巡るライド。",
-    emoji:"🪵"
-  },
-
-  {
-    name:"空飛ぶダンボ",
-    area:"ファンタジーランド",
-    id:"169",
-    desc:"空飛ぶダンボに乗って空中散歩。",
-    emoji:"🐘"
-  },
-
-  {
-    name:"キャッスルカルーセル",
-    area:"ファンタジーランド",
-    id:"170",
-    desc:"シンデレラの世界をイメージしたメリーゴーラウンド。",
-    emoji:"🎠"
-  },
-
-  {
-    name:"ホーンテッドマンション",
-    area:"ファンタジーランド",
-    id:"171",
-    desc:"999人の亡霊が住む不気味な館を探検。",
-    emoji:"👻"
-  },
-
-  {
-    name:"イッツ・ア・スモールワールド",
-    area:"ファンタジーランド",
-    id:"172",
-    desc:"世界中の子どもたちが歌う世界旅行。",
-    emoji:"🌎"
-  },
-
-  {
-    name:"アリスのティーパーティー",
-    area:"ファンタジーランド",
-    id:"173",
-    desc:"大きなティーカップに乗ってぐるぐる回転。",
-    emoji:"☕"
-  },
-
-  {
-    name:"プーさんのハニーハント",
-    area:"ファンタジーランド",
-    id:"174",
-    desc:"ハニーポットに乗って100エーカーの森へ。",
-    emoji:"🍯"
-  },
-
-  {
-    name:"美女と野獣“魔法のものがたり”",
-    area:"ファンタジーランド",
-    id:"197",
-    desc:"魔法のカップに乗って美女と野獣の世界を巡る。",
-    emoji:"🌹"
-  },
-
-  {
-    name:"ロジャーラビットのカートゥーンスピン",
-    area:"トゥーンタウン",
-    id:"175",
-    desc:"ロジャーラビットの世界をハチャメチャに駆け巡る。",
-    emoji:"🐰"
-  },
-
-  {
-    name:"ミニーの家",
-    area:"トゥーンタウン",
-    id:"177",
-    desc:"ミニーの家の中を自由に見学。",
-    emoji:"🎀"
-  },
-
-  {
-    name:"チップとデールのツリーハウス",
-    area:"トゥーンタウン",
-    id:"178",
-    desc:"チップとデールの暮らす木の家。",
-    emoji:"🐿️"
-  },
-
-  {
-    name:"ガジェットのゴーコースター",
-    area:"トゥーンタウン",
-    id:"179",
-    desc:"小型ジェットコースターでトゥーンタウンを疾走。",
-    emoji:"🎢"
-  },
-
-  {
-    name:"ドナルドのボート",
-    area:"トゥーンタウン",
-    id:"180",
-    desc:"ドナルドのボートを見学。",
-    emoji:"🦆"
-  },
-
-  {
-    name:"グーフィーのペイント＆プレイハウス",
-    area:"トゥーンタウン",
-    id:"181",
-    desc:"グーフィーの部屋をペンキで模様替え。",
-    emoji:"🎨"
-  },
-
-  {
-    name:"トゥーンパーク",
-    area:"トゥーンタウン",
-    id:"194",
-    desc:"小さな子どもも遊べるトゥーンタウンの公園。",
-    emoji:"🌟"
-  },
-
-  {
-    name:"スター・ツアーズ：ザ・アドベンチャーズ・コンティニュー",
-    area:"トゥモローランド",
-    id:"183",
-    desc:"スター・ウォーズの世界を3D映像で体験。",
-    emoji:"🚀"
-  },
-
-  {
-    name:"スティッチ・エンカウンター",
-    area:"トゥモローランド",
-    id:"195",
-    desc:"スクリーン越しにスティッチと交流。",
-    emoji:"👽"
-  },
-
-  {
-    name:"モンスターズ・インク“ライド＆ゴーシーク！”",
-    area:"トゥモローランド",
-    id:"189",
-    desc:"フラッシュライトを使ってモンスターたちを探す。",
-    emoji:"👁️"
-  },
-
-  {
-    name:"ベイマックスのハッピーライド",
-    area:"トゥモローランド",
-    id:"196",
-    desc:"ベイマックスと一緒に音楽に合わせて楽しむライド。",
-    emoji:"🤖"
-  }
-
-];
+].map(x=>({
+  name:x[0],
+  area:x[1],
+  id:x[2],
+  emoji:x[3],
+  type:"attraction"
+}));
 
 
-/* =====================================================
-   ショップ
-   ※公式詳細ページを確認できているもの
-===================================================== */
-
-const shops = [
-
-  {
-    name:"グランドエンポーリアム",
-    area:"ワールドバザール",
-    id:"513",
-    desc:"パーク最大のグッズショップ。",
-    emoji:"🛍️"
-  },
-
-  {
-    name:"ディズニー＆カンパニー",
-    area:"ワールドバザール",
-    id:"502",
-    desc:"雑貨やアクセサリーなどを扱うショップ。",
-    emoji:"🎁"
-  },
-
-  {
-    name:"タウンセンターファッション",
-    area:"ワールドバザール",
-    id:"525",
-    desc:"ファッションアイテムを中心に扱うショップ。",
-    emoji:"👕"
-  },
-
-  {
-    name:"カメラセンター",
-    area:"ワールドバザール",
-    id:"515",
-    desc:"写真関連グッズやデジタルプリント。",
-    emoji:"📷"
-  },
-
-  {
-    name:"シルエットスタジオ",
-    area:"ワールドバザール",
-    id:"510",
-    desc:"切り絵の実演販売を行うショップ。",
-    emoji:"✂️"
-  },
-
-  {
-    name:"アドベンチャーランド・バザール",
-    area:"アドベンチャーランド",
-    id:"533",
-    desc:"アドベンチャーランドらしいグッズが揃うショップ。",
-    emoji:"🌴"
-  },
-
-  {
-    name:"クリスタルアーツ",
-    area:"アドベンチャーランド",
-    id:"531",
-    desc:"ガラス製品などを扱うショップ。",
-    emoji:"💎"
-  },
-
-  {
-    name:"ゴールデンガリオン",
-    area:"アドベンチャーランド",
-    id:"526",
-    desc:"海賊をテーマにしたショップ。",
-    emoji:"🏴‍☠️"
-  },
-
-  {
-    name:"パイレーツ・トレジャー",
-    area:"アドベンチャーランド",
-    id:"527",
-    desc:"海賊をイメージしたグッズを扱うショップ。",
-    emoji:"💰"
-  },
-
-  {
-    name:"パーティグラ・ギフト",
-    area:"アドベンチャーランド",
-    id:"529",
-    desc:"アドベンチャーランドのグッズショップ。",
-    emoji:"🎁"
-  },
-
-  {
-    name:"ウエスタンウエア",
-    area:"ウエスタンランド",
-    id:"539",
-    desc:"西部開拓時代をイメージしたファッションショップ。",
-    emoji:"🤠"
-  },
-
-  {
-    name:"フロンティア・ウッドクラフト",
-    area:"ウエスタンランド",
-    id:"541",
-    desc:"オリジナルグッズを制作できるショップ。",
-    emoji:"🪵"
-  },
-
-  {
-    name:"プーさんコーナー",
-    area:"ファンタジーランド",
-    id:"555",
-    desc:"くまのプーさんグッズを扱うショップ。",
-    emoji:"🍯"
-  },
-
-  {
-    name:"ハーモニーフェア",
-    area:"ファンタジーランド",
-    id:"548",
-    desc:"ファンタジーランドのグッズショップ。",
-    emoji:"🎀"
-  }
-
-];
-
-
-/* =====================================================
+/* =========================================================
    レストラン
-===================================================== */
+========================================================= */
 
-const restaurants = [
+const restaurants=[
 
-  {
-    name:"リフレッシュメントコーナー",
-    area:"ワールドバザール",
-    id:"303",
-    desc:"ワールドバザール入口付近のカジュアルなレストラン。",
-    emoji:"🌭"
-  },
+["アイスクリームコーン","ワールドバザール","304","🍦"],
+["リフレッシュメントコーナー","ワールドバザール","303","🌭"],
+["イーストサイド・カフェ","ワールドバザール","300","🍝"],
+["センターストリート・コーヒーハウス","ワールドバザール","301","☕"],
 
-  {
-    name:"イーストサイド・カフェ",
-    area:"ワールドバザール",
-    id:"300",
-    desc:"ヴィクトリア朝の雰囲気を楽しめるレストラン。",
-    emoji:"🍝"
-  },
+["ポリネシアンテラス・レストラン","アドベンチャーランド","326","🌺"],
+["クリスタルパレス・レストラン","アドベンチャーランド","323","🍽️"],
+["ブルーバイユー・レストラン","アドベンチャーランド","318","🌙"],
+["チャイナボイジャー","アドベンチャーランド","320","🍜"],
+["カフェ・オーリンズ","アドベンチャーランド","321","🥞"],
+["ザ・ガゼーボ","アドベンチャーランド","322","🥤"],
 
-  {
-    name:"センターストリート・コーヒーハウス",
-    area:"ワールドバザール",
-    id:"301",
-    desc:"洋食やドリンクを楽しめるカフェ。",
-    emoji:"☕"
-  },
+["ハングリーベア・レストラン","ウエスタンランド","338","🍛"],
+["プラザパビリオン・レストラン","ウエスタンランド","335","🍴"],
 
-  {
-    name:"ポリネシアンテラス・レストラン",
-    area:"アドベンチャーランド",
-    id:"326",
-    desc:"南国ムードのショーレストラン。",
-    emoji:"🌺"
-  },
+["グランマ・サラのキッチン","クリッターカントリー","344","🍳"],
 
-  {
-    name:"クリスタルパレス・レストラン",
-    area:"アドベンチャーランド",
-    id:"323",
-    desc:"ガラス張りの優雅なレストラン。",
-    emoji:"🍽️"
-  },
+["クイーン・オブ・ハートのバンケットホール","ファンタジーランド","346","♥️"],
+["トルバドールタバン","ファンタジーランド","349","🥤"],
+["キャプテンフックス・ギャレー","ファンタジーランド","347","🍕"],
 
-  {
-    name:"ブルーバイユー・レストラン",
-    area:"アドベンチャーランド",
-    id:"318",
-    desc:"カリブの海賊から見える幻想的なレストラン。",
-    emoji:"🌙"
-  },
+["トゥーンタウン・グルメ","トゥーンタウン","350","🍔"],
 
-  {
-    name:"チャイナボイジャー",
-    area:"アドベンチャーランド",
-    id:"320",
-    desc:"中華料理を楽しめるレストラン。",
-    emoji:"🍜"
-  },
+["トゥモローランド・テラス","トゥモローランド","357","🍔"],
+["プラズマ・レイズ・ダイナー","トゥモローランド","352","🚀"]
 
-  {
-    name:"カフェ・オーリンズ",
-    area:"アドベンチャーランド",
-    id:"321",
-    desc:"ニューオーリンズをイメージしたカフェ。",
-    emoji:"🥞"
-  },
-
-  {
-    name:"ハングリーベア・レストラン",
-    area:"ウエスタンランド",
-    id:"338",
-    desc:"ボリュームたっぷりのカレーが楽しめるレストラン。",
-    emoji:"🍛"
-  },
-
-  {
-    name:"プラザパビリオン・レストラン",
-    area:"ウエスタンランド",
-    id:"335",
-    desc:"広いパティオを持つアメリカ西部風レストラン。",
-    emoji:"🍴"
-  },
-
-  {
-    name:"グランマ・サラのキッチン",
-    area:"クリッターカントリー",
-    id:"344",
-    desc:"クリッターたちの暮らしを感じられるレストラン。",
-    emoji:"🍳"
-  },
-
-  {
-    name:"クイーン・オブ・ハートのバンケットホール",
-    area:"ファンタジーランド",
-    id:"346",
-    desc:"ふしぎの国のアリスをテーマにしたレストラン。",
-    emoji:"♥️"
-  },
-
-  {
-    name:"トルバドールタバン",
-    area:"ファンタジーランド",
-    id:"349",
-    desc:"ファンタジーランドのカジュアルなレストラン。",
-    emoji:"🥤"
-  },
-
-  {
-    name:"トゥーンタウン・グルメ",
-    area:"トゥーンタウン",
-    id:"350",
-    desc:"トゥーンタウンで気軽に食事を楽しめる店舗。",
-    emoji:"🍔"
-  },
-
-  {
-    name:"トゥモローランド・テラス",
-    area:"トゥモローランド",
-    id:"357",
-    desc:"近未来的な雰囲気の広々としたレストラン。",
-    emoji:"🍔"
-  },
-
-  {
-    name:"プラズマ・レイズ・ダイナー",
-    area:"トゥモローランド",
-    id:"352",
-    desc:"宇宙をテーマにしたレストラン。",
-    emoji:"🚀"
-  }
-
-];
+].map(x=>({
+  name:x[0],
+  area:x[1],
+  id:x[2],
+  emoji:x[3],
+  type:"restaurant"
+}));
 
 
-/* =====================================================
+/* =========================================================
+   ショップ
+   公式ショップ一覧 2026-09-22 確認
+========================================================= */
+
+const shops=[
+
+/* ワールドバザール */
+
+["カメラセンター","ワールドバザール","515","📷"],
+["グランドエンポーリアム","ワールドバザール","513","🛍️"],
+["シルエットスタジオ","ワールドバザール","510","✂️"],
+["タウンセンターファッション","ワールドバザール","525","👕"],
+["ディズニー＆カンパニー","ワールドバザール","502","🎁"],
+["トイ・ステーション","ワールドバザール","524","🧸"],
+["ハウス・オブ・グリーティング","ワールドバザール","508","✉️"],
+["ハリントンズ・ジュエリー＆ウォッチ","ワールドバザール","523","💎"],
+["ビビディ・バビディ・ブティック","ワールドバザール","566","👑"],
+["ペイストリーパレス","ワールドバザール","522","🍪"],
+["ホームストア","ワールドバザール","512","🏠"],
+["マジックショップ","ワールドバザール","509","🎩"],
+["ワールドバザール・コンフェクショナリー","ワールドバザール","500","🍬"],
+
+/* アドベンチャーランド */
+
+["アドベンチャーランド・バザール","アドベンチャーランド","533","🌴"],
+["アドベンチャーランド・バザール（カプセルトイ）","アドベンチャーランド","594","🎁"],
+["クリスタルアーツ","アドベンチャーランド","531","💎"],
+["クリスタルアーツ（制作物）※ガラス製品","アドベンチャーランド","532","🪟"],
+["ゴールデンガリオン","アドベンチャーランド","526","🏴‍☠️"],
+["ジャングルカーニバル（丸太投げ）","アドベンチャーランド","570","🪵"],
+["ジャングルカーニバル（ボール転がし）","アドベンチャーランド","571","🎯"],
+["パイレーツ・トレジャー","アドベンチャーランド","527","💰"],
+["パーティグラ・ギフト","アドベンチャーランド","529","🎁"],
+["ラ・プティート・パフュームリー","アドベンチャーランド","528","🌸"],
+["ル・マルシェ・ブルー","アドベンチャーランド","530","🎀"],
+
+/* ウエスタンランド */
+
+["ウエスタンウエア","ウエスタンランド","539","🤠"],
+["ウエスタンランド写真館","ウエスタンランド","538","📸"],
+["カントリーベア・バンドワゴン","ウエスタンランド","542","🐻"],
+["ゼネラルストア","ウエスタンランド","540","🍪"],
+["トレーディングポスト","ウエスタンランド","537","🎁"],
+["ハッピーキャンパーサプライ","ウエスタンランド","534","🧢"],
+["フロンティア・ウッドクラフト","ウエスタンランド","541","🪵"],
+
+/* クリッターカントリー */
+
+["スプラッシュダウン・フォト","クリッターカントリー","543","📸"],
+
+/* ファンタジーランド */
+
+["ガラスの靴","ファンタジーランド","546","👠"],
+["ガラスの靴（制作物）※ガラス製品","ファンタジーランド","547","✨"],
+["キングダム・トレジャー","ファンタジーランド","549","👑"],
+["ストロンボリズ・ワゴン","ファンタジーランド","552","🎀"],
+["ハーモニーフェア","ファンタジーランド","548","🎀"],
+["ビレッジショップス","ファンタジーランド","572","🌹"],
+["プーさんコーナー","ファンタジーランド","555","🍯"],
+["ブレイブリトルテイラー・ショップ","ファンタジーランド","563","👶"],
+["プレジャーアイランド・キャンディーズ","ファンタジーランド","551","🍭"],
+
+/* トゥーンタウン */
+
+["ギャグファクトリー／ファイブ・アンド・ダイム","トゥーンタウン","556","🤣"],
+["ギャグファクトリー/ファイブ・アンド・ダイム（カプセルトイ）","トゥーンタウン","590","🎁"],
+["トゥーンタウン・デリバリー・カンパニー","トゥーンタウン","557","🧢"],
+
+/* トゥモローランド */
+
+["コズミック・エンカウンター","トゥモローランド","560","🚀"],
+["スターゲイザーサプライ","トゥモローランド","576","🧢"],
+["トレジャーコメット","トゥモローランド","564","🤖"],
+["トレジャーコメット（カプセルトイ）","トゥモローランド","592","🎁"],
+["モンスターズ・インク・カンパニーストア","トゥモローランド","558","👁️"]
+
+].map(x=>({
+  name:x[0],
+  area:x[1],
+  id:x[2],
+  emoji:x[3],
+  type:"shop"
+}));
+
+
+/* =========================================================
    フォトスポット
-===================================================== */
+========================================================= */
 
-const photoSpots = [
+const photos=[
 
-  {
-    name:"シンデレラ城・プラザ側",
-    area:"ワールドバザール",
-    desc:"シンデレラ城を正面から大きく写せる定番スポット。",
-    emoji:"🏰",
-    source:"東京ディズニーリゾート周辺の公式案内を参考"
-  },
+{
+  name:"シンデレラ城・プラザ側",
+  area:"ワールドバザール",
+  emoji:"🏰",
+  desc:"シンデレラ城を正面から大きく写せる定番アングル。",
+  source:"東京ディズニーランド撮影スポット情報"
+},
 
-  {
-    name:"シンデレラ城・トゥモローランド側",
-    area:"トゥモローランド",
-    desc:"夕方〜夜にシンデレラ城を撮影するのにおすすめの場所。",
-    emoji:"🌃",
-    source:"東京ディズニーリゾート周辺の公式案内を参考"
-  },
+{
+  name:"ワールドバザール・ハロウィーン",
+  area:"ワールドバザール",
+  emoji:"🎃",
+  desc:"ハロウィーン期間の装飾を使った写真スポット。",
+  source:"2026年東京ディズニーランド ハロウィーン情報"
+},
 
-  {
-    name:"美女と野獣の城",
-    area:"ファンタジーランド",
-    desc:"美女と野獣エリアの象徴的な景色。建物と空の組み合わせが綺麗。",
-    emoji:"🌹",
-    source:"東京ディズニーリゾート公式エリア情報"
-  },
+{
+  name:"アドベンチャーランドの街並み",
+  area:"アドベンチャーランド",
+  emoji:"🌴",
+  desc:"ニューオーリンズ風の街並みを背景にした雰囲気写真。",
+  source:"東京ディズニーランド撮影スポット情報"
+},
 
-  {
-    name:"美女と野獣の城・右側",
-    area:"ファンタジーランド",
-    desc:"城を背景に全身写真を撮りやすいアングル。",
-    emoji:"📸",
-    source:"東京ディズニーランド撮影スポット情報"
-  },
+{
+  name:"美女と野獣の城",
+  area:"ファンタジーランド",
+  emoji:"🌹",
+  desc:"美女と野獣エリアを象徴する城を背景に撮影。",
+  source:"東京ディズニーランド撮影スポット情報"
+},
 
-  {
-    name:"ワールドバザール・ハロウィーン",
-    area:"ワールドバザール",
-    desc:"2026年ハロウィーン時期の装飾を活かした写真スポット。",
-    emoji:"🎃",
-    source:"2026年ハロウィーン情報"
-  },
+{
+  name:"美女と野獣の城・右側",
+  area:"ファンタジーランド",
+  emoji:"📸",
+  desc:"城を背景に全身を入れやすいアングル。",
+  source:"東京ディズニーランド撮影スポット情報"
+},
 
-  {
-    name:"アドベンチャーランドの街並み",
-    area:"アドベンチャーランド",
-    desc:"ニューオーリンズ風の街並みを背景にした雰囲気写真。",
-    emoji:"🌴",
-    source:"東京ディズニーランド撮影スポット情報"
-  }
+{
+  name:"シンデレラ城・トゥモローランド側",
+  area:"トゥモローランド",
+  emoji:"🌃",
+  desc:"夕方〜夜のシンデレラ城を撮影するのに使いやすい場所。",
+  source:"東京ディズニーランド撮影スポット情報"
+}
 
 ];
 
 
-/* =====================================================
-   URL生成
-===================================================== */
+/* =========================================================
+   URL
+========================================================= */
 
-function attractionUrl(item){
-  return `${OFFICIAL_BASE}/tdl/attraction/detail/${item.id}/`;
+function detailUrl(item){
+
+  if(item.type==="attraction")
+    return `${BASE}/tdl/attraction/detail/${item.id}/`;
+
+  if(item.type==="shop")
+    return `${BASE}/tdl/shop/detail/${item.id}/`;
+
+  return `${BASE}/tdl/restaurant/detail/${item.id}/`;
 }
 
-function shopUrl(item){
-  return `${OFFICIAL_BASE}/tdl/shop/detail/${item.id}/`;
+
+/* =========================================================
+   画像キャッシュ
+========================================================= */
+
+const IMAGE_CACHE_KEY="tdl_ai_navi_official_images_v2";
+
+let imageCache={};
+
+try{
+  imageCache=
+    JSON.parse(
+      localStorage.getItem(IMAGE_CACHE_KEY)||"{}"
+    );
+}catch(e){
+  imageCache={};
 }
 
-function restaurantUrl(item){
-  return `${OFFICIAL_BASE}/tdl/restaurant/detail/${item.id}/`;
-}
 
+/* =========================================================
+   公式画像URL取得
+   「最初の画像」ではなく「イメージ1」だけ
+========================================================= */
 
-/* =====================================================
-   公式ページから「イメージ1」だけを取得
-===================================================== */
+async function findOfficialImage(url){
 
-async function getOfficialImage(url, type){
+  if(imageCache[url])
+    return imageCache[url];
 
   try{
 
-    /*
-      公式ページそのものを直接読み込むと
-      ブラウザのCORS制限があるため、
-      Jina Reader経由で公式ページの内容だけ取得する。
-
-      重要：
-      「ページ内の最初の画像」は絶対に使わない。
-      「イメージ1」に一致する画像だけ探す。
-    */
-
-    const response =
+    const res=
       await fetch(
-        "https://r.jina.ai/" + url,
-        {
-          cache:"no-store"
-        }
+        "https://r.jina.ai/"+url,
+        {cache:"force-cache"}
       );
 
-    if(!response.ok){
+    if(!res.ok)
       return null;
+
+    const text=await res.text();
+
+    const patterns=[
+
+      /!\[[^\]]*(?:イメージ\s*1|image\s*1)[^\]]*\]\((https:\/\/media1\.tokyodisneyresort\.jp\/[^)\s]+)\)/i,
+
+      /<img[^>]+(?:alt|title)=["'][^"']*(?:イメージ\s*1|image\s*1)[^"']*["'][^>]+src=["'](https:\/\/media1\.tokyodisneyresort\.jp\/[^"']+)["']/i,
+
+      /<img[^>]+src=["'](https:\/\/media1\.tokyodisneyresort\.jp\/[^"']+)["'][^>]+(?:alt|title)=["'][^"']*(?:イメージ\s*1|image\s*1)[^"']*["']/i
+
+    ];
+
+    for(const regex of patterns){
+
+      const match=text.match(regex);
+
+      if(match){
+
+        imageCache[url]=match[1];
+
+        try{
+          localStorage.setItem(
+            IMAGE_CACHE_KEY,
+            JSON.stringify(imageCache)
+          );
+        }catch(e){}
+
+        return match[1];
+      }
     }
 
-    const text = await response.text();
-
-    /*
-      Markdown形式
-      ![施設名のイメージ1](https://media1...)
-    */
-
-    const markdownRegex =
-      /!\[[^\]]*(?:イメージ\s*1|image\s*1)[^\]]*\]\((https:\/\/media1\.tokyodisneyresort\.jp\/[^)\s]+)\)/i;
-
-    let match = text.match(markdownRegex);
-
-    if(match){
-      return match[1];
-    }
-
-    /*
-      HTML形式になっている場合
-      <img alt="○○のイメージ1" src="...">
-    */
-
-    const htmlRegex =
-      /<img[^>]+(?:alt|title)=["'][^"']*(?:イメージ\s*1|image\s*1)[^"']*["'][^>]+src=["'](https:\/\/media1\.tokyodisneyresort\.jp\/[^"']+)["']/i;
-
-    match = text.match(htmlRegex);
-
-    if(match){
-      return match[1];
-    }
-
-    /*
-      属性の順番が逆の場合
-    */
-
-    const htmlRegex2 =
-      /<img[^>]+src=["'](https:\/\/media1\.tokyodisneyresort\.jp\/[^"']+)["'][^>]+(?:alt|title)=["'][^"']*(?:イメージ\s*1|image\s*1)[^"']*["']/i;
-
-    match = text.match(htmlRegex2);
-
-    if(match){
-      return match[1];
-    }
-
-    return null;
-
-  }catch(error){
-
-    console.log("画像取得エラー:",error);
-    return null;
-
+  }catch(e){
+    console.log("画像取得失敗",url);
   }
+
+  return null;
 }
 
 
-/* =====================================================
-   画像表示
-===================================================== */
+/* =========================================================
+   画像を遅延読み込み
+========================================================= */
 
-async function loadImage(item, imgElement, placeholder, type){
+const imageObserver=
+  new IntersectionObserver(
+    entries=>{
 
-  placeholder.textContent =
-    "公式サイトから画像を取得中…";
+      entries.forEach(entry=>{
 
-  const url =
-    type === "attraction"
-      ? attractionUrl(item)
-      : type === "shop"
-        ? shopUrl(item)
-        : restaurantUrl(item);
+        if(!entry.isIntersecting)
+          return;
 
-  const imageUrl =
-    await getOfficialImage(url,type);
+        const img=entry.target;
+
+        imageObserver.unobserve(img);
+
+        loadCardImage(img);
+
+      });
+
+    },
+    {
+      rootMargin:"350px"
+    }
+  );
+
+
+async function loadCardImage(img){
+
+  const url=img.dataset.page;
+  const placeholder=img.parentElement.querySelector(".placeholder");
+
+  if(!url)
+    return;
+
+  /* キャッシュ済みなら即表示 */
+
+  if(imageCache[url]){
+
+    img.src=imageCache[url];
+
+    img.onload=()=>{
+      img.style.display="block";
+      placeholder.style.display="none";
+    };
+
+    return;
+  }
+
+  placeholder.textContent="公式画像を読み込み中…";
+
+  const imageUrl=
+    await findOfficialImage(url);
 
   if(imageUrl){
 
-    imgElement.src = imageUrl;
+    img.src=imageUrl;
 
-    imgElement.onload = () => {
-      imgElement.style.display = "block";
-      placeholder.style.display = "none";
+    img.onload=()=>{
+      img.style.display="block";
+      placeholder.style.display="none";
     };
 
-    imgElement.onerror = () => {
-      imgElement.style.display = "none";
-      placeholder.style.display = "block";
-      placeholder.textContent =
-        "公式画像を表示できませんでした";
+    img.onerror=()=>{
+      img.style.display="none";
+      placeholder.textContent="公式画像を表示できませんでした";
     };
 
   }else{
 
-    imgElement.style.display = "none";
-    placeholder.style.display = "block";
-    placeholder.textContent =
+    placeholder.textContent=
       "公式画像を取得できませんでした";
 
   }
-
 }
 
 
-/* =====================================================
-   カード作成
-===================================================== */
+/* =========================================================
+   カード
+========================================================= */
 
-function createFacilityCard(item,type){
+function makeCard(item,selectable=false){
 
-  const card =
-    document.createElement("div");
+  const card=document.createElement("div");
+  card.className="card";
 
-  card.className = "card";
+  const imageBox=document.createElement("div");
+  imageBox.className="image-box";
 
-  const image =
-    document.createElement("div");
+  const img=document.createElement("img");
 
-  image.className = "card-image";
+  img.alt=item.name;
+  img.loading="lazy";
+  img.style.display="none";
 
-  const placeholder =
-    document.createElement("div");
+  img.dataset.page=detailUrl(item);
 
-  placeholder.className =
-    "image-placeholder";
+  const placeholder=document.createElement("div");
+  placeholder.className="placeholder";
+  placeholder.textContent=
+    `${item.emoji} 公式画像を読み込みます`;
 
-  placeholder.textContent =
-    item.emoji + " 画像を読み込み中…";
+  imageBox.appendChild(img);
+  imageBox.appendChild(placeholder);
 
-  const img =
-    document.createElement("img");
+  const body=document.createElement("div");
+  body.className="body";
 
-  img.alt =
-    item.name;
+  const title=document.createElement("div");
+  title.className="title";
+  title.textContent=
+    `${item.emoji} ${item.name}`;
 
-  img.style.display = "none";
+  const area=document.createElement("div");
+  area.className="area";
+  area.textContent=item.area;
 
-  image.appendChild(img);
-  image.appendChild(placeholder);
+  const desc=document.createElement("div");
+  desc.className="desc";
 
-  const body =
-    document.createElement("div");
+  if(item.type==="shop")
+    desc.textContent="東京ディズニーリゾート公式ショップ";
 
-  body.className = "card-body";
+  else if(item.type==="restaurant")
+    desc.textContent="東京ディズニーリゾート公式レストラン";
 
-  const title =
-    document.createElement("div");
+  else
+    desc.textContent="東京ディズニーリゾート公式アトラクション";
 
-  title.className = "card-title";
+  const buttons=document.createElement("div");
+  buttons.className="buttons";
 
-  title.textContent =
-    item.emoji + " " + item.name;
+  if(selectable){
 
-  const area =
-    document.createElement("div");
+    const select=document.createElement("button");
 
-  area.className = "card-area";
+    select.className="select";
+    select.textContent="ここを選択";
 
-  area.textContent =
-    item.area;
-
-  const desc =
-    document.createElement("div");
-
-  desc.className = "card-desc";
-
-  desc.textContent =
-    item.desc || "";
-
-  const buttons =
-    document.createElement("div");
-
-  buttons.className =
-    "card-buttons";
-
-  const official =
-    document.createElement("a");
-
-  official.className =
-    "official";
-
-  official.textContent =
-    "公式詳細";
-
-  official.href =
-    type === "attraction"
-      ? attractionUrl(item)
-      : type === "shop"
-        ? shopUrl(item)
-        : restaurantUrl(item);
-
-  official.target =
-    "_blank";
-
-  official.rel =
-    "noopener";
-
-  if(type === "attraction"){
-
-    const select =
-      document.createElement("button");
-
-    select.className =
-      "select-btn";
-
-    select.textContent =
-      "ここを選択";
-
-    select.onclick =
-      () => selectAttraction(item);
+    select.onclick=()=>{
+      selectAttraction(item);
+    };
 
     buttons.appendChild(select);
-
   }
+
+  const official=document.createElement("a");
+
+  official.className="official";
+  official.textContent="公式詳細";
+  official.href=detailUrl(item);
+  official.target="_blank";
+  official.rel="noopener";
 
   buttons.appendChild(official);
 
@@ -1247,426 +818,277 @@ function createFacilityCard(item,type){
   body.appendChild(desc);
   body.appendChild(buttons);
 
-  card.appendChild(image);
+  card.appendChild(imageBox);
   card.appendChild(body);
 
-  /*
-    画像取得はカード表示後に行う
-  */
-
-  setTimeout(
-    () => loadImage(item,img,placeholder,type),
-    20
-  );
+  imageObserver.observe(img);
 
   return card;
 }
 
 
-/* =====================================================
-   エリアボタン
-===================================================== */
-
-let selectedArea =
-  "ワールドバザール";
+/* =========================================================
+   エリア
+========================================================= */
 
 function renderAreas(){
 
-  const container =
-    document.getElementById("areaButtons");
+  const box=document.getElementById("areas");
+  box.innerHTML="";
 
-  container.innerHTML = "";
+  areas.forEach(area=>{
 
-  areas.forEach(area => {
+    const btn=document.createElement("button");
 
-    const button =
-      document.createElement("button");
+    btn.className="area-btn";
 
-    button.className =
-      "area-btn";
+    if(area===selectedArea)
+      btn.classList.add("active");
 
-    if(area === selectedArea){
-      button.classList.add("active");
-    }
+    btn.textContent=area;
 
-    button.textContent =
-      area;
+    btn.onclick=()=>{
 
-    button.onclick =
-      () => {
+      selectedArea=area;
 
-        selectedArea =
-          area;
+      renderAreas();
+      renderAttractions();
 
-        renderAreas();
-        renderAttractions();
+      document.getElementById("selected").innerHTML="";
+      document.getElementById("nearby").innerHTML="";
 
-        /*
-          エリア変更時は選択状態をリセット
-        */
+    };
 
-        document.getElementById(
-          "selectedArea"
-        ).innerHTML = "";
-
-        document.getElementById(
-          "nearbyArea"
-        ).innerHTML = "";
-
-      };
-
-    container.appendChild(button);
+    box.appendChild(btn);
 
   });
-
 }
 
 
-/* =====================================================
-   アトラクション表示
-===================================================== */
+/* =========================================================
+   アトラクション
+========================================================= */
 
 function renderAttractions(){
 
-  const container =
-    document.getElementById("attractionList");
+  const box=document.getElementById("attractions");
 
-  const keyword =
-    document.getElementById(
-      "searchInput"
-    ).value.trim().toLowerCase();
+  box.innerHTML="";
 
-  container.innerHTML = "";
+  const keyword=
+    document.getElementById("search")
+    .value
+    .trim()
+    .toLowerCase();
 
-  const filtered =
-    attractions.filter(item => {
+  const list=
+    attractions.filter(item=>
+      item.area===selectedArea &&
+      item.name.toLowerCase().includes(keyword)
+    );
 
-      const sameArea =
-        item.area === selectedArea;
+  if(!list.length){
 
-      const match =
-        item.name
-          .toLowerCase()
-          .includes(keyword);
-
-      return sameArea && match;
-
-    });
-
-  if(filtered.length === 0){
-
-    container.innerHTML =
-      `<div class="empty">
-        該当するアトラクションがありません
-      </div>`;
+    box.innerHTML=
+      `<div class="empty">該当するアトラクションがありません</div>`;
 
     return;
   }
 
-  filtered.forEach(item => {
-
-    container.appendChild(
-      createFacilityCard(
-        item,
-        "attraction"
-      )
+  list.forEach(item=>{
+    box.appendChild(
+      makeCard(item,true)
     );
-
   });
-
 }
 
 
-/* =====================================================
+/* =========================================================
    アトラクション選択
-===================================================== */
+========================================================= */
 
 function selectAttraction(item){
 
-  const selected =
-    document.getElementById(
-      "selectedArea"
-    );
+  const selected=
+    document.getElementById("selected");
 
-  selected.innerHTML = `
-    <div class="selected-box">
-      <div style="font-size:12px;opacity:.7;">
-        現在地として選択中
-      </div>
-
+  selected.innerHTML=`
+    <div class="selected">
+      <div class="selected-small">現在選択中</div>
       <div class="selected-name">
         ${item.emoji} ${item.name}
       </div>
-
-      <div class="selected-area">
+      <div class="selected-small">
         ${item.area}
-      </div>
-
-      <div style="
-        margin-top:10px;
-        font-size:12px;
-        line-height:1.6;
-        opacity:.85;
-      ">
-        この施設を基準に、同じエリアの
-        アトラクション・レストラン・ショップ・
-        フォトスポットを表示しています。
       </div>
     </div>
   `;
 
   renderNearby(item);
 
-  window.scrollTo({
-    top:selected.offsetTop - 80,
-    behavior:"smooth"
-  });
-
+  setTimeout(()=>{
+    selected.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  },50);
 }
 
 
-/* =====================================================
+/* =========================================================
    周辺施設
-===================================================== */
+========================================================= */
 
 function renderNearby(attraction){
 
-  const container =
-    document.getElementById(
-      "nearbyArea"
+  const box=document.getElementById("nearby");
+
+  box.innerHTML="";
+
+  const nearA=
+    attractions.filter(x=>
+      x.area===attraction.area &&
+      x.id!==attraction.id
     );
 
-  container.innerHTML = "";
-
-  /*
-    現段階では「同じエリア」を
-    周辺施設として扱う。
-
-    次の段階で
-    緯度経度を入れて本当の距離順にできる。
-  */
-
-  const nearbyAttractions =
-    attractions.filter(item =>
-      item.area === attraction.area &&
-      item.id !== attraction.id
+  const nearR=
+    restaurants.filter(x=>
+      x.area===attraction.area
     );
 
-  const nearbyRestaurants =
-    restaurants.filter(item =>
-      item.area === attraction.area
+  const nearS=
+    shops.filter(x=>
+      x.area===attraction.area
     );
 
-  const nearbyShops =
-    shops.filter(item =>
-      item.area === attraction.area
+  const nearP=
+    photos.filter(x=>
+      x.area===attraction.area
     );
 
-  const nearbyPhotos =
-    photoSpots.filter(item =>
-      item.area === attraction.area
-    );
-
-
-  /* アトラクション */
-
-  addSection(
-    container,
+  addFacilitySection(
+    box,
     "🎢 近くのアトラクション",
-    nearbyAttractions,
-    "attraction"
+    nearA
   );
 
-
-  /* レストラン */
-
-  addSection(
-    container,
+  addFacilitySection(
+    box,
     "🍴 近くのレストラン",
-    nearbyRestaurants,
-    "restaurant"
+    nearR
   );
 
-
-  /* ショップ */
-
-  addSection(
-    container,
+  addFacilitySection(
+    box,
     "🛍️ 近くのショップ",
-    nearbyShops,
-    "shop"
+    nearS
   );
-
-
-  /* フォトスポット */
 
   addPhotoSection(
-    container,
-    "📸 近くのフォトスポット",
-    nearbyPhotos
+    box,
+    "📸 フォトスポット",
+    nearP
   );
-
 }
 
 
-/* =====================================================
-   セクション追加
-===================================================== */
+/* =========================================================
+   施設セクション
+========================================================= */
 
-function addSection(
-  container,
-  title,
-  items,
-  type
-){
+function addFacilitySection(box,title,list){
 
-  const section =
-    document.createElement("div");
+  const section=document.createElement("section");
+  section.className="section";
 
-  section.className =
-    "section";
+  const heading=document.createElement("div");
+  heading.className="section-title";
+  heading.textContent=title;
 
-  const heading =
-    document.createElement("div");
+  section.appendChild(heading);
 
-  heading.className =
-    "section-title";
+  if(!list.length){
 
-  heading.textContent =
-    title;
+    const empty=document.createElement("div");
+    empty.className="empty";
+    empty.textContent="このエリアにはありません";
 
-  section.appendChild(
-    heading
-  );
-
-  if(items.length === 0){
-
-    const empty =
-      document.createElement("div");
-
-    empty.className =
-      "empty";
-
-    empty.textContent =
-      "このエリアには登録されていません";
-
-    section.appendChild(
-      empty
-    );
+    section.appendChild(empty);
 
   }else{
 
-    const grid =
-      document.createElement("div");
+    const grid=document.createElement("div");
+    grid.className="grid";
 
-    grid.className =
-      "card-grid";
-
-    items.forEach(item => {
-
+    list.forEach(item=>{
       grid.appendChild(
-        createFacilityCard(
-          item,
-          type
-        )
+        makeCard(item,false)
       );
-
     });
 
     section.appendChild(grid);
-
   }
 
-  container.appendChild(section);
-
+  box.appendChild(section);
 }
 
 
-/* =====================================================
+/* =========================================================
    フォトスポット
-===================================================== */
+========================================================= */
 
-function addPhotoSection(
-  container,
-  title,
-  items
-){
+function addPhotoSection(box,title,list){
 
-  const section =
-    document.createElement("div");
+  const section=document.createElement("section");
+  section.className="section";
 
-  section.className =
-    "section";
+  const heading=document.createElement("div");
+  heading.className="section-title";
+  heading.textContent=title;
 
-  const heading =
-    document.createElement("div");
+  section.appendChild(heading);
 
-  heading.className =
-    "section-title";
+  if(!list.length){
 
-  heading.textContent =
-    title;
+    const empty=document.createElement("div");
+    empty.className="empty";
+    empty.textContent="このエリアにはありません";
 
-  section.appendChild(
-    heading
-  );
-
-  if(items.length === 0){
-
-    const empty =
-      document.createElement("div");
-
-    empty.className =
-      "empty";
-
-    empty.textContent =
-      "このエリアには登録されていません";
-
-    section.appendChild(
-      empty
-    );
+    section.appendChild(empty);
 
   }else{
 
-    const grid =
-      document.createElement("div");
+    const grid=document.createElement("div");
+    grid.className="grid";
 
-    grid.className =
-      "card-grid";
+    list.forEach(item=>{
 
-    items.forEach(item => {
+      const card=document.createElement("div");
+      card.className="photo";
 
-      const card =
-        document.createElement("div");
+      const image=document.createElement("div");
+      image.className="image-box";
 
-      card.className =
-        "photo-card";
-
-      const placeholder =
-        document.createElement("div");
-
-      placeholder.className =
-        "card-image";
-
-      placeholder.innerHTML =
-        `<div class="image-placeholder">
-          ${item.emoji}
-          <br>
+      image.innerHTML=`
+        <div class="placeholder">
+          ${item.emoji}<br>
           フォトスポット
-        </div>`;
+        </div>
+      `;
 
-      const body =
-        document.createElement("div");
+      const body=document.createElement("div");
+      body.className="photo-body";
 
-      body.className =
-        "photo-body";
-
-      body.innerHTML = `
-        <div class="card-title">
+      body.innerHTML=`
+        <div class="title">
           ${item.emoji} ${item.name}
         </div>
 
-        <div class="card-desc">
+        <div class="area">
+          ${item.area}
+        </div>
+
+        <div class="desc">
           ${item.desc}
         </div>
 
@@ -1675,48 +1097,35 @@ function addPhotoSection(
         </div>
       `;
 
-      card.appendChild(
-        placeholder
-      );
+      card.appendChild(image);
+      card.appendChild(body);
 
-      card.appendChild(
-        body
-      );
-
-      grid.appendChild(
-        card
-      );
+      grid.appendChild(card);
 
     });
 
-    section.appendChild(
-      grid
-    );
-
+    section.appendChild(grid);
   }
 
-  container.appendChild(
-    section
-  );
-
+  box.appendChild(section);
 }
 
 
-/* =====================================================
+/* =========================================================
    検索
-===================================================== */
+========================================================= */
 
 document
-  .getElementById("searchInput")
+  .getElementById("search")
   .addEventListener(
     "input",
     renderAttractions
   );
 
 
-/* =====================================================
-   初期表示
-===================================================== */
+/* =========================================================
+   起動
+========================================================= */
 
 renderAreas();
 renderAttractions();
