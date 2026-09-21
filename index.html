@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>TDL AI NAVI</title>
 
+
 <style>
+
+/* ================================
+   基本
+================================ */
 
 *{
   box-sizing:border-box;
 }
 
 body{
+
   margin:0;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -21,301 +34,600 @@ body{
     "Hiragino Kaku Gothic ProN",
     "Yu Gothic",
     sans-serif;
+
   background:#f5f6f8;
+
   color:#222;
+
 }
+
+
+button,
+input{
+
+  font-family:inherit;
+
+}
+
+
+/* ================================
+   ヘッダー
+================================ */
 
 header{
-  background:linear-gradient(135deg,#243b55,#141e30);
-  color:white;
-  padding:20px 16px;
+
   position:sticky;
+
   top:0;
+
   z-index:100;
-  box-shadow:0 3px 12px rgba(0,0,0,.15);
-}
 
-.header-inner{
-  max-width:900px;
-  margin:auto;
-}
-
-header h1{
-  margin:0;
-  font-size:22px;
-}
-
-header p{
-  margin:5px 0 0;
-  font-size:12px;
-  opacity:.8;
-}
-
-
-/* =========================
-   メイン
-========================= */
-
-main{
-  max-width:900px;
-  margin:auto;
-  padding:18px 14px 60px;
-}
-
-.section-title{
-  font-size:18px;
-  font-weight:700;
-  margin:10px 0 12px;
-}
-
-
-/* =========================
-   エリア
-========================= */
-
-.area-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-bottom:22px;
-}
-
-.area-button{
-  border:none;
-  background:white;
-  border-radius:16px;
-  padding:14px 8px;
-  min-height:82px;
-  font-size:13px;
-  font-weight:700;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-  cursor:pointer;
-  transition:.2s;
-}
-
-.area-button:active{
-  transform:scale(.97);
-}
-
-.area-button.active{
-  background:#243b55;
   color:white;
-  transform:translateY(-2px);
-  box-shadow:0 5px 15px rgba(0,0,0,.18);
-}
 
-.area-icon{
-  display:block;
-  font-size:27px;
-  margin-bottom:5px;
-}
-
-
-/* =========================
-   検索
-========================= */
-
-.search-box{
-  margin-bottom:20px;
-}
-
-.search-box input{
-  width:100%;
-  border:none;
-  background:white;
-  padding:15px 16px;
-  border-radius:14px;
-  font-size:16px;
-  outline:none;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-
-/* =========================
-   カード
-========================= */
-
-.card-list{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:14px;
-}
-
-.card{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
-}
-
-.image-wrap{
-  width:100%;
-  height:180px;
   background:
     linear-gradient(
       135deg,
-      #e9edf2,
-      #dce2e8
+      #243b55,
+      #141e30
     );
-  overflow:hidden;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.18);
+
 }
+
+
+.header-inner{
+
+  max-width:1000px;
+
+  margin:auto;
+
+  padding:
+    17px
+    15px
+    15px;
+
+}
+
+
+header h1{
+
+  margin:0;
+
+  font-size:21px;
+
+}
+
+
+header p{
+
+  margin:5px 0 0;
+
+  font-size:12px;
+
+  opacity:.82;
+
+}
+
+
+/* ================================
+   メイン
+================================ */
+
+main{
+
+  max-width:1000px;
+
+  margin:auto;
+
+  padding:
+    18px
+    14px
+    70px;
+
+}
+
+
+.section-title{
+
+  font-size:18px;
+
+  font-weight:700;
+
+  margin:
+    12px
+    0
+    12px;
+
+}
+
+
+/* ================================
+   エリア
+================================ */
+
+.area-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:9px;
+
+  margin-bottom:20px;
+
+}
+
+
+.area-button{
+
+  border:0;
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:12px 6px;
+
+  min-height:78px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  color:#333;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.08);
+
+  cursor:pointer;
+
+  transition:.15s;
+
+}
+
+
+.area-button:active{
+
+  transform:scale(.97);
+
+}
+
+
+.area-button.active{
+
+  background:#243b55;
+
+  color:white;
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.18);
+
+}
+
+
+.area-icon{
+
+  display:block;
+
+  font-size:25px;
+
+  margin-bottom:5px;
+
+}
+
+
+/* ================================
+   検索
+================================ */
+
+.search-box{
+
+  margin-bottom:20px;
+
+}
+
+
+.search-box input{
+
+  width:100%;
+
+  border:0;
+
+  outline:0;
+
+  background:white;
+
+  border-radius:14px;
+
+  padding:
+    14px
+    15px;
+
+  font-size:16px;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.07);
+
+}
+
+
+/* ================================
+   2列カード
+================================ */
+
+.card-list{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:11px;
+
+}
+
+
+.card{
+
+  background:white;
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.08);
+
+  min-width:0;
+
+  cursor:pointer;
+
+  transition:.15s;
+
+}
+
+
+.card:active{
+
+  transform:scale(.98);
+
+}
+
+
+/* ================================
+   画像
+================================ */
+
+.image-wrap{
+
+  width:100%;
+
+  aspect-ratio:16 / 10;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e8edf2,
+      #d8dee5
+    );
+
+}
+
 
 .facility-image{
+
   width:100%;
+
   height:100%;
+
   object-fit:cover;
+
   display:block;
+
 }
+
 
 .no-image{
+
+  width:100%;
+
   height:100%;
+
   display:flex;
-  justify-content:center;
+
   align-items:center;
-  font-size:42px;
-  color:#9ca3af;
+
+  justify-content:center;
+
+  font-size:34px;
+
+  color:#8e98a3;
+
 }
+
+
+/* ================================
+   カード本文
+================================ */
 
 .card-content{
-  padding:15px;
+
+  padding:11px;
+
 }
+
 
 .card-type{
-  font-size:12px;
+
+  font-size:10px;
+
   color:#777;
+
   margin-bottom:4px;
+
 }
+
 
 .card h3{
-  margin:0 0 5px;
-  font-size:17px;
+
+  margin:
+    0
+    0
+    6px;
+
+  font-size:14px;
+
+  line-height:1.35;
+
 }
+
 
 .card-area{
+
   display:inline-block;
-  font-size:11px;
-  background:#f0f2f5;
+
+  padding:
+    3px
+    7px;
+
   border-radius:20px;
-  padding:4px 9px;
+
+  background:#f0f2f5;
+
   color:#555;
+
+  font-size:9px;
+
 }
+
 
 .card-description{
-  font-size:13px;
+
+  margin-top:8px;
+
+  font-size:10px;
+
+  line-height:1.5;
+
   color:#666;
-  line-height:1.6;
-  margin:10px 0;
+
 }
 
-.detail-button{
-  display:block;
-  text-align:center;
-  background:#243b55;
-  color:white;
-  text-decoration:none;
-  padding:11px;
-  border-radius:11px;
-  font-size:13px;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-.detail-button:active{
-  transform:scale(.98);
-}
-
-
-/* =========================
-   選択中
-========================= */
-
-.selected-box{
-  background:white;
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:22px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
-  border-left:5px solid #243b55;
-}
-
-.selected-label{
-  font-size:12px;
-  color:#777;
-  margin-bottom:5px;
-}
-
-.selected-name{
-  font-size:21px;
-  font-weight:700;
-}
-
-
-/* =========================
-   結果セクション
-========================= */
-
-.result-section{
-  margin-top:26px;
-}
-
-.result-title{
-  font-size:17px;
-  font-weight:bold;
-  margin:0 0 10px;
-}
-
-.empty{
-  background:white;
-  border-radius:15px;
-  padding:20px;
-  text-align:center;
-  color:#888;
-  font-size:13px;
-}
-
-
-/* =========================
-   ステータス
-========================= */
 
 .status{
-  margin-top:8px;
-  font-size:12px;
+
+  margin-top:7px;
+
+  font-size:10px;
+
+  line-height:1.4;
+
   color:#d35400;
+
   font-weight:bold;
+
 }
 
 
-/* =========================
+.detail-button{
+
+  display:block;
+
+  margin-top:9px;
+
+  padding:9px 5px;
+
+  text-align:center;
+
+  text-decoration:none;
+
+  color:white;
+
+  background:#243b55;
+
+  border-radius:9px;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+}
+
+
+/* ================================
+   選択中
+================================ */
+
+.selected-box{
+
+  background:white;
+
+  border-radius:17px;
+
+  padding:15px;
+
+  margin:
+    22px
+    0;
+
+  border-left:
+    5px solid
+    #243b55;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.08);
+
+}
+
+
+.selected-label{
+
+  font-size:11px;
+
+  color:#777;
+
+  margin-bottom:5px;
+
+}
+
+
+.selected-name{
+
+  font-size:18px;
+
+  font-weight:700;
+
+}
+
+
+/* ================================
+   結果
+================================ */
+
+.result-section{
+
+  margin-top:27px;
+
+}
+
+
+.result-title{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  font-size:17px;
+
+  font-weight:bold;
+
+  margin-bottom:10px;
+
+}
+
+
+.result-count{
+
+  font-size:11px;
+
+  color:#888;
+
+  font-weight:normal;
+
+}
+
+
+.empty{
+
+  grid-column:
+    1 / -1;
+
+  background:white;
+
+  padding:20px;
+
+  border-radius:14px;
+
+  text-align:center;
+
+  color:#888;
+
+  font-size:12px;
+
+}
+
+
+/* ================================
    PC
-========================= */
+================================ */
 
 @media(min-width:700px){
 
   .area-grid{
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+      repeat(4,1fr);
+
   }
 
   .card-list{
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+
+  }
+
+}
+
+
+/* ================================
+   小さいスマホ
+================================ */
+
+@media(max-width:360px){
+
+  .card h3{
+
+    font-size:13px;
+
+  }
+
+  .card-description{
+
+    font-size:9px;
+
   }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <header>
 
   <div class="header-inner">
 
-    <h1>🏰 TDL AI NAVI</h1>
+    <h1>
+      🏰 TDL AI NAVI
+    </h1>
 
     <p>
-      アトラクションを選ぶと、近くの楽しみ方を探します
+      アトラクションを選ぶと、その周辺の楽しみ方を探します
     </p>
 
   </div>
@@ -323,77 +635,81 @@ main{
 </header>
 
 
+
 <main>
 
 
-  <!-- =========================
-       AREA
-  ========================== -->
+<!-- =================================
+     エリア
+================================= -->
 
-  <div class="section-title">
-    🗺️ エリアを選ぶ
-  </div>
-
-
-  <div
-    id="areaButtons"
-    class="area-grid">
-  </div>
+<div class="section-title">
+  🗺️ エリアを選ぶ
+</div>
 
 
-  <!-- =========================
-       SEARCH
-  ========================== -->
-
-  <div class="search-box">
-
-    <input
-      id="searchInput"
-      type="search"
-      placeholder="🔎 アトラクションを検索"
-    >
-
-  </div>
+<div
+  id="areaButtons"
+  class="area-grid">
+</div>
 
 
-  <!-- =========================
-       ATTRACTIONS
-  ========================== -->
 
-  <div class="section-title">
-    🎢 アトラクション
-  </div>
+<!-- =================================
+     検索
+================================= -->
 
+<div class="search-box">
 
-  <div
-    id="attractionList"
-    class="card-list">
-  </div>
+  <input
+    id="searchInput"
+    type="search"
+    placeholder="🔎 アトラクションを検索"
+  >
 
-
-  <!-- =========================
-       SELECTED
-  ========================== -->
-
-  <div
-    id="selectedArea"
-    style="display:none;">
-
-  </div>
+</div>
 
 
-  <!-- =========================
-       NEARBY
-  ========================== -->
 
-  <div
-    id="nearbyArea"
-    style="display:none;">
+<!-- =================================
+     アトラクション
+================================= -->
 
-  </div>
+<div class="section-title">
+  🎢 アトラクション
+</div>
+
+
+<div
+  id="attractionList"
+  class="card-list">
+</div>
+
+
+
+<!-- =================================
+     選択
+================================= -->
+
+<div
+  id="selectedArea"
+  style="display:none;">
+</div>
+
+
+
+<!-- =================================
+     周辺
+================================= -->
+
+<div
+  id="nearbyArea"
+  style="display:none;">
+</div>
 
 
 </main>
+
 
 
 <script>
@@ -449,123 +765,472 @@ const areas = [
 
 const attractions = [
 
+{
+  name:"オムニバス",
+  area:"ワールドバザール",
+  type:"🎢 アトラクション",
+  description:"2階建てバスに乗ってプラザを一周。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/151/",
+  image:""
+},
+
+{
+  name:"カリブの海賊",
+  area:"アドベンチャーランド",
+  type:"🎢 アトラクション",
+  description:"海賊たちの世界をボートで冒険。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/152/",
+  image:""
+},
+
+{
+  name:"ジャングルクルーズ：ワイルドライフ・エクスペディション",
+  area:"アドベンチャーランド",
+  type:"🎢 アトラクション",
+  description:"船長と一緒にジャングルを探検。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/153/",
+  image:""
+},
+
+{
+  name:"ウエスタンリバー鉄道",
+  area:"アドベンチャーランド",
+  type:"🎢 アトラクション",
+  description:"蒸気機関車でパークを巡る。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/154/",
+  image:""
+},
+
+{
+  name:"スイスファミリー・ツリーハウス",
+  area:"アドベンチャーランド",
+  type:"🎢 アトラクション",
+  description:"大きな木の上にあるツリーハウス。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/155/",
+  image:"",
+  status:"休止中（2022/4/1〜未定）"
+},
+
+{
+  name:"魅惑のチキルーム：スティッチ・プレゼンツ“アロハ・エ・コモ・マイ！”",
+  area:"アドベンチャーランド",
+  type:"🎢 アトラクション",
+  description:"スティッチと鳥たちによる楽しい音楽ショー。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/156/",
+  image:"",
+  status:"2026/9/24〜10/23休止予定"
+},
+
+{
+  name:"ウエスタンランド・シューティングギャラリー",
+  area:"ウエスタンランド",
+  type:"🎢 アトラクション",
+  description:"西部開拓時代の射撃体験。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/157/",
+  image:""
+},
+
+{
+  name:"カントリーベア・シアター",
+  area:"ウエスタンランド",
+  type:"🎢 アトラクション",
+  description:"クマたちによるカントリーミュージックショー。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/158/",
+  image:""
+},
+
+{
+  name:"蒸気船マークトウェイン号",
+  area:"ウエスタンランド",
+  type:"🎢 アトラクション",
+  description:"大型蒸気船でアメリカ河を一周。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/159/",
+  image:""
+},
+
+{
+  name:"ビッグサンダー・マウンテン",
+  area:"ウエスタンランド",
+  type:"🎢 アトラクション",
+  description:"鉱山を駆け抜けるローラーコースター。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/160/",
+  image:""
+},
+
+{
+  name:"トムソーヤ島いかだ",
+  area:"ウエスタンランド",
+  type:"🎢 アトラクション",
+  description:"いかだに乗ってトムソーヤ島へ。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/161/",
+  image:""
+},
+
+{
+  name:"スプラッシュ・マウンテン",
+  area:"クリッターカントリー",
+  type:"🎢 アトラクション",
+  description:"最後に大きな滝を急降下する人気アトラクション。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/162/",
+  image:""
+},
+
+{
+  name:"ピーターパン空の旅",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"空飛ぶ海賊船でネバーランドへ。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/164/",
+  image:""
+},
+
+{
+  name:"白雪姫と七人のこびと",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"白雪姫の物語をトロッコで冒険。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/165/",
+  image:""
+},
+
+{
+  name:"シンデレラのフェアリーテイル・ホール",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"シンデレラの物語を展示で楽しむ。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/166/",
+  image:"",
+  status:"2026/10/1〜休止予定"
+},
+
+{
+  name:"ミッキーのフィルハーマジック",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"ディズニーキャラクターが登場する3Dシアター。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/167/",
+  image:""
+},
+
+{
+  name:"ピノキオの冒険旅行",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"ピノキオの物語をトロッコで体験。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/168/",
+  image:""
+},
+
+{
+  name:"空飛ぶダンボ",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"ダンボに乗って空を飛ぶ。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/169/",
+  image:"",
+  status:"2026/1/5〜10/22休止予定"
+},
+
+{
+  name:"キャッスルカルーセル",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"ファンタジーランドのメリーゴーラウンド。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/170/",
+  image:""
+},
+
+{
+  name:"ホーンテッドマンション",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"999人の幽霊が待つ不気味な洋館。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/171/",
+  image:""
+},
+
+{
+  name:"イッツ・ア・スモールワールド",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"世界中を旅するボートライド。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/172/",
+  image:""
+},
+
+{
+  name:"アリスのティーパーティー",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"ティーカップに乗ってくるくる回ろう。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/173/",
+  image:""
+},
+
+{
+  name:"プーさんのハニーハント",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"プーさんと一緒にはちみつ探し。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/174/",
+  image:""
+},
+
+{
+  name:"美女と野獣“魔法のものがたり”",
+  area:"ファンタジーランド",
+  type:"🎢 アトラクション",
+  description:"魔法のカップに乗って美女と野獣の世界へ。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/197/",
+  image:""
+},
+
+{
+  name:"ロジャーラビットのカートゥーンスピン",
+  area:"トゥーンタウン",
+  type:"🎢 アトラクション",
+  description:"トゥーンタウンをドタバタ冒険。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/175/",
+  image:""
+},
+
+{
+  name:"チップとデールのツリーハウス",
+  area:"トゥーンタウン",
+  type:"🎢 アトラクション",
+  description:"チップとデールの暮らす木の家。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/178/",
+  image:""
+},
+
+{
+  name:"ガジェットのゴーコースター",
+  area:"トゥーンタウン",
+  type:"🎢 アトラクション",
+  description:"トゥーンタウンを駆け抜ける小型コースター。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/179/",
+  image:""
+},
+
+{
+  name:"ドナルドのボート",
+  area:"トゥーンタウン",
+  type:"🎢 アトラクション",
+  description:"ドナルドが暮らす船を見学。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/180/",
+  image:""
+},
+
+{
+  name:"グーフィーのペイント＆プレイハウス",
+  area:"トゥーンタウン",
+  type:"🎢 アトラクション",
+  description:"グーフィーの家をペンキで模様替え。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/181/",
+  image:""
+},
+
+{
+  name:"トゥーンパーク",
+  area:"トゥーンタウン",
+  type:"🎢 アトラクション",
+  description:"トゥーンタウンの小さな公園。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/194/",
+  image:""
+},
+
+{
+  name:"スター・ツアーズ：ザ・アドベンチャーズ・コンティニュー",
+  area:"トゥモローランド",
+  type:"🎢 アトラクション",
+  description:"スター・ウォーズの世界を体験。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/183/",
+  image:""
+},
+
+{
+  name:"スティッチ・エンカウンター",
+  area:"トゥモローランド",
+  type:"🎢 アトラクション",
+  description:"スクリーン越しにスティッチとおしゃべり。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/195/",
+  image:""
+},
+
+{
+  name:"モンスターズ・インク“ライド＆ゴーシーク！”",
+  area:"トゥモローランド",
+  type:"🎢 アトラクション",
+  description:"モンスターズ・インクの世界でかくれんぼ。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/189/",
+  image:""
+},
+
+{
+  name:"ベイマックスのハッピーライド",
+  area:"トゥモローランド",
+  type:"🎢 アトラクション",
+  description:"ベイマックスと音楽に合わせて楽しくドライブ。",
+  url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/196/",
+  image:"",
+  status:"2026/9/15〜9/29休止予定"
+}
+
+];
+
+
+/* =====================================================
+   ショップ
+   公式ショップ一覧をベースに登録
+===================================================== */
+
+const shops = [
+
 /* ワールドバザール */
 
 {
- name:"オムニバス",
+ name:"カメラセンター",
  area:"ワールドバザール",
- type:"🎢 アトラクション",
- description:"パークをゆったり眺めながら楽しめるクラシックな乗り物。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/151/",
+ type:"🛍️ ショップ",
+ description:"写真関連グッズやデジタルプリント。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
+
+{
+ name:"グランドエンポーリアム",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"パーク内最大のグッズショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/detail/513/",
+ image:"",
+ status:"スタンバイパス対象の場合あり"
+},
+
+{
+ name:"シルエットスタジオ",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"切り絵の実演販売。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:""
+},
+
+{
+ name:"タウンセンターファッション",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"パーク内最大のアパレルショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:""
+},
+
+{
+ name:"ディズニー＆カンパニー",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"雑貨やアクセサリーなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/detail/502/",
+ image:"",
+ status:"スタンバイパス対象の場合あり"
+},
+
+{
+ name:"トイ・ステーション",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"パーク内最大級のおもちゃショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:"",
+ status:"スタンバイパス対象の場合あり"
+},
+
+{
+ name:"ハウス・オブ・グリーティング",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"文具、本やDVDなどを扱うショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:""
+},
+
+{
+ name:"ハリントンズ・ジュエリー＆ウォッチ",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"アクセサリー、時計、バッグなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:""
+},
+
+{
+ name:"ペイストリーパレス",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"クッキーやバウムクーヘンなどのお菓子。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:"",
+ status:"スタンバイパス対象の場合あり"
+},
+
+{
+ name:"ホームストア",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"テーブルウェアやインテリア雑貨。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:""
+},
+
+{
+ name:"マジックショップ",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"手品用品の実演販売。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:""
+},
+
+{
+ name:"ワールドバザール・コンフェクショナリー",
+ area:"ワールドバザール",
+ type:"🛍️ ショップ",
+ description:"パーク内最大のお菓子ショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:""
+},
+
 
 /* アドベンチャーランド */
 
 {
- name:"カリブの海賊",
+ name:"アドベンチャーランド・バザール",
  area:"アドベンチャーランド",
- type:"🎢 アトラクション",
- description:"海賊たちが暮らす世界をボートでめぐる人気アトラクション。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/152/",
+ type:"🛍️ ショップ",
+ description:"カチューシャ、雑貨、お菓子、カプセルトイなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
 {
- name:"ジャングルクルーズ：ワイルドライフ・エクスペディション",
+ name:"アドベンチャーランド・バザール（カプセルトイ）",
  area:"アドベンチャーランド",
- type:"🎢 アトラクション",
- description:"船長と一緒にジャングルを探検。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/153/",
- image:""
-},
-
-{
- name:"ウエスタンリバー鉄道",
- area:"アドベンチャーランド",
- type:"🎢 アトラクション",
- description:"蒸気機関車に乗ってパークの景色を楽しもう。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/154/",
- image:""
-},
-
-{
- name:"スイスファミリー・ツリーハウス",
- area:"アドベンチャーランド",
- type:"🎢 アトラクション",
- description:"大きな木の上に作られたツリーハウス。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/155/",
+ type:"🛍️ ショップ",
+ description:"カプセルトイを楽しめるショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:"",
- status:"休止中"
-},
-
-{
- name:"魅惑のチキルーム：スティッチ・プレゼンツ“アロハ・エ・コモ・マイ！”",
- area:"アドベンチャーランド",
- type:"🎢 アトラクション",
- description:"鳥たちとスティッチが登場する音楽ショー。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/156/",
- image:"",
- status:"2026/10/6は休止予定"
+ status:"スタンバイパス対象の場合あり"
 },
 
 
 /* ウエスタンランド */
 
 {
- name:"ウエスタンランド・シューティングギャラリー",
+ name:"カントリーベア・バンドワゴン",
  area:"ウエスタンランド",
- type:"🎢 アトラクション",
- description:"西部開拓時代をイメージした射撃体験。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/157/",
- image:""
-},
-
-{
- name:"カントリーベア・シアター",
- area:"ウエスタンランド",
- type:"🎢 アトラクション",
- description:"たくさんのクマたちによる楽しいカントリーミュージックショー。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/158/",
- image:""
-},
-
-{
- name:"蒸気船マークトウェイン号",
- area:"ウエスタンランド",
- type:"🎢 アトラクション",
- description:"大型蒸気船でアメリカ河を一周。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/159/",
- image:""
-},
-
-{
- name:"ビッグサンダー・マウンテン",
- area:"ウエスタンランド",
- type:"🎢 アトラクション",
- description:"鉱山を猛スピードで駆け抜けるローラーコースター。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/160/",
- image:""
-},
-
-{
- name:"トムソーヤ島いかだ",
- area:"ウエスタンランド",
- type:"🎢 アトラクション",
- description:"いかだに乗ってトムソーヤ島へ。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/161/",
- image:""
-},
-
-
-/* クリッターカントリー */
-
-{
- name:"スプラッシュ・マウンテン",
- area:"クリッターカントリー",
- type:"🎢 アトラクション",
- description:"丸太のボートに乗って物語の世界を冒険。最後には大きな滝を急降下！",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/162/",
+ type:"🛍️ ショップ",
+ description:"ウエスタンランドらしい雰囲気のショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
@@ -573,121 +1238,56 @@ const attractions = [
 /* ファンタジーランド */
 
 {
- name:"ピーターパン空の旅",
+ name:"ストロンボリズ・ワゴン",
  area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"空飛ぶ海賊船に乗ってネバーランドへ。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/164/",
+ type:"🛍️ ショップ",
+ description:"ファンキャップやカチューシャなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
 {
- name:"白雪姫と七人のこびと",
+ name:"ハーモニーフェア",
  area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"白雪姫の物語をトロッコに乗ってめぐるアトラクション。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/165/",
+ type:"🛍️ ショップ",
+ description:"ファンキャップやカチューシャなど身につけグッズ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/detail/548/",
  image:""
 },
 
 {
- name:"シンデレラのフェアリーテイル・ホール",
+ name:"ビレッジショップス",
  area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"シンデレラの物語を美しい展示で楽しめる施設。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/166/",
- image:"",
- status:"2026/10/1〜休止予定"
-},
-
-{
- name:"ミッキーのフィルハーマジック",
- area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"ディズニーキャラクターが登場する3Dシアター。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/167/",
+ type:"🛍️ ショップ",
+ description:"美女と野獣に登場する村のお店をイメージしたショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
 {
- name:"ピノキオの冒険旅行",
+ name:"プーさんコーナー",
  area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"ピノキオの物語をトロッコに乗って体験。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/168/",
+ type:"🛍️ ショップ",
+ description:"プーさんたちのグッズを取り扱うショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
 {
- name:"空飛ぶダンボ",
+ name:"ブレイブリトルテイラー・ショップ",
  area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"ダンボに乗って空を飛ぶ人気アトラクション。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/169/",
- image:"",
- status:"2026/10/6は休止予定"
-},
-
-{
- name:"キャッスルカルーセル",
- area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"ファンタジーランドのお城の前にあるメリーゴーラウンド。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/170/",
+ type:"🛍️ ショップ",
+ description:"ベビーと幼児向けの専門店。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
 {
- name:"ホーンテッドマンション",
+ name:"プレジャーアイランド・キャンディーズ",
  area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"999人の幽霊が待ち受ける不気味な洋館。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/171/",
- image:""
-},
-
-{
- name:"イッツ・ア・スモールワールド",
- area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"世界中の子どもたちと一緒に世界旅行。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/172/",
- image:""
-},
-
-{
- name:"アリスのティーパーティー",
- area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"ティーカップに乗ってくるくる回ろう。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/173/",
- image:""
-},
-
-{
- name:"プーさんのハニーハント",
- area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"ハニーポットに乗って、プーさんと一緒にはちみつ探し。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/174/",
- image:""
-},
-
-{
- name:"ロジャーラビットのカートゥーンスピン",
- area:"トゥーンタウン",
- type:"🎢 アトラクション",
- description:"トゥーンタウンの街をドタバタ冒険。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/175/",
- image:""
-},
-
-{
- name:"美女と野獣“魔法のものがたり”",
- area:"ファンタジーランド",
- type:"🎢 アトラクション",
- description:"魔法のカップに乗って美女と野獣の世界をめぐる大型アトラクション。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/197/",
+ type:"🛍️ ショップ",
+ description:"キャンディーなどのお菓子を販売。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
@@ -695,47 +1295,31 @@ const attractions = [
 /* トゥーンタウン */
 
 {
- name:"チップとデールのツリーハウス",
+ name:"ギャグファクトリー／ファイブ・アンド・ダイム",
  area:"トゥーンタウン",
- type:"🎢 アトラクション",
- description:"チップとデールの暮らす木の家を探検。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/178/",
- image:""
+ type:"🛍️ ショップ",
+ description:"ミッキー＆フレンズの雑貨、お菓子、カプセルトイなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:"",
+ status:"スタンバイパス対象の場合あり"
 },
 
 {
- name:"ガジェットのゴーコースター",
+ name:"ギャグファクトリー／ファイブ・アンド・ダイム（カプセルトイ）",
  area:"トゥーンタウン",
- type:"🎢 アトラクション",
- description:"小さなコースターでトゥーンタウンを駆け抜けよう。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/179/",
- image:""
+ type:"🛍️ ショップ",
+ description:"カプセルトイを楽しめるショップ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
+ image:"",
+ status:"スタンバイパス対象の場合あり"
 },
 
 {
- name:"ドナルドのボート",
+ name:"トゥーンタウン・デリバリー・カンパニー",
  area:"トゥーンタウン",
- type:"🎢 アトラクション",
- description:"ドナルドが暮らす船を見学。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/180/",
- image:""
-},
-
-{
- name:"グーフィーのペイント＆プレイハウス",
- area:"トゥーンタウン",
- type:"🎢 アトラクション",
- description:"グーフィーの家をペンキで模様替え。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/181/",
- image:""
-},
-
-{
- name:"トゥーンパーク",
- area:"トゥーンタウン",
- type:"🎢 アトラクション",
- description:"子どもたちが遊べる小さな公園。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/194/",
+ type:"🛍️ ショップ",
+ description:"ファンキャップ、カチューシャ、光るグッズなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
@@ -743,38 +1327,29 @@ const attractions = [
 /* トゥモローランド */
 
 {
- name:"スター・ツアーズ：ザ・アドベンチャーズ・コンティニュー",
+ name:"コズミック・エンカウンター",
  area:"トゥモローランド",
- type:"🎢 アトラクション",
- description:"スター・ウォーズの世界を体験する3Dシミュレーター。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/183/",
+ type:"🛍️ ショップ",
+ description:"キャラクターグッズなどを販売。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
 {
- name:"スティッチ・エンカウンター",
+ name:"スターゲイザーサプライ",
  area:"トゥモローランド",
- type:"🎢 アトラクション",
- description:"スクリーン越しにスティッチと楽しくおしゃべり。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/195/",
+ type:"🛍️ ショップ",
+ description:"ファンキャップやカチューシャなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 },
 
 {
- name:"モンスターズ・インク“ライド＆ゴーシーク！”",
+ name:"トレジャーコメット",
  area:"トゥモローランド",
- type:"🎢 アトラクション",
- description:"モンスターズ・インクの世界でかくれんぼ。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/189/",
- image:""
-},
-
-{
- name:"ベイマックスのハッピーライド",
- area:"トゥモローランド",
- type:"🎢 アトラクション",
- description:"ベイマックスと一緒に音楽に合わせて楽しくドライブ。",
- url:"https://www.tokyodisneyresort.jp/tdl/attraction/detail/196/",
+ type:"🛍️ ショップ",
+ description:"ベイマックスのグッズ、カプセルトイなど。",
+ url:"https://www.tokyodisneyresort.jp/tdl/shop/list/",
  image:""
 }
 
@@ -788,6 +1363,15 @@ const attractions = [
 const restaurants = [
 
 {
+ name:"アイスクリームコーン",
+ area:"ワールドバザール",
+ type:"🍴 レストラン",
+ description:"シンデレラ城を眺めながらアイスを楽しめる。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
+ image:""
+},
+
+{
  name:"リフレッシュメントコーナー",
  area:"ワールドバザール",
  type:"🍴 レストラン",
@@ -797,10 +1381,28 @@ const restaurants = [
 },
 
 {
+ name:"イーストサイド・カフェ",
+ area:"ワールドバザール",
+ type:"🍴 レストラン",
+ description:"ヴィクトリア朝の雰囲気を楽しめるレストラン。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/300/",
+ image:""
+},
+
+{
+ name:"センターストリート・コーヒーハウス",
+ area:"ワールドバザール",
+ type:"🍴 レストラン",
+ description:"クラシックな雰囲気の洋食レストラン。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
+ image:""
+},
+
+{
  name:"ポリネシアンテラス・レストラン",
  area:"アドベンチャーランド",
  type:"🍴 レストラン",
- description:"南国ムードを楽しめるレストラン。",
+ description:"南国ムードのレストラン。",
  url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/326/",
  image:""
 },
@@ -818,8 +1420,35 @@ const restaurants = [
  name:"ブルーバイユー・レストラン",
  area:"アドベンチャーランド",
  type:"🍴 レストラン",
- description:"カリブの海賊の世界を眺めながら食事を楽しめるレストラン。",
+ description:"カリブの海賊の世界を眺めながら食事。",
  url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/318/",
+ image:""
+},
+
+{
+ name:"チャイナボイジャー",
+ area:"アドベンチャーランド",
+ type:"🍴 レストラン",
+ description:"中華麺などを楽しめる人気レストラン。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
+ image:""
+},
+
+{
+ name:"ザ・ガゼーボ",
+ area:"アドベンチャーランド",
+ type:"🍴 レストラン",
+ description:"軽食を楽しめる屋外レストラン。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
+ image:""
+},
+
+{
+ name:"カフェ・オーリンズ",
+ area:"アドベンチャーランド",
+ type:"🍴 レストラン",
+ description:"クレープなどを楽しめるカフェ。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
  image:""
 },
 
@@ -827,7 +1456,7 @@ const restaurants = [
  name:"ハングリーベア・レストラン",
  area:"ウエスタンランド",
  type:"🍴 レストラン",
- description:"カレーを中心としたメニューを楽しめるレストラン。",
+ description:"カレーを中心とした人気レストラン。",
  url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/338/",
  image:""
 },
@@ -845,17 +1474,44 @@ const restaurants = [
  name:"グランマ・サラのキッチン",
  area:"クリッターカントリー",
  type:"🍴 レストラン",
- description:"クリッターたちの住む家をイメージしたレストラン。",
+ description:"クリッターたちの住む家をイメージ。",
  url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/344/",
  image:""
 },
 
 {
- name:"プラズマ・レイズ・ダイナー",
- area:"トゥモローランド",
+ name:"キャプテンフックス・ギャレー",
+ area:"ファンタジーランド",
  type:"🍴 レストラン",
- description:"宇宙をイメージした未来的なレストラン。",
- url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/352/",
+ description:"ピザなどを楽しめるカウンターサービス。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
+ image:""
+},
+
+{
+ name:"クイーン・オブ・ハートのバンケットホール",
+ area:"ファンタジーランド",
+ type:"🍴 レストラン",
+ description:"ふしぎの国のアリスの世界観を楽しめるレストラン。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
+ image:""
+},
+
+{
+ name:"トルバドールタバン",
+ area:"ファンタジーランド",
+ type:"🍴 レストラン",
+ description:"ファンタジーランドで軽食を楽しめるスポット。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
+ image:""
+},
+
+{
+ name:"トゥーンタウン・グルメ",
+ area:"トゥーンタウン",
+ type:"🍴 レストラン",
+ description:"トゥーンタウンで軽食を楽しめるスポット。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/list/",
  image:""
 },
 
@@ -863,53 +1519,17 @@ const restaurants = [
  name:"トゥモローランド・テラス",
  area:"トゥモローランド",
  type:"🍴 レストラン",
- description:"広い店内でハンバーガーなどを楽しめるレストラン。",
+ description:"広い店内でハンバーガーなどを楽しめる。",
  url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/357/",
  image:""
-}
-
-];
-
-
-/* =====================================================
-   ショップ
-===================================================== */
-
-const shops = [
-
-{
- name:"グランドエンポーリアム",
- area:"ワールドバザール",
- type:"🛍️ ショップ",
- description:"東京ディズニーランド最大級のショップ。",
- url:"https://www.tokyodisneyresort.jp/tdl/shop/detail/513/",
- image:""
 },
 
 {
- name:"ディズニー＆カンパニー",
- area:"ワールドバザール",
- type:"🛍️ ショップ",
- description:"ヴィクトリア時代の雰囲気に包まれたショップ。",
- url:"https://www.tokyodisneyresort.jp/tdl/shop/detail/502/",
- image:""
-},
-
-{
- name:"カントリーベア・バンドワゴン",
- area:"ウエスタンランド",
- type:"🛍️ ショップ",
- description:"ウエスタンランドらしい雰囲気のショップ。",
- url:"https://www.tokyodisneyresort.jp/tdl/shop/detail/542/",
- image:""
-},
-
-{
- name:"ハーモニーフェア",
- area:"ファンタジーランド",
- type:"🛍️ ショップ",
- description:"ファンタジーランドのグッズを探せるショップ。",
- url:"https://www.tokyodisneyresort.jp/tdl/shop/detail/548/",
+ name:"プラズマ・レイズ・ダイナー",
+ area:"トゥモローランド",
+ type:"🍴 レストラン",
+ description:"未来的な雰囲気のレストラン。",
+ url:"https://www.tokyodisneyresort.jp/tdl/restaurant/detail/352/",
  image:""
 }
 
@@ -926,16 +1546,34 @@ const photos = [
  name:"シンデレラ城",
  area:"ワールドバザール",
  type:"📸 フォトスポット",
- description:"東京ディズニーランドを代表する定番フォトスポット。",
+ description:"東京ディズニーランド定番の撮影スポット。",
  url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
  image:""
 },
 
 {
- name:"トゥーンタウン",
- area:"トゥーンタウン",
+ name:"ワールドバザール街並み",
+ area:"ワールドバザール",
  type:"📸 フォトスポット",
- description:"カラフルでポップな写真を撮りやすいエリア。",
+ description:"クラシックなパーク入口の街並み。",
+ url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
+ image:""
+},
+
+{
+ name:"アドベンチャーランドの街並み",
+ area:"アドベンチャーランド",
+ type:"📸 フォトスポット",
+ description:"南国・冒険感のある背景で撮影。",
+ url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
+ image:""
+},
+
+{
+ name:"ウエスタンランドの街並み",
+ area:"ウエスタンランド",
+ type:"📸 フォトスポット",
+ description:"西部開拓時代を感じる街並み。",
  url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
  image:""
 },
@@ -944,7 +1582,7 @@ const photos = [
  name:"ファンタジーランド",
  area:"ファンタジーランド",
  type:"📸 フォトスポット",
- description:"おとぎ話の世界を感じられる写真スポットが多いエリア。",
+ description:"おとぎ話の世界を感じるエリア。",
  url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
  image:""
 },
@@ -953,7 +1591,25 @@ const photos = [
  name:"美女と野獣エリア",
  area:"ファンタジーランド",
  type:"📸 フォトスポット",
- description:"美女と野獣の世界観を感じられる街並み。",
+ description:"美女と野獣の世界観を感じる街並み。",
+ url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
+ image:""
+},
+
+{
+ name:"トゥーンタウン",
+ area:"トゥーンタウン",
+ type:"📸 フォトスポット",
+ description:"カラフルでポップな写真を撮りやすい。",
+ url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
+ image:""
+},
+
+{
+ name:"トゥモローランド",
+ area:"トゥモローランド",
+ type:"📸 フォトスポット",
+ description:"未来的な建物を背景に撮影。",
  url:"https://www.tokyodisneyresort.jp/dream/photo/tdl_snapphoto.html",
  image:""
 }
@@ -962,25 +1618,28 @@ const photos = [
 
 
 /* =====================================================
-   絵文字
+   状態
+===================================================== */
+
+let selectedArea =
+  "ファンタジーランド";
+
+let selectedAttraction =
+  null;
+
+
+/* =====================================================
+   エリアアイコン
 ===================================================== */
 
 const areaIconMap = {};
 
 areas.forEach(area => {
 
-  areaIconMap[area.name] = area.icon;
+  areaIconMap[area.name] =
+    area.icon;
 
 });
-
-
-/* =====================================================
-   状態
-===================================================== */
-
-let selectedArea = "";
-
-let selectedAttraction = null;
 
 
 /* =====================================================
@@ -988,15 +1647,21 @@ let selectedAttraction = null;
 ===================================================== */
 
 const areaButtons =
-  document.getElementById("areaButtons");
+  document.getElementById(
+    "areaButtons"
+  );
 
 
 areas.forEach(area => {
 
   const button =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
-  button.className = "area-button";
+  button.className =
+    "area-button";
+
 
   button.innerHTML = `
 
@@ -1010,20 +1675,25 @@ areas.forEach(area => {
 
   `;
 
+
   button.addEventListener(
     "click",
     () => {
 
       document
-        .querySelectorAll(".area-button")
-        .forEach(b => {
+        .querySelectorAll(
+          ".area-button"
+        )
+        .forEach(button => {
 
-          b.classList.remove("active");
+          button.classList
+            .remove("active");
 
         });
 
 
-      button.classList.add("active");
+      button.classList
+        .add("active");
 
 
       selectedArea =
@@ -1035,13 +1705,26 @@ areas.forEach(area => {
 
 
       document
-        .getElementById("searchInput")
+        .getElementById(
+          "searchInput"
+        )
         .value = "";
 
 
       document
-        .getElementById("nearbyArea")
-        .style.display = "none";
+        .getElementById(
+          "nearbyArea"
+        )
+        .style.display =
+          "none";
+
+
+      document
+        .getElementById(
+          "selectedArea"
+        )
+        .style.display =
+          "none";
 
 
       renderAttractions();
@@ -1050,37 +1733,34 @@ areas.forEach(area => {
   );
 
 
-  areaButtons.appendChild(button);
+  areaButtons.appendChild(
+    button
+  );
 
 });
 
 
-/* =====================================================
-   初期表示
-===================================================== */
-
-selectedArea =
-  "ファンタジーランド";
-
+/* 初期選択 */
 
 document
-  .querySelectorAll(".area-button")
+  .querySelectorAll(
+    ".area-button"
+  )
   .forEach(button => {
 
     if(
-      button.innerText.includes(
-        "ファンタジーランド"
-      )
+      button.innerText
+        .includes(
+          "ファンタジーランド"
+        )
     ){
 
-      button.classList.add("active");
+      button.classList
+        .add("active");
 
     }
 
   });
-
-
-renderAttractions();
 
 
 /* =====================================================
@@ -1088,7 +1768,9 @@ renderAttractions();
 ===================================================== */
 
 document
-  .getElementById("searchInput")
+  .getElementById(
+    "searchInput"
+  )
   .addEventListener(
     "input",
     renderAttractions
@@ -1106,9 +1788,7 @@ function imageHTML(item){
     return `
 
       <div class="no-image">
-
         📷
-
       </div>
 
     `;
@@ -1119,12 +1799,21 @@ function imageHTML(item){
   return `
 
     <img
+
       class="facility-image"
+
       src="${item.image}"
+
       alt="${item.name}"
+
       loading="lazy"
-      onerror="this.style.display='none'"
-    >
+
+      onerror="
+        this.style.display='none';
+        this.parentElement.innerHTML='<div class=&quot;no-image&quot;>📷</div>';
+      "
+
+  >
 
   `;
 
@@ -1138,9 +1827,13 @@ function imageHTML(item){
 function createCard(item){
 
   const card =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
-  card.className = "card";
+
+  card.className =
+    "card";
 
 
   card.innerHTML = `
@@ -1188,9 +1881,13 @@ function createCard(item){
 
         ?
 
-        `<div class="status">
+        `
+        <div class="status">
+
           ⚠️ ${item.status}
-        </div>`
+
+        </div>
+        `
 
         :
 
@@ -1199,10 +1896,16 @@ function createCard(item){
 
 
       <a
+
         class="detail-button"
+
         href="${item.url}"
+
         target="_blank"
-        rel="noopener">
+
+        rel="noopener"
+
+      >
 
         公式詳細を見る ↗
 
@@ -1235,7 +1938,9 @@ function renderAttractions(){
 
   const keyword =
     document
-      .getElementById("searchInput")
+      .getElementById(
+        "searchInput"
+      )
       .value
       .trim()
       .toLowerCase();
@@ -1245,28 +1950,39 @@ function renderAttractions(){
     attractions.filter(item => {
 
       const areaOK =
-        item.area === selectedArea;
+        item.area ===
+        selectedArea;
 
 
       const keywordOK =
+
         !keyword ||
+
         item.name
           .toLowerCase()
-          .includes(keyword);
+          .includes(
+            keyword
+          );
 
 
-      return areaOK && keywordOK;
+      return (
+        areaOK &&
+        keywordOK
+      );
 
     });
 
 
-  if(filtered.length === 0){
+  if(
+    filtered.length === 0
+  ){
 
     list.innerHTML = `
 
       <div class="empty">
 
-        該当するアトラクションがありません。
+        該当する
+        アトラクションがありません。
 
       </div>
 
@@ -1315,7 +2031,9 @@ function renderAttractions(){
    アトラクション選択
 ===================================================== */
 
-function selectAttraction(item){
+function selectAttraction(
+  item
+){
 
   selectedAttraction =
     item;
@@ -1337,7 +2055,7 @@ function selectAttraction(item){
 
       <div class="selected-label">
 
-        📍 現在選択中
+        📍 選択中のアトラクション
 
       </div>
 
@@ -1348,7 +2066,6 @@ function selectAttraction(item){
 
       </div>
 
-
     </div>
 
   `;
@@ -1357,14 +2074,14 @@ function selectAttraction(item){
   renderNearby();
 
 
-  window.scrollTo({
+  setTimeout(() => {
 
-    top:
-      selected.offsetTop - 80,
+    selected.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
 
-    behavior:"smooth"
-
-  });
+  },50);
 
 }
 
@@ -1375,7 +2092,9 @@ function selectAttraction(item){
 
 function renderNearby(){
 
-  if(!selectedAttraction){
+  if(
+    !selectedAttraction
+  ){
 
     return;
 
@@ -1392,90 +2111,107 @@ function renderNearby(){
     "block";
 
 
-  /*
-   現段階では
-   「同じエリア」
-   を近くの施設として表示。
+  nearby.innerHTML = "";
 
-   後で座標を追加すれば
-   本当の距離順にもできる。
+
+  /*
+    現在は
+    「同じエリア」
+    を近くとして表示。
+
+    今後ここに
+    緯度・経度を追加すれば
+    本当の距離順にできる。
   */
 
 
   const nearbyAttractions =
-    attractions.filter(item =>
+    attractions.filter(
+      item =>
 
-      item.area ===
-      selectedAttraction.area &&
+        item.area ===
+        selectedAttraction.area &&
 
-      item.name !==
-      selectedAttraction.name
-
+        item.name !==
+        selectedAttraction.name
     );
 
 
   const nearbyRestaurants =
-    restaurants.filter(item =>
+    restaurants.filter(
+      item =>
 
-      item.area ===
-      selectedAttraction.area
-
+        item.area ===
+        selectedAttraction.area
     );
 
 
   const nearbyShops =
-    shops.filter(item =>
+    shops.filter(
+      item =>
 
-      item.area ===
-      selectedAttraction.area
-
+        item.area ===
+        selectedAttraction.area
     );
 
 
   const nearbyPhotos =
-    photos.filter(item =>
+    photos.filter(
+      item =>
 
-      item.area ===
-      selectedAttraction.area
-
+        item.area ===
+        selectedAttraction.area
     );
 
 
-  nearby.innerHTML = "";
-
-
   addSection(
+
     nearby,
+
     "🎢 近くのアトラクション",
+
     nearbyAttractions
+
   );
 
 
   addSection(
+
     nearby,
+
     "🍴 近くのレストラン",
+
     nearbyRestaurants
+
   );
 
 
   addSection(
+
     nearby,
+
     "🛍️ 近くのショップ",
+
     nearbyShops
+
   );
 
 
   addSection(
+
     nearby,
+
     "📸 フォトスポット",
+
     nearbyPhotos
+
   );
 
 }
 
 
 /* =====================================================
-   セクション追加
+   セクション
 ===================================================== */
 
 function addSection(
@@ -1498,7 +2234,13 @@ function addSection(
 
     <div class="result-title">
 
-      ${title}
+      <span>
+        ${title}
+      </span>
+
+      <span class="result-count">
+        ${items.length}件
+      </span>
 
     </div>
 
@@ -1515,14 +2257,16 @@ function addSection(
     "card-list";
 
 
-  if(items.length === 0){
+  if(
+    items.length === 0
+  ){
 
     list.innerHTML = `
 
       <div class="empty">
 
         このエリアでは
-        現在登録されている施設がありません。
+        登録されている施設がありません。
 
       </div>
 
@@ -1540,15 +2284,26 @@ function addSection(
   });
 
 
-  section.appendChild(list);
+  section.appendChild(
+    list
+  );
 
 
-  parent.appendChild(section);
+  parent.appendChild(
+    section
+  );
 
 }
 
 
+/* =====================================================
+   初期表示
+===================================================== */
+
+renderAttractions();
+
 </script>
 
 </body>
+
 </html>
