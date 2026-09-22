@@ -2280,5 +2280,700 @@ if(
 
 </script>
 
+<script>
+/* =========================================================
+   TDL AI NAVI
+   画像修正版 v4
+   ========================================================= */
+
+(function(){
+
+  const IMAGE_CACHE_KEY = "tdl_ai_navi_image_cache_v4";
+
+  /* 古い画像キャッシュを使用しない */
+  try {
+    localStorage.removeItem("tdl_ai_navi_image_cache_v3");
+  } catch(e){}
+
+  let cache = {};
+
+  try {
+    cache = JSON.parse(
+      localStorage.getItem(IMAGE_CACHE_KEY) || "{}"
+    );
+  } catch(e) {
+    cache = {};
+  }
+
+  function saveCache(){
+    try{
+      localStorage.setItem(
+        IMAGE_CACHE_KEY,
+        JSON.stringify(cache)
+      );
+    }catch(e){}
+  }
+
+
+  /* -----------------------------------------
+     施設IDの修正
+  ----------------------------------------- */
+
+  const ID_FIX = {
+
+    "restaurant:センターストリート・コーヒーハウス":
+      "306",
+
+    "restaurant:チャイナボイジャー":
+      "332"
+
+  };
+
+
+  function fixedId(name,type,id){
+
+    return (
+      ID_FIX[type + ":" + name] ||
+      String(id)
+    );
+
+  }
+
+
+  /* -----------------------------------------
+     施設を一意に識別する
+  ----------------------------------------- */
+
+  function cacheKey(name,type,id){
+
+    return [
+      type,
+      fixedId(name,type,id),
+      name
+    ].join("|");
+
+  }
+
+
+  /* -----------------------------------------
+     公式ページURL
+  ----------------------------------------- */
+
+  function officialPage(name,type,id){
+
+    const realId =
+      fixedId(name,type,id);
+
+    if(type === "attraction"){
+      return (
+        OFFICIAL +
+        "/tdl/attraction/detail/" +
+        realId +
+        "/"
+      );
+    }
+
+    if(type === "restaurant"){
+      return (
+        OFFICIAL +
+        "/tdl/restaurant/detail/" +
+        realId +
+        "/"
+      );
+    }
+
+    if(type === "shop"){
+      return (
+        OFFICIAL +
+        "/tdl/shop/detail/" +
+        realId +
+        "/"
+      );
+    }
+
+    return null;
+
+  }
+
+
+  /* -----------------------------------------
+     公式画像を取得
+  ----------------------------------------- */
+
+  async function getOfficialImage(
+    name,
+    type,
+    id
+  ){
+
+    const key =
+      cacheKey(name,type,id);
+
+
+    /*
+      直接確認済み画像を最優先
+    */
+
+    if(
+      typeof DIRECT_IMAGES !== "undefined" &&
+      DIRECT_IMAGES[name]
+    ){
+
+      cache[key] =
+        DIRECT_IMAGES[name];
+
+      saveCache();
+
+      return DIRECT_IMAGES[name];
+
+    }
+
+
+    /*
+      v4キャッシュ
+    */
+
+    if(cache[key]){
+      return cache[key];
+    }
+
+
+    const page =
+      officialPage(
+        name,
+        type,
+        id
+      );
+
+
+    if(!page){
+      return null;
+    }
+
+
+    try{
+
+      const res =
+        await fetch(
+          "https://r.jina.ai/" + page,
+          {
+            cache:"no-store"
+          }
+        );
+
+
+      if(!res.ok){
+        return null;
+      }
+
+
+      const text =
+        await res.text();
+
+
+      /*
+        media1.tokyodisneyresort.jp
+        の画像だけを抽出
+      */
+
+      const urls =
+        text.match(
+          /https:\/\/media1\.tokyodisneyresort\.jp\/[^)\s"'<>]+/gi
+        ) || [];
+
+
+      const cleaned = [];
+
+      urls.forEach(function(url){
+
+        url =
+          url
+            .replace(/&amp;/g,"&")
+            .replace(/\\u0026/g,"&")
+            .trim();
+
+
+        if(
+          !url.includes(
+            "media1.tokyodisneyresort.jp"
+          )
+        ){
+          return;
+        }
+
+
+        if(
+          /map/i.test(url)
+        ){
+          return;
+        }
+
+
+        if(
+          /logo/i.test(url)
+        ){
+          return;
+        }
+
+
+        if(
+          !cleaned.includes(url)
+        ){
+          cleaned.push(url);
+        }
+
+      });
+
+
+      if(!cleaned.length){
+        return null;
+      }
+
+
+      /*
+        まず「イメージ1」を探す
+      */
+
+      let selected =
+        null;
+
+
+      const image1 =
+        text.match(
+          /イメージ\s*1[\s\S]{0,500}?(https:\/\/media1\.tokyodisneyresort\.jp\/[^)\s"'<>]+)/i
+        );
+
+
+      if(image1){
+
+        selected =
+          image1[1]
+            .replace(/&amp;/g,"&")
+            .replace(/\\u0026/g,"&");
+
+      }
+
+
+      /*
+        イメージ1が見つからない場合は
+        公式ページ内の最初のmedia1画像
+      */
+
+      if(!selected){
+
+        selected =
+          cleaned[0];
+
+      }
+
+
+      if(!selected){
+        return null;
+      }
+
+
+      cache[key] =
+        selected;
+
+      saveCache();
+
+
+      return selected;
+
+
+    }catch(error){
+
+      console.log(
+        "画像取得失敗:",
+        name,
+        type,
+        id,
+        error
+      );
+
+      return null;
+
+    }
+
+  }
+
+
+  /* -----------------------------------------
+     画像を実際に表示
+  ----------------------------------------- */
+
+  async function loadImage(el){
+
+    if(
+      !el ||
+      el.dataset.imageLoading === "true"
+    ){
+      return;
+    }
+
+
+    el.dataset.imageLoading =
+      "true";
+
+
+    const name =
+      el.dataset.name;
+
+    const type =
+      el.dataset.type;
+
+    const id =
+      el.dataset.id;
+
+
+    const small =
+      el.dataset.small === "true";
+
+
+    const url =
+      await getOfficialImage(
+        name,
+        type,
+        id
+      );
+
+
+    if(!url){
+
+      el.dataset.imageLoading =
+        "false";
+
+      el.classList.remove(
+        "image-loading"
+      );
+
+      return;
+
+    }
+
+
+    const img =
+      document.createElement("img");
+
+
+    img.className =
+      small
+        ? "mini-image"
+        : "card-image";
+
+
+    img.alt =
+      name;
+
+
+    img.loading =
+      "lazy";
+
+
+    img.decoding =
+      "async";
+
+
+    img.referrerPolicy =
+      "no-referrer";
+
+
+    img.src =
+      url;
+
+
+    img.onload =
+      function(){
+
+        el.replaceWith(img);
+
+      };
+
+
+    img.onerror =
+      async function(){
+
+        /*
+          壊れたキャッシュを削除
+        */
+
+        const key =
+          cacheKey(
+            name,
+            type,
+            id
+          );
+
+
+        delete cache[key];
+
+        saveCache();
+
+
+        /*
+          直接画像以外は一度だけ再取得
+        */
+
+        if(
+          el.dataset.retry !== "true"
+        ){
+
+          el.dataset.retry =
+            "true";
+
+          el.dataset.imageLoading =
+            "false";
+
+          await loadImage(el);
+
+          return;
+
+        }
+
+
+        el.dataset.imageLoading =
+          "false";
+
+        el.classList.remove(
+          "image-loading"
+        );
+
+      };
+
+  }
+
+
+  /* -----------------------------------------
+     既存の画像プレースホルダーを監視
+  ----------------------------------------- */
+
+  function observeImages(){
+
+    const elements =
+      document.querySelectorAll(
+        ".lazy-image"
+      );
+
+
+    elements.forEach(function(el){
+
+      if(
+        el.dataset.imageObserved ===
+        "true"
+      ){
+        return;
+      }
+
+
+      el.dataset.imageObserved =
+        "true";
+
+
+      const observer =
+        new IntersectionObserver(
+          function(entries){
+
+            entries.forEach(
+              function(entry){
+
+                if(
+                  !entry.isIntersecting
+                ){
+                  return;
+                }
+
+
+                observer.unobserve(
+                  entry.target
+                );
+
+
+                loadImage(
+                  entry.target
+                );
+
+              }
+            );
+
+          },
+          {
+            rootMargin:
+              "800px 0px"
+          }
+        );
+
+
+      observer.observe(el);
+
+    });
+
+  }
+
+
+  /* -----------------------------------------
+     imageHTMLを上書き
+     -----------------------------------------
+     
+     既存の施設データを変更せず、
+     新しい画像処理だけ使う。
+  ----------------------------------------- */
+
+  const originalImageHTML =
+    window.imageHTML;
+
+
+  window.imageHTML =
+    function(
+      name,
+      small=false,
+      type="attraction",
+      id=""
+    ){
+
+      const realId =
+        fixedId(
+          name,
+          type,
+          id
+        );
+
+
+      /*
+        直接確認済み画像
+      */
+
+      if(
+        typeof DIRECT_IMAGES !== "undefined" &&
+        DIRECT_IMAGES[name]
+      ){
+
+        return `
+          <img
+            class="${small ? "mini-image" : "card-image"}"
+            src="${DIRECT_IMAGES[name]}"
+            alt="${escapeHTML(name)}"
+            loading="lazy"
+            decoding="async"
+            referrerpolicy="no-referrer"
+          >
+        `;
+
+      }
+
+
+      return `
+        <div
+          class="${small ? "mini-image" : "card-image"}
+          placeholder
+          image-loading
+          lazy-image"
+
+          data-name="${escapeHTML(name)}"
+          data-type="${escapeHTML(type)}"
+          data-id="${escapeHTML(realId)}"
+          data-small="${small ? "true" : "false"}"
+          data-retry="false"
+        ></div>
+      `;
+
+    };
+
+
+  /* -----------------------------------------
+     画面内の画像を処理
+  ----------------------------------------- */
+
+  function refreshImages(){
+
+    observeImages();
+
+  }
+
+
+  /*
+    DOM更新後にも画像監視
+  */
+
+  const originalRender =
+    window.renderAttractions;
+
+
+  if(typeof originalRender === "function"){
+
+    window.renderAttractions =
+      function(){
+
+        originalRender();
+
+        setTimeout(
+          refreshImages,
+          50
+        );
+
+      };
+
+  }
+
+
+  /*
+    周辺施設表示後にも監視
+  */
+
+  const originalRenderNearby =
+    window.renderNearby;
+
+
+  if(typeof originalRenderNearby === "function"){
+
+    window.renderNearby =
+      function(){
+
+        originalRenderNearby();
+
+        setTimeout(
+          refreshImages,
+          50
+        );
+
+      };
+
+  }
+
+
+  /*
+    初回
+  */
+
+  setTimeout(
+    refreshImages,
+    300
+  );
+
+
+  /*
+    画像が追加された場合にも対応
+  */
+
+  const mutation =
+    new MutationObserver(
+      function(){
+
+        refreshImages();
+
+      }
+    );
+
+
+  mutation.observe(
+    document.body,
+    {
+      childList:true,
+      subtree:true
+    }
+  );
+
+
+})();
+</script>
 </body>
 </html>
